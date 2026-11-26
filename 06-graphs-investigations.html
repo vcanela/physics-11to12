@@ -107,7 +107,7 @@
   }
   details.num summary::-webkit-details-marker { display: none; }
   details.num[open] summary { background: var(--green-soft); }
-  details.num span {
+  details.num > span {
     display: inline-block;
     margin-left: 10px;
     font-family: "IBM Plex Serif", Georgia, serif;
@@ -193,6 +193,10 @@
     #graphPaper { break-before: page; }
     #graphPaper svg { width: 18cm; height: 24cm; }
   }
+  /* Stacked fractions */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2; margin: 0 0.12em; }
+  .frac > span { padding: 0 0.2em; }
+  .frac > span:first-child { border-bottom: 1px solid currentColor; }
 </style>
 </head>
 <body>
@@ -214,7 +218,7 @@
   </nav>
 
   <div class="note">
-    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: your tutor will look at your <em>working</em>, and on this page, at your graphs. When you read a gradient from a hand-drawn line, your answer will differ slightly from anyone else’s. That is expected, so the checks give a sensible range.</p>
+    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: what matters is your <em>working</em>, and on this page, your graphs. When you read a gradient from a hand-drawn line, your answer will differ slightly from anyone else’s. That is expected, so the checks give a sensible range.</p>
     <p class="screen-only">You will need graph paper. If you print this page, the last sheet is a page of graph paper.</p>
   </div>
 
@@ -250,9 +254,9 @@
         <details class="num"><summary>Check your number</summary><span>0.34 s</span></details><div class="work-space"></div></li>
       <li class="q"><p>Four readings are 4.2, 4.3, 5.9 and 4.1 cm. One looks wrong. Find the average of the other three.</p>
         <details class="num"><summary>Check your number</summary><span>4.2 cm</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A student investigates how the height a ball is dropped from affects how high it bounces. Name the independent and dependent variables, and two variables they should control. Say how they would control each one.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Explain why timing ten vibrations and dividing by ten gives a more precise answer than timing one vibration.</p><div class="work-space"></div></li>
     </ol>
   </div>
@@ -281,7 +285,7 @@
   <div class="questions">
     <h3>Your turn</h3>
     <ol start="6">
-      <li class="q explain"><span class="tag">Rewrite · bring to your session</span>
+      <li class="q explain"><span class="tag">Rewrite</span>
         <p>A student’s results are written like this: “1 kg = 12cm, 1 kg = 11.5 cm, 2kg 24 cm, 2 kg = 23.75, 3 kg: 35cm and 36 cm.” Draw a proper results table for them, including an average column.</p><div class="work-space"></div></li>
     </ol>
   </div>
@@ -315,7 +319,7 @@
     <ol class="working">
       <li>The points lie close to a straight line that does not pass through the origin.</li>
       <li>Large triangle on the line, from (0 min, 20 °C) to (5 min, 49 °C):</li>
-      <li>gradient = (49 − 20) ÷ (5 − 0) = 5.8 °C per minute <span class="why">the rate of heating</span></li>
+      <li>gradient = <span class="frac"><span>49 − 20</span><span>5 − 0</span></span> = 5.8 °C per minute <span class="why">the rate of heating</span></li>
       <li>intercept = 20 °C <span class="why">the starting temperature</span></li>
       <li>Equation: <i class="v">T</i> = 5.8<i class="v">t</i> + 20, with <i class="v">T</i> in °C and <i class="v">t</i> in minutes</li>
     </ol>
@@ -329,7 +333,7 @@
       <tr><th>speed (m s<sup>−1</sup>)</th><td>0.4</td><td>0.9</td><td>1.5</td><td>1.9</td><td>2.5</td><td>3.0</td></tr>
     </table>
     <ol start="7">
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Plot this data on graph paper and draw a line of best fit.</p><div class="work-space"></div></li>
       <li class="q"><p>Find the gradient of your line of best fit, with its units.</p>
         <details class="num"><summary>Check your number</summary><span>about 0.52 m s<sup>−2</sup> (anything from 0.48 to 0.56 is reasonable)</span></details><div class="work-space"></div></li>
@@ -337,16 +341,16 @@
         <details class="num"><summary>Check your number</summary><span>about 0.4 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
       <li class="q"><p>Assuming the pattern continues, predict the speed at 8.0 s.</p>
         <details class="num"><summary>Check your number</summary><span>about 4.6 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>What physical quantity do the gradient and the intercept represent here? Write the equation of the line using physics symbols.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your hand-drawn graph, with the gradient triangle drawn on it.</li>
-      <li>Your answers to questions 4, 5, 6 and 11.</li>
+      <li>Check your graph: labelled axes with units, a line of best fit, and a large gradient triangle.</li>
+      <li>Read your answers to questions 4, 5, 6 and 11 again.</li>
     </ul>
   </div>
 
@@ -355,15 +359,15 @@
 
   <p>Many relationships in physics are not straight lines. At Level 2 you need to recognise four common shapes. In each, <i class="v">k</i> is a constant.</p>
   <div class="gallery" id="gallery"></div>
-  <p>The curves for 1/<i class="v">x</i> and 1/<i class="v">x</i><sup>2</sup> look similar, as do <i class="v">x</i><sup>2</sup> and a steep straight line over a short range. You usually cannot tell them apart by eye, which is why the next section matters.</p>
+  <p>The curves for <span class="frac"><span>1</span><span><i class="v">x</i></span></span> and <span class="frac"><span>1</span><span><i class="v">x</i><sup>2</sup></span></span> look similar, as do <i class="v">x</i><sup>2</sup> and a steep straight line over a short range. You usually cannot tell them apart by eye, which is why the next section matters.</p>
   <p>A quick test: think about what happens when <i class="v">x</i> doubles.</p>
   <table class="wide">
     <tr><th>Relationship</th><th>When <i class="v">x</i> doubles, <i class="v">y</i> …</th></tr>
     <tr><td><i class="v">y</i> ∝ <i class="v">x</i></td><td>doubles (× 2)</td></tr>
     <tr><td><i class="v">y</i> ∝ <i class="v">x</i><sup>2</sup></td><td>quadruples (× 4)</td></tr>
     <tr><td><i class="v">y</i> ∝ √<i class="v">x</i></td><td>increases by × 1.41 (√2)</td></tr>
-    <tr><td><i class="v">y</i> ∝ 1/<i class="v">x</i></td><td>halves (× ½)</td></tr>
-    <tr><td><i class="v">y</i> ∝ 1/<i class="v">x</i><sup>2</sup></td><td>becomes a quarter (× ¼)</td></tr>
+    <tr><td><i class="v">y</i> ∝ <span class="frac"><span>1</span><span><i class="v">x</i></span></span></td><td>halves (× <span class="frac"><span>1</span><span>2</span></span>)</td></tr>
+    <tr><td><i class="v">y</i> ∝ <span class="frac"><span>1</span><span><i class="v">x</i><sup>2</sup></span></span></td><td>becomes a quarter (× <span class="frac"><span>1</span><span>4</span></span>)</td></tr>
   </table>
 
   <div class="questions">
@@ -373,10 +377,10 @@
         <details class="num"><summary>Check your number</summary><span>× 9</span></details><div class="work-space"></div></li>
       <li class="q"><p>If <i class="v">y</i> ∝ √<i class="v">x</i> and <i class="v">x</i> is multiplied by 4, by what factor does <i class="v">y</i> change?</p>
         <details class="num"><summary>Check your number</summary><span>× 2</span></details><div class="work-space"></div></li>
-      <li class="q"><p>If <i class="v">y</i> ∝ 1/<i class="v">x</i><sup>2</sup> and <i class="v">x</i> is tripled, by what factor does <i class="v">y</i> change?</p>
-        <details class="num"><summary>Check your number</summary><span>× 1/9 (about 0.11)</span></details><div class="work-space"></div></li>
-      <li class="q"><p>In an experiment, when <i class="v">x</i> goes from 2.0 to 4.0, <i class="v">y</i> goes from 36 to 9.0. Which of the four relationships fits? Give the power of <i class="v">x</i> (for example, 2 for <i class="v">x</i><sup>2</sup> or −1 for 1/<i class="v">x</i>).</p>
-        <details class="num"><summary>Check your number</summary><span>−2 (y ∝ 1/x²)</span></details><div class="work-space"></div></li>
+      <li class="q"><p>If <i class="v">y</i> ∝ <span class="frac"><span>1</span><span><i class="v">x</i><sup>2</sup></span></span> and <i class="v">x</i> is tripled, by what factor does <i class="v">y</i> change?</p>
+        <details class="num"><summary>Check your number</summary><span>× <span class="frac"><span>1</span><span>9</span></span> (about 0.11)</span></details><div class="work-space"></div></li>
+      <li class="q"><p>In an experiment, when <i class="v">x</i> goes from 2.0 to 4.0, <i class="v">y</i> goes from 36 to 9.0. Which of the four relationships fits? Give the power of <i class="v">x</i> (for example, 2 for <i class="v">x</i><sup>2</sup> or −1 for <span class="frac"><span>1</span><span><i class="v">x</i></span></span>).</p>
+        <details class="num"><summary>Check your number</summary><span>−2 (<i>y</i> ∝ <span class="frac"><span>1</span><span><i>x</i>²</span></span>)</span></details><div class="work-space"></div></li>
     </ol>
   </div>
 
@@ -389,8 +393,8 @@
     <tr><th>If you suspect …</th><th>plot <i class="v">y</i> against …</th><th>and the gradient is</th></tr>
     <tr><td><i class="v">y</i> = <i class="v">kx</i><sup>2</sup></td><td><i class="v">x</i><sup>2</sup></td><td><i class="v">k</i></td></tr>
     <tr><td><i class="v">y</i> = <i class="v">k</i>√<i class="v">x</i></td><td>√<i class="v">x</i></td><td><i class="v">k</i></td></tr>
-    <tr><td><i class="v">y</i> = <i class="v">k</i>/<i class="v">x</i></td><td>1/<i class="v">x</i></td><td><i class="v">k</i></td></tr>
-    <tr><td><i class="v">y</i> = <i class="v">k</i>/<i class="v">x</i><sup>2</sup></td><td>1/<i class="v">x</i><sup>2</sup></td><td><i class="v">k</i></td></tr>
+    <tr><td><i class="v">y</i> = <span class="frac"><span><i class="v">k</i></span><span><i class="v">x</i></span></span></td><td><span class="frac"><span>1</span><span><i class="v">x</i></span></span></td><td><i class="v">k</i></td></tr>
+    <tr><td><i class="v">y</i> = <span class="frac"><span><i class="v">k</i></span><span><i class="v">x</i><sup>2</sup></span></span></td><td><span class="frac"><span>1</span><span><i class="v">x</i><sup>2</sup></span></span></td><td><i class="v">k</i></td></tr>
   </table>
 
   <div class="example">
@@ -408,7 +412,7 @@
     <ol class="working">
       <li>The first graph curves upward. Doubling the speed from 1.0 to 2.0 m s<sup>−1</sup> roughly quadruples the distance (0.19 to 0.78 m), which suggests <i class="v">d</i> ∝ <i class="v">v</i><sup>2</sup>.</li>
       <li>Plot <i class="v">d</i> against <i class="v">v</i><sup>2</sup>. The points lie on a straight line through the origin, which confirms it.</li>
-      <li>gradient = (1.80 − 0) ÷ (9.00 − 0) = 0.20 s<sup>2</sup> m<sup>−1</sup> <span class="why">from the line, using a large triangle</span></li>
+      <li>gradient = <span class="frac"><span>1.80 − 0</span><span>9.00 − 0</span></span> = 0.20 s<sup>2</sup> m<sup>−1</sup> <span class="why">from the line, using a large triangle</span></li>
       <li>Equation: <i class="v">d</i> = 0.20<i class="v">v</i><sup>2</sup></li>
     </ol>
   </div>
@@ -436,16 +440,16 @@
       <label><input type="radio" name="xform" value="x" checked> <i>x</i></label>
       <label><input type="radio" name="xform" value="x2"> <i>x</i>²</label>
       <label><input type="radio" name="xform" value="sqrt"> √<i>x</i></label>
-      <label><input type="radio" name="xform" value="inv"> 1/<i>x</i></label>
-      <label><input type="radio" name="xform" value="inv2"> 1/<i>x</i>²</label>
+      <label><input type="radio" name="xform" value="inv"> <span class="frac"><span>1</span><span><i>x</i></span></span></label>
+      <label><input type="radio" name="xform" value="inv2"> <span class="frac"><span>1</span><span><i>x</i>²</span></span></label>
     </div>
     <svg id="linPlot" viewBox="0 0 440 290" aria-label="Graph of the chosen data with a line of best fit"></svg>
     <p class="fit" id="fit"></p>
     <p><strong>Things to try:</strong></p>
     <ul class="try">
       <li>For each built-in data set, which choice gives the straightest line? Does that line go through the origin?</li>
-      <li>For the plucked string, compare the 1/<i>x</i> and 1/<i>x</i>² graphs. How can you tell which is right?</li>
-      <li>Bring data from an experiment you do with your tutor and try it here.</li>
+      <li>For the plucked string, compare the <span class="frac"><span>1</span><span><i>x</i></span></span> and <span class="frac"><span>1</span><span><i>x</i>²</span></span> graphs. How can you tell which is right?</li>
+      <li>Try it with data from an experiment of your own.</li>
     </ul>
   </div>
 
@@ -461,22 +465,21 @@
         <details class="num"><summary>Check your number</summary><span>about × 4</span></details><div class="work-space"></div></li>
       <li class="q"><p>Calculate <i class="v">I</i><sup>2</sup> for <i class="v">I</i> = 2.5 A.</p>
         <details class="num"><summary>Check your number</summary><span>6.25 A<sup>2</sup></span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Add an <i class="v">I</i><sup>2</sup> row to the table, then plot <i class="v">P</i> against <i class="v">I</i><sup>2</sup> on graph paper and draw a line of best fit.</p><div class="work-space"></div></li>
       <li class="q"><p>Find the gradient of your line, with its units.</p>
         <details class="num"><summary>Check your number</summary><span>about 5.0 W A<sup>−2</sup></span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Write the equation linking <i class="v">P</i> and <i class="v">I</i>. Then use the <a href="03-electricity.html#power">electricity page</a> to work out which physical quantity the gradient represents.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Explain why physicists prefer to straighten a curve before finding a relationship, instead of working from the curve directly.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your graph of <i class="v">P</i> against <i class="v">I</i><sup>2</sup>, with the gradient triangle.</li>
-      <li>Your answers to questions 20 and 21.</li>
+      <li>Check your graph of <i class="v">P</i> against <i class="v">I</i><sup>2</sup> has a gradient triangle, and that your gradient has units.</li>
     </ul>
   </div>
 
@@ -496,10 +499,10 @@
   <p>The discussion is where the higher grades are decided. Use the skills from <a href="05-writing-explanations.html">Writing explanations</a>: link each source of error to how it affected your results.</p>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Anything on this page you would like to go over again.</li>
-      <li>Ideas for an experiment we could do together to practise the whole process.</li>
+      <li>Note anything on this page you want to revisit.</li>
+      <li>Think of an experiment you could do at home to practise the whole process.</li>
     </ul>
   </div>
 
@@ -595,8 +598,8 @@
     const shapes = [
       ['y ∝ x²', 'curves upward, getting steeper', x => x * x],
       ['y ∝ √x', 'rises steeply, then levels off', x => Math.sqrt(x)],
-      ['y ∝ 1/x', 'falls, then levels off towards the axis', x => 0.15 / x],
-      ['y ∝ 1/x²', 'falls even more sharply, then levels off', x => 0.03 / (x * x)]
+      ['y ∝ <span class="frac"><span>1</span><span>x</span></span>', 'falls, then levels off towards the axis', x => 0.15 / x],
+      ['y ∝ <span class="frac"><span>1</span><span>x²</span></span>', 'falls even more sharply, then levels off', x => 0.03 / (x * x)]
     ];
     $('gallery').innerHTML = shapes.map(([name, desc, f]) => {
       const pts = [];

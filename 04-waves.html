@@ -103,7 +103,7 @@
   }
   details.num summary::-webkit-details-marker { display: none; }
   details.num[open] summary { background: var(--green-soft); }
-  details.num span {
+  details.num > span {
     display: inline-block;
     margin-left: 10px;
     font-family: "IBM Plex Serif", Georgia, serif;
@@ -191,6 +191,10 @@
     .work-space { display: block; height: 3.2cm; }
     .explain .work-space { height: 5cm; }
   }
+  /* Stacked fractions */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2; margin: 0 0.12em; }
+  .frac > span { padding: 0 0.2em; }
+  .frac > span:first-child { border-bottom: 1px solid currentColor; }
 </style>
 </head>
 <body>
@@ -212,7 +216,7 @@
   </nav>
 
   <div class="note">
-    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: your tutor will look at your <em>working</em>. Explain and sketch questions have no answers here. Do your best attempt and bring it to your session.</p>
+    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. Use it only once you have finished: the number is the least important part, and your working is what matters, so write every step. Explain and sketch questions have no answers here. Write your best attempt in your book.</p>
   </div>
 
   <!-- ===================================================== 1 -->
@@ -252,19 +256,19 @@
   <div class="questions">
     <h3>Your turn</h3>
     <ol>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A duck sits on a pond. As ripples pass, it bobs up and down but does not move across the pond with them. Explain what this tells you about waves.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Sort these into transverse and longitudinal: ripples on a pond, sound, light, a slinky pushed back and forth along its length, a slinky shaken side to side. Give a reason for each.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>We can see the Sun, but we cannot hear the huge explosions happening on it. Explain why.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your three answers, and anything the explorer showed you that surprised you.</li>
+      <li>Note anything the explorer showed you that surprised you.</li>
     </ul>
   </div>
 
@@ -288,15 +292,15 @@
     <tr><td>Period, <i class="v">T</i></td><td>the time for one complete wave to pass</td><td>s</td></tr>
     <tr><td>Speed, <i class="v">v</i></td><td>how fast the wave travels</td><td>m s<sup>−1</sup></td></tr>
   </table>
-  <p class="eq"><i>v</i> = <i>f</i>λ &nbsp;&nbsp;&nbsp;&nbsp; <i>T</i> = 1 ÷ <i>f</i></p>
+  <p class="eq"><i>v</i> = <i>f</i>λ &nbsp;&nbsp;&nbsp;&nbsp; <i>T</i> = <span class="frac"><span>1</span><span><i>f</i></span></span></p>
   <p><strong>An important idea for later:</strong> the <em>source</em> sets the frequency, and the <em>medium</em> sets the speed. When a wave passes into a different medium, its frequency stays the same, so its speed and wavelength change together.</p>
 
   <div class="example">
     <h4>Worked example</h4>
     <p>Four complete waves pass along a rope in 2.0 s. Each wave is 1.5 m long. Find the frequency, the period and the speed.</p>
     <ol class="working">
-      <li><i class="v">f</i> = 4 waves ÷ 2.0 s = 2.0 Hz</li>
-      <li><i class="v">T</i> = 1 ÷ <i class="v">f</i> = 1 ÷ 2.0 = 0.50 s</li>
+      <li><i class="v">f</i> = <span class="frac"><span>4 waves</span><span>2.0 s</span></span> = 2.0 Hz</li>
+      <li><i class="v">T</i> = <span class="frac"><span>1</span><span><i class="v">f</i></span></span> = <span class="frac"><span>1</span><span>2.0</span></span> = 0.50 s</li>
       <li><i class="v">v</i> = <i class="v">f</i>λ = 2.0 × 1.5 = 3.0 m s<sup>−1</sup></li>
     </ol>
   </div>
@@ -318,16 +322,16 @@
         <details class="num"><summary>Check your number</summary><span>4.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
       <li class="q"><p>A radio station broadcasts at 100 MHz. Radio waves travel at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>. Find the wavelength.</p>
         <details class="num"><summary>Check your number</summary><span>3.0 m</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Water waves slow down as they move from deep water into shallow water. Explain what happens to their frequency and to their wavelength.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your working for questions 4 to 6. Draw a quick sketch of the wave for each one.</li>
-      <li>Your deep and shallow water explanation. It is the key idea behind refraction.</li>
+      <li>Draw a quick sketch of the wave for questions 4 to 6.</li>
+      <li>Read your deep and shallow water answer again. It is the key idea behind refraction.</li>
     </ul>
   </div>
 
@@ -347,7 +351,7 @@
     <p>You shout towards a cliff and hear the echo 0.60 s later. How far away is the cliff?</p>
     <ol class="working">
       <li>Total distance travelled by the sound: <i class="v">d</i> = <i class="v">vt</i> = 340 × 0.60 = 204 m</li>
-      <li>That is there and back, so the cliff is 204 ÷ 2 = 102 m away</li>
+      <li>That is there and back, so the cliff is <span class="frac"><span>204</span><span>2</span></span> = 102 m away</li>
       <li>To 2 s.f.: 1.0 × 10<sup>2</sup> m</li>
     </ol>
   </div>
@@ -363,17 +367,17 @@
         <details class="num"><summary>Check your number</summary><span>1.0 × 10<sup>3</sup> m (1020 m before rounding)</span></details><div class="work-space"></div></li>
       <li class="q"><p>A bat uses ultrasound with a frequency of 40 kHz. Find its wavelength in air.</p>
         <details class="num"><summary>Check your number</summary><span>8.5 × 10<sup>−3</sup> m</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Question 3 does not halve the time, but question 1 does. Explain why.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>One guitar string is plucked harder. Another is tightened so it plays a higher note. Describe how the sound wave is different in each case.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your explanations for questions 5 and 6.</li>
+      <li>Check that your answers to questions 5 and 6 give reasons, not just facts.</li>
     </ul>
   </div>
 
@@ -427,18 +431,18 @@
         <details class="num"><summary>Check your number</summary><span>3.0 m</span></details><div class="work-space"></div></li>
       <li class="q"><p>The Moon is 3.8 × 10<sup>8</sup> m from Earth. How long does moonlight take to reach us?</p>
         <details class="num"><summary>Check your number</summary><span>1.3 s</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Draw a ray diagram showing how a person sees the image of a pencil in a flat mirror. Use a ruler, mark the normals, and show where the image is.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Explain why the image in a flat mirror is called a virtual image.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your ray diagram and your ruler. Ray diagrams are a big part of Level 2.</li>
-      <li>Your virtual image explanation.</li>
+      <li>Draw your ray diagram with a ruler. Ray diagrams are a big part of Level 2.</li>
+      <li>Read your virtual image explanation again.</li>
     </ul>
   </div>
 
@@ -471,22 +475,22 @@
         <details class="num"><summary>Check your number</summary><span>6.5 × 10<sup>−7</sup> m</span></details><div class="work-space"></div></li>
       <li class="q"><p>The same red light enters glass, where it travels at 2.0 × 10<sup>8</sup> m s<sup>−1</sup>. Its frequency does not change. Find its wavelength in the glass.</p>
         <details class="num"><summary>Check your number</summary><span>4.3 × 10<sup>−7</sup> m</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Draw a ray of light passing from air into water at an angle. Mark the normal and show which way the ray bends.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Draw a ray passing from glass into air at a small angle. Then draw a second ray hitting the same surface at a large angle, where total internal reflection happens.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A straw standing in a glass of water looks bent at the water’s surface. Explain why.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Explain how an optical fibre keeps light inside it, even when the fibre bends.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your two sketches.</li>
-      <li>Your straw and optical fibre explanations.</li>
+      <li>Check that every sketch has a normal drawn at 90° to the surface.</li>
+      <li>Read your straw and optical fibre explanations again.</li>
     </ul>
   </div>
 
@@ -506,20 +510,19 @@
   <div class="questions">
     <h3>Have a go</h3>
     <ol>
-      <li class="q"><p><span class="preview">Level 2 preview</span> The refractive index of a material is <i class="v">n</i> = <i class="v">c</i> ÷ <i class="v">v</i>, where <i class="v">c</i> = 3.0 × 10<sup>8</sup> m s<sup>−1</sup> is the speed of light in a vacuum. Find the refractive index of glass, where light travels at 2.0 × 10<sup>8</sup> m s<sup>−1</sup>.</p>
+      <li class="q"><p><span class="preview">Level 2 preview</span> The refractive index of a material is <i class="v">n</i> = <span class="frac"><span><i class="v">c</i></span><span><i class="v">v</i></span></span>, where <i class="v">c</i> = 3.0 × 10<sup>8</sup> m s<sup>−1</sup> is the speed of light in a vacuum. Find the refractive index of glass, where light travels at 2.0 × 10<sup>8</sup> m s<sup>−1</sup>.</p>
         <details class="num"><summary>Check your number</summary><span>1.5</span></details><div class="work-space"></div></li>
       <li class="q"><p><span class="preview">Level 2 preview</span> Snell’s law is <i class="v">n</i><sub>1</sub> sin θ<sub>1</sub> = <i class="v">n</i><sub>2</sub> sin θ<sub>2</sub>. Light passes from air (<i class="v">n</i> = 1.00) into glass (<i class="v">n</i> = 1.50) with an angle of incidence of 40°. Find the angle of refraction.</p>
         <details class="num"><summary>Check your number</summary><span>25°</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p><span class="preview">Level 2 preview</span> You can hear someone talking around the corner of a building, but you cannot see them. Both sound and light are waves. Suggest why sound gets round the corner and light does not. Hint: compare their wavelengths with the size of a doorway.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your answer to the corner question.</li>
-      <li>Anything on this page you would like to go over again.</li>
+      <li>Note anything on this page you want to revisit.</li>
     </ul>
   </div>
 </main>

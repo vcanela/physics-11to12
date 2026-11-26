@@ -103,7 +103,7 @@
   }
   details.num summary::-webkit-details-marker { display: none; }
   details.num[open] summary { background: var(--green-soft); }
-  details.num span {
+  details.num > span {
     display: inline-block;
     margin-left: 10px;
     font-family: "IBM Plex Serif", Georgia, serif;
@@ -200,6 +200,10 @@
     .work-space { display: block; height: 3.2cm; }
     .explain .work-space { height: 5cm; }
   }
+  /* Stacked fractions */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2; margin: 0 0.12em; }
+  .frac > span { padding: 0 0.2em; }
+  .frac > span:first-child { border-bottom: 1px solid currentColor; }
 </style>
 </head>
 <body>
@@ -222,7 +226,7 @@
   </nav>
 
   <div class="note">
-    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: your tutor will look at your <em>working</em>. Explain and sketch questions have no answers here. Do your best attempt and bring it to your session.</p>
+    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. Use it only once you have finished: the number is the least important part, and your working is what matters, so write every step. Explain and sketch questions have no answers here. Write your best attempt in your book.</p>
     <p>Use <i class="v">g</i> = 10 m s<sup>−2</sup> throughout.</p>
   </div>
 
@@ -230,11 +234,11 @@
   <h2 id="speed">1. Speed and acceleration</h2>
 
   <p><strong>Speed</strong> is how fast something is moving: the distance it covers each second.</p>
-  <p class="eq"><i>v</i> = Δ<i>d</i> ÷ Δ<i>t</i> &nbsp;&nbsp; units: m s<sup>−1</sup></p>
+  <p class="eq"><i>v</i> = <span class="frac"><span>Δ<i>d</i></span><span>Δ<i>t</i></span></span> &nbsp;&nbsp; units: m s<sup>−1</sup></p>
   <p>The Δ (delta) means “change in”. When speed varies during a journey, this formula gives the <em>average</em> speed.</p>
   <p><strong>Velocity</strong> is speed in a particular direction. A car going round a corner at a steady speed has a changing velocity, because its direction is changing. At Year 11 the two words are often used loosely; at Level 2 the difference matters.</p>
   <p><strong>Acceleration</strong> is how quickly the speed changes: the change in speed each second.</p>
-  <p class="eq"><i>a</i> = Δ<i>v</i> ÷ Δ<i>t</i> &nbsp;&nbsp; units: m s<sup>−2</sup></p>
+  <p class="eq"><i>a</i> = <span class="frac"><span>Δ<i>v</i></span><span>Δ<i>t</i></span></span> &nbsp;&nbsp; units: m s<sup>−2</sup></p>
   <p>Slowing down gives a negative acceleration, often called deceleration.</p>
 
   <div class="example">
@@ -242,7 +246,7 @@
     <p>A bus speeds up from 5.0 m s<sup>−1</sup> to 15 m s<sup>−1</sup> in 4.0 s. Find its acceleration.</p>
     <ol class="working">
       <li>Δ<i class="v">v</i> = 15 − 5.0 = 10 m s<sup>−1</sup> <span class="why">final speed minus starting speed</span></li>
-      <li><i class="v">a</i> = Δ<i class="v">v</i> ÷ Δ<i class="v">t</i> = 10 ÷ 4.0 = 2.5 m s<sup>−2</sup></li>
+      <li><i class="v">a</i> = <span class="frac"><span>Δ<i class="v">v</i></span><span>Δ<i class="v">t</i></span></span> = <span class="frac"><span>10</span><span>4.0</span></span> = 2.5 m s<sup>−2</sup></li>
       <li>The bus gains 2.5 m s<sup>−1</sup> of speed every second.</li>
     </ol>
   </div>
@@ -260,15 +264,15 @@
         <details class="num"><summary>Check your number</summary><span>−4.0 m s<sup>−2</sup></span></details><div class="work-space"></div></li>
       <li class="q"><p>A skateboarder moving at 2.0 m s<sup>−1</sup> accelerates at 1.5 m s<sup>−2</sup> for 4.0 s. What is her final speed?</p>
         <details class="num"><summary>Check your number</summary><span>8.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A car drives all the way round a roundabout at a steady 30 km/h. Explain why its speed is constant but its velocity is not. Is the car accelerating?</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your answer to the roundabout question. It is a first look at an important Level 2 idea.</li>
+      <li>Read your roundabout answer again. It is a first look at an important Level 2 idea.</li>
     </ul>
   </div>
 
@@ -338,20 +342,20 @@
         <details class="num"><summary>Check your number</summary><span>10 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
       <li class="q"><p>Find the dog’s average speed for the whole 30 s.</p>
         <details class="num"><summary>Check your number</summary><span>5.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Sketch the speed against time graph for the dog’s walk. Label the axes and mark the speeds.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>A ball rolls down a ramp, speeding up. It then rolls across a carpet, slowing down steadily until it stops. Sketch both the distance against time and the speed against time graphs.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A graph shows a flat horizontal line at 8 m s<sup>−1</sup>. One student says the object is not moving. Explain what the graph actually shows and why this mistake is so common.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your three sketches. Draw them in your book, not just in your head.</li>
-      <li>One story you built in the explorer where the graphs surprised you.</li>
+      <li>Draw all three sketches in your book, not just in your head.</li>
+      <li>Build one story in the explorer, predict both graphs first, then press Play to check.</li>
     </ul>
   </div>
 
@@ -399,7 +403,7 @@
     <ol class="working">
       <li>Up and down: weight and support force are equal, so they cancel. <span class="why">the car doesn’t sink or float</span></li>
       <li><i class="v">F</i><sub>net</sub> = 3000 − 600 = 2400 N forward</li>
-      <li><i class="v">a</i> = <i class="v">F</i><sub>net</sub> ÷ <i class="v">m</i> = 2400 ÷ 1200 = 2.0 m s<sup>−2</sup> forward</li>
+      <li><i class="v">a</i> = <span class="frac"><span><i class="v">F</i><sub>net</sub></span><span><i class="v">m</i></span></span> = <span class="frac"><span>2400</span><span>1200</span></span> = 2.0 m s<sup>−2</sup> forward</li>
     </ol>
   </div>
 
@@ -430,17 +434,17 @@
         <details class="num"><summary>Check your number</summary><span>6.0 N</span></details><div class="work-space"></div></li>
       <li class="q"><p>A 1500 kg car brakes from 20 m s<sup>−1</sup> to rest in 4.0 s. Find the size of the braking force. (Two steps: acceleration first.)</p>
         <details class="num"><summary>Check your number</summary><span>7500 N</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Draw a labelled force diagram for a car driving at constant speed along a flat road. Make the arrow lengths show which forces are equal.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Without looking at the worked example, explain why a skydiver who jumps from a plane speeds up at first but eventually falls at a constant speed. Use the words <em>weight</em>, <em>air resistance</em>, <em>net force</em> and <em>acceleration</em>.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your force diagram and your skydiver explanation. Explanations like this are where Merit and Excellence marks come from.</li>
+      <li>Once you have written your skydiver explanation, compare it with the worked example. Explanations like this are where Merit and Excellence marks come from.</li>
     </ul>
   </div>
 
@@ -448,7 +452,7 @@
   <h2 id="pressure">4. Pressure</h2>
 
   <p>Pressure tells you how concentrated a force is: how much force pushes on each square metre.</p>
-  <p class="eq"><i>P</i> = <i>F</i> ÷ <i>A</i> &nbsp;&nbsp; units: pascals (Pa), where 1 Pa = 1 N m<sup>−2</sup></p>
+  <p class="eq"><i>P</i> = <span class="frac"><span><i>F</i></span><span><i>A</i></span></span> &nbsp;&nbsp; units: pascals (Pa), where 1 Pa = 1 N m<sup>−2</sup></p>
   <ul>
     <li>The same force on a <strong>smaller area</strong> gives a <strong>bigger pressure</strong>. This is why knives are sharp and snowshoes are wide.</li>
     <li>When something rests on the ground, the force is usually its weight, so you will often need <i class="v">F</i> = <i class="v">mg</i> first.</li>
@@ -460,8 +464,8 @@
     <p>A 60 kg person stands on both feet. Each foot has an area of 150 cm<sup>2</sup> touching the floor. What pressure do they exert on the floor?</p>
     <ol class="working">
       <li><i class="v">F</i> = <i class="v">mg</i> = 60 × 10 = 600 N</li>
-      <li><i class="v">A</i> = 2 × 150 = 300 cm<sup>2</sup> = 300 ÷ 10 000 = 0.030 m<sup>2</sup> <span class="why">two feet</span></li>
-      <li><i class="v">P</i> = <i class="v">F</i> ÷ <i class="v">A</i> = 600 ÷ 0.030 = 20 000 Pa = 2.0 × 10<sup>4</sup> Pa</li>
+      <li><i class="v">A</i> = 2 × 150 = 300 cm<sup>2</sup> = <span class="frac"><span>300</span><span>10 000</span></span> = 0.030 m<sup>2</sup> <span class="why">two feet</span></li>
+      <li><i class="v">P</i> = <span class="frac"><span><i class="v">F</i></span><span><i class="v">A</i></span></span> = <span class="frac"><span>600</span><span>0.030</span></span> = 20 000 Pa = 2.0 × 10<sup>4</sup> Pa</li>
     </ol>
   </div>
 
@@ -478,16 +482,16 @@
         <details class="num"><summary>Check your number</summary><span>2300 Pa</span></details><div class="work-space"></div></li>
       <li class="q"><p>A thumb pushes a drawing pin with a force of 20 N. The point of the pin has an area of 0.10 mm<sup>2</sup>, which is 1.0 × 10<sup>−7</sup> m<sup>2</sup>. Find the pressure at the point.</p>
         <details class="num"><summary>Check your number</summary><span>2.0 × 10<sup>8</sup> Pa</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Explain why a person wearing snowshoes sinks much less into soft snow than the same person wearing boots, even though their weight hasn’t changed.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your working for question 4. The two-step questions are where most mistakes happen.</li>
-      <li>Your snowshoe explanation.</li>
+      <li>Check your working for question 4. Two-step questions are where most mistakes happen.</li>
+      <li>Read your snowshoe explanation again. Does it link the area to the pressure?</li>
     </ul>
   </div>
 
@@ -498,14 +502,14 @@
   <p>This is the most important idea in physics. In mechanics, the two forms you calculate are:</p>
   <ul>
     <li><strong>Gravitational potential energy</strong>, stored because of height: Δ<i class="v">E</i><sub>p</sub> = <i class="v">mg</i>Δ<i class="v">h</i></li>
-    <li><strong>Kinetic energy</strong>, the energy of movement: <i class="v">E</i><sub>k</sub> = ½<i class="v">mv</i><sup>2</sup></li>
+    <li><strong>Kinetic energy</strong>, the energy of movement: <i class="v">E</i><sub>k</sub> = <span class="frac"><span>1</span><span>2</span></span><i class="v">mv</i><sup>2</sup></li>
   </ul>
   <p>When an object falls with no air resistance, potential energy turns into kinetic energy and the total stays the same. In real life, some energy becomes heat and sound because of air resistance and friction.</p>
   <p><strong>Work</strong> is done when a force moves something. It is the amount of energy transformed:</p>
   <p class="eq"><i>W</i> = <i>Fd</i> &nbsp;&nbsp; and &nbsp;&nbsp; <i>W</i> = Δ<i>E</i> &nbsp;&nbsp; units: joules (J)</p>
   <p>The distance must be in the same direction as the force. Lifting something, the force is its weight and the distance is the height.</p>
   <p><strong>Power</strong> is how fast work is done:</p>
-  <p class="eq"><i>P</i> = <i>W</i> ÷ <i>t</i> &nbsp;&nbsp; units: watts (W), where 1 W = 1 J s<sup>−1</sup></p>
+  <p class="eq"><i>P</i> = <span class="frac"><span><i>W</i></span><span><i>t</i></span></span> &nbsp;&nbsp; units: watts (W), where 1 W = 1 J s<sup>−1</sup></p>
 
   <div class="example">
     <h4>Worked example</h4>
@@ -513,7 +517,7 @@
     <ol class="working">
       <li><i class="v">E</i><sub>p</sub> at the top = <i class="v">mg</i>Δ<i class="v">h</i> = 0.50 × 10 × 5.0 = 25 J</li>
       <li>All of this becomes kinetic energy, so <i class="v">E</i><sub>k</sub> at the bottom = 25 J <span class="why">conservation of energy</span></li>
-      <li><i class="v">v</i> = √(2<i class="v">E</i><sub>k</sub> ÷ <i class="v">m</i>) = √(2 × 25 ÷ 0.50) = √100 = 10 m s<sup>−1</sup></li>
+      <li><i class="v">v</i> = √(<span class="frac"><span>2<i class="v">E</i><sub>k</sub></span><span><i class="v">m</i></span></span>) = √(<span class="frac"><span>2 × 25</span><span>0.50</span></span>) = √100 = 10 m s<sup>−1</sup></li>
     </ol>
   </div>
 
@@ -532,16 +536,16 @@
         <details class="num"><summary>Check your number</summary><span>14 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
       <li class="q"><p>A 50 kg student runs up a flight of stairs 3.0 m high in 4.0 s. Find her power.</p>
         <details class="num"><summary>Check your number</summary><span>380 W</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A ball is dropped from a balcony. Describe the energy changes from the moment it is released to just before it hits the ground. Then explain why its real speed at the ground is a little less than the speed you would calculate.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your working for the diver and the stairs questions.</li>
-      <li>Your energy explanation.</li>
+      <li>Check your working for the diver and the stairs questions.</li>
+      <li>Check that your energy explanation names every energy change, in order.</li>
     </ul>
   </div>
 
@@ -565,17 +569,17 @@
     <ol>
       <li class="q"><p><span class="preview">Level 2 preview</span> Momentum is <i class="v">p</i> = <i class="v">mv</i>. Find the momentum of a 60 kg runner moving at 5.0 m s<sup>−1</sup>. (Units: kg m s<sup>−1</sup>.)</p>
         <details class="num"><summary>Check your number</summary><span>300 kg m s<sup>−1</sup></span></details><div class="work-space"></div></li>
-      <li class="q"><p><span class="preview">Level 2 preview</span> A car starts from rest and accelerates at 2.0 m s<sup>−2</sup> for 5.0 s. Use <i class="v">d</i> = <i class="v">ut</i> + ½<i class="v">at</i><sup>2</sup> to find how far it travels. (<i class="v">u</i> is the starting speed.)</p>
+      <li class="q"><p><span class="preview">Level 2 preview</span> A car starts from rest and accelerates at 2.0 m s<sup>−2</sup> for 5.0 s. Use <i class="v">d</i> = <i class="v">ut</i> + <span class="frac"><span>1</span><span>2</span></span><i class="v">at</i><sup>2</sup> to find how far it travels. (<i class="v">u</i> is the starting speed.)</p>
         <details class="num"><summary>Check your number</summary><span>25 m</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
-        <p><span class="preview">Level 2 preview</span> One ball is dropped from a table at the same moment as another is rolled off the edge sideways. Which hits the floor first? Make a prediction and give your reasoning. We will test it together.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain</span>
+        <p><span class="preview">Level 2 preview</span> One ball is dropped from a table at the same moment as another is rolled off the edge sideways. Which hits the floor first? Make a prediction and give your reasoning. Then test it with two coins: flick one off the edge of a table as you drop the other.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <!-- ===================================================== exam -->
   <h2 id="exam">Exam practice</h2>
 
-  <p>These questions come from real Year 11 mechanics exams (2011 to 2016) in the past exam booklet from your tutor. Each question mixes several ideas; the list shows its main topic. Write full answers in your book, and bring them to your session. Your tutor has the marking schedules.</p>
+  <p>These questions come from real Year 11 mechanics exams (2011 to 2016) in the past exam booklet. Each question mixes several ideas; the list shows its main topic. Write full answers in your book, as you would in the exam.</p>
 
   <table>
     <tr><th>Main topic</th><th>Exam questions</th></tr>
@@ -587,10 +591,10 @@
   </table>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your written exam answers. Leave nothing blank; a partial answer gives us something to work with.</li>
-      <li>Anything on this page you would like to go over again.</li>
+      <li>Leave nothing blank. A partial answer is always better than none.</li>
+      <li>Note anything on this page you want to revisit.</li>
     </ul>
   </div>
 </main>

@@ -187,6 +187,10 @@
       background: repeating-linear-gradient(to bottom, transparent 0, transparent 0.8cm, #bbb 0.8cm, #bbb calc(0.8cm + 1px));
     }
   }
+  /* Stacked fractions */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2; margin: 0 0.12em; }
+  .frac > span { padding: 0 0.2em; }
+  .frac > span:first-child { border-bottom: 1px solid currentColor; }
 </style>
 </head>
 <body>
@@ -207,8 +211,8 @@
   </nav>
 
   <div class="note">
-    <p><strong>About this page.</strong> The example answers are illustrations written for this page, to show the difference between the grades. They are not official marking schedules; your tutor marks your work against those.</p>
-    <p>Everything you write in the practice section comes to your session. There are no answers on this page for any question you are asked to do.</p>
+    <p><strong>About this page.</strong> The example answers are illustrations written for this page, to show the difference between the grades. They are not official marking schedules.</p>
+    <p>There are no answers on this page for any question you are asked to do.</p>
   </div>
 
   <!-- ===================================================== 1 -->
@@ -273,12 +277,12 @@
   </div>
   <div class="answer lvl-m">
     <span class="label">Merit-style</span>
-    <blockquote>The loaded car has a greater mass. By Newton’s second law, acceleration = net force ÷ mass. The driving force is the same, so with a bigger mass the acceleration is smaller.</blockquote>
+    <blockquote>The loaded car has a greater mass. By Newton’s second law, acceleration = <span class="frac"><span>net force</span><span>mass</span></span>. The driving force is the same, so with a bigger mass the acceleration is smaller.</blockquote>
     <p class="why">Now there is cause and effect: the law is named and used to connect the mass to the acceleration. What is missing: it assumes the net force is the same without saying so, and nothing shows how big the effect is.</p>
   </div>
   <div class="answer lvl-e">
     <span class="label">Excellence-style</span>
-    <blockquote>The loaded car has a greater mass. Newton’s second law gives a = F<sub>net</sub> ÷ m. If the driving force and the resistive forces are the same for both cars, the net force is the same, so a larger mass gives a smaller acceleration. For example, with a net force of 3000 N, a 1200 kg car accelerates at 2.5 m s<sup>−2</sup>, but a 1500 kg loaded car accelerates at only 2.0 m s<sup>−2</sup>. In practice, the extra weight also presses the tyres harder onto the road, which slightly increases the rolling resistance. That makes the net force smaller as well, so the loaded car’s acceleration is reduced even further.</blockquote>
+    <blockquote>The loaded car has a greater mass. Newton’s second law gives a = <span class="frac"><span>F<sub>net</sub></span><span>m.</span></span> If the driving force and the resistive forces are the same for both cars, the net force is the same, so a larger mass gives a smaller acceleration. For example, with a net force of 3000 N, a 1200 kg car accelerates at 2.5 m s<sup>−2</sup>, but a 1500 kg loaded car accelerates at only 2.0 m s<sup>−2</sup>. In practice, the extra weight also presses the tyres harder onto the road, which slightly increases the rolling resistance. That makes the net force smaller as well, so the loaded car’s acceleration is reduced even further.</blockquote>
     <p class="why">The assumption is stated, the reasoning is a complete chain, and a calculation shows the size of the effect. It goes further than the simple case by considering a second factor, the resistive force, and linking it back to the acceleration. Every sentence connects to the next, and the answer ends on what was asked.</p>
   </div>
 
@@ -299,7 +303,7 @@
   </div>
   <div class="answer lvl-e">
     <span class="label">Excellence-style</span>
-    <blockquote>The sockets on a power board are connected in parallel, so every appliance has the full 230 V across it and draws its own current, I = P ÷ V. The current from the wall is the sum of the branch currents. Another way to see this is that each extra parallel branch gives the current another path, which lowers the total resistance of the board; with the same 230 V, I = V ÷ R means a lower resistance gives a larger current. For example, a 2300 W heater draws 10 A and an 1840 W kettle draws 8.0 A, so together they draw 18 A through the one wall socket. This is why overloading a power board is dangerous: the current in the cord and socket can become large enough to overheat the wiring.</blockquote>
+    <blockquote>The sockets on a power board are connected in parallel, so every appliance has the full 230 V across it and draws its own current, I = <span class="frac"><span>P</span><span>V.</span></span> The current from the wall is the sum of the branch currents. Another way to see this is that each extra parallel branch gives the current another path, which lowers the total resistance of the board; with the same 230 V, I = <span class="frac"><span>V</span><span>R</span></span> means a lower resistance gives a larger current. For example, a 2300 W heater draws 10 A and an 1840 W kettle draws 8.0 A, so together they draw 18 A through the one wall socket. This is why overloading a power board is dangerous: the current in the cord and socket can become large enough to overheat the wiring.</blockquote>
     <p class="why">Two linked explanations that agree with each other, both tied to formulae. A calculation makes the effect concrete, and the answer follows through to a real consequence. All the physics words are used precisely.</p>
   </div>
 
@@ -320,7 +324,7 @@
   </div>
   <div class="answer lvl-e">
     <span class="label">Excellence-style</span>
-    <blockquote>The lightning and the thunder happen at the same moment and place. Light travels at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>, so over a few kilometres it arrives almost instantly, while sound travels at only about 340 m s<sup>−1</sup> and takes several seconds. Because the light’s travel time is tiny, the gap you measure is almost exactly the time the sound takes, so distance = speed of sound × time gap. For a gap of 5.0 s, d = 340 × 5.0 = 1700 m, about 1.7 km. The light takes only 1700 ÷ (3.0 × 10<sup>8</sup>) ≈ 6 × 10<sup>−6</sup> s, which is far too small to matter. The answer is only an estimate, because the speed of sound changes with air temperature and it is hard to time the gap precisely by eye and ear.</blockquote>
+    <blockquote>The lightning and the thunder happen at the same moment and place. Light travels at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>, so over a few kilometres it arrives almost instantly, while sound travels at only about 340 m s<sup>−1</sup> and takes several seconds. Because the light’s travel time is tiny, the gap you measure is almost exactly the time the sound takes, so distance = speed of sound × time gap. For a gap of 5.0 s, d = 340 × 5.0 = 1700 m, about 1.7 km. The light takes only <span class="frac"><span>1700</span><span>3.0 × 10<sup>8</sup></span></span> ≈ 6 × 10<sup>−6</sup> s, which is far too small to matter. The answer is only an estimate, because the speed of sound changes with air temperature and it is hard to time the gap precisely by eye and ear.</blockquote>
     <p class="why">The answer justifies the method, not just states it: it explains <em>why</em> the light’s travel time can be ignored, and checks it with a calculation. It finishes by judging how reliable the estimate is. This is what “discuss” asks for.</p>
   </div>
 
@@ -350,11 +354,11 @@
   <!-- ===================================================== 5 -->
   <h2 id="practice">5. Practice</h2>
 
-  <p>Write your answers in your book, or print this section, which has lined space. Run the pre-flight check on each answer before you bring it.</p>
+  <p>Write your answers in your book, or print this section, which has lined space. Run the pre-flight check on each answer when you finish it.</p>
 
   <div class="preflight">
     <h3>Pre-flight check</h3>
-    <p style="margin:0 0 6px;color:var(--muted);font-size:0.95rem">Before you bring an answer, check it against these. This is not a mark, just a habit.</p>
+    <p style="margin:0 0 6px;color:var(--muted);font-size:0.95rem">When you finish an answer, check it against these. This is not a mark, just a habit.</p>
     <label><input type="checkbox"> I re-read the question, and I answered what it actually asked.</label>
     <label><input type="checkbox"> I named the physics idea or law.</label>
     <label><input type="checkbox"> I used the details of this situation, not just general facts.</label>
@@ -368,35 +372,35 @@
     <h3>Upgrade this answer</h3>
     <p>Each question has a weak answer. Rewrite it as the best answer you can. Aim for Excellence.</p>
     <ol>
-      <li class="q"><span class="tag">Rewrite · bring to your session</span>
+      <li class="q"><span class="tag">Rewrite</span>
         <p>A heavy box is pushed across a floor at a constant speed. Explain why the pushing force must be the same size as the friction force.</p>
         <div class="weak-answer">Because the forces are balanced.</div><div class="work-space"></div></li>
-      <li class="q"><span class="tag">Rewrite · bring to your session</span>
+      <li class="q"><span class="tag">Rewrite</span>
         <p>Two identical lamps are connected in series to a battery. A third identical lamp is then added in series. Explain what happens to the brightness of the lamps.</p>
         <div class="weak-answer">They get dimmer because there are more lamps.</div><div class="work-space"></div></li>
-      <li class="q"><span class="tag">Rewrite · bring to your session</span>
+      <li class="q"><span class="tag">Rewrite</span>
         <p>A ray of light enters a glass block at an angle. Explain why it changes direction.</p>
         <div class="weak-answer">Because glass is denser than air so the light bends.</div><div class="work-space"></div></li>
     </ol>
 
     <h3>Fresh questions</h3>
     <ol start="4">
-      <li class="q"><span class="tag">Discuss · bring to your session</span>
+      <li class="q"><span class="tag">Discuss</span>
         <p>A ball is thrown straight up into the air. Ignoring air resistance, discuss the forces acting on the ball and how its speed changes on the way up, at the top, and on the way down.</p><div class="work-space"></div></li>
-      <li class="q"><span class="tag">Explain · bring to your session</span>
+      <li class="q"><span class="tag">Explain</span>
         <p>Explain why a sharp knife cuts more easily than a blunt one, even when you push with the same force.</p><div class="work-space"></div></li>
-      <li class="q"><span class="tag">Discuss · bring to your session</span>
+      <li class="q"><span class="tag">Discuss</span>
         <p>A phone charger is labelled “5.0 V, 2.0 A”. Discuss what these two numbers tell you about the charger, and calculate how much energy it delivers to the phone in one hour.</p><div class="work-space"></div></li>
-      <li class="q"><span class="tag">Explain · bring to your session</span>
+      <li class="q"><span class="tag">Explain</span>
         <p>A swimmer underwater and a friend standing on a jetty are the same distance from a boat. The swimmer hears the boat’s engine sooner. Explain why.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>All seven answers. We will mark them together against the grade ladder, so you can see where each one sits and what would move it up.</li>
-      <li>One explain question from any other topic page that you would like to rewrite after reading this page.</li>
+      <li>Run the pre-flight check on all seven answers.</li>
+      <li>Pick one explain question from another topic page and rewrite it using what you learned here.</li>
     </ul>
   </div>
 </main>

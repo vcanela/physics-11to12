@@ -18,9 +18,11 @@ Each topic ends with a "What comes next" section previewing Level 2.
 ## How the pages work
 
 - Key ideas, then worked examples, then questions.
-- Calculation questions show **only the final number** behind a button. The working is checked in person with the tutor.
-- Explain, sketch and discuss questions have **no answers** on the pages. Students bring their attempts to sessions.
-- There is no marking or self-assessment anywhere. Initial diagnostics happen in person.
+- The pages speak directly to the student and work with or without a tutor present.
+- Calculation questions show **only the final number** behind a button. The working is what matters.
+- Explain, sketch and discuss questions have **no answers** on the pages. Students write their attempts in their books.
+- There is no marking or self-assessment anywhere. Each section ends with a short "Before you move on" self-check.
+- Formulas use stacked fractions (a small CSS class, `.frac`), not division signs.
 - Interactive explorers (motion stories, series and parallel circuits, waves, linearising data) are for exploring, not testing.
 - Every page prints cleanly, with space left for working.
 

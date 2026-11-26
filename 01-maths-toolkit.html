@@ -102,7 +102,7 @@
   }
   details.num summary::-webkit-details-marker { display: none; }
   details.num[open] summary { background: var(--green-soft); }
-  details.num span {
+  details.num > span {
     display: inline-block;
     margin-left: 10px;
     font-family: "IBM Plex Serif", Georgia, serif;
@@ -165,6 +165,10 @@
     .work-space { display: block; height: 3.2cm; }
     .explain .work-space { height: 5cm; }
   }
+  /* Stacked fractions */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2; margin: 0 0.12em; }
+  .frac > span { padding: 0 0.2em; }
+  .frac > span:first-child { border-bottom: 1px solid currentColor; }
 </style>
 </head>
 <body>
@@ -186,7 +190,7 @@
   </nav>
 
   <div class="note">
-    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: in your session, your tutor will look at your <em>working</em>, because that is where the marks and the understanding are. Explain questions have no answers here. Write your best attempt and bring it to your session.</p>
+    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. Use it only once you have finished: the number is the least important part, and your working is what matters, so write every step. Explain and sketch questions have no answers here. Write your best attempt in your book.</p>
   </div>
 
   <!-- ===================================================== 1 -->
@@ -216,8 +220,8 @@
     <p>A car travels at 90 km/h. What is its speed in m s<sup>−1</sup>?</p>
     <ol class="working">
       <li>90 km/h = 90 000 m in 3600 s <span class="why">1 km = 1000 m, 1 h = 3600 s</span></li>
-      <li>v = 90 000 ÷ 3600 = 25 m s<sup>−1</sup></li>
-      <li>Check with the shortcut: 90 ÷ 3.6 = 25 ✓</li>
+      <li>v = <span class="frac"><span>90 000</span><span>3600</span></span> = 25 m s<sup>−1</sup></li>
+      <li>Check with the shortcut: <span class="frac"><span>90</span><span>3.6</span></span> = 25 ✓</li>
     </ol>
   </div>
 
@@ -236,16 +240,16 @@
         <details class="num"><summary>Check your number</summary><span>4700 Ω</span></details><div class="work-space"></div></li>
       <li class="q"><p>A current of 250 mA flows through a lamp. Write the current in amperes.</p>
         <details class="num"><summary>Check your number</summary><span>0.25 A</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
-        <p>A student calculates the kinetic energy of a 500 g ball moving at 4.0 m s<sup>−1</sup> using E<sub>k</sub> = ½<i class="v">mv</i><sup>2</sup> and gets 4000 J. Explain what went wrong, and why the mistake gives an answer that is so much too big.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain</span>
+        <p>A student calculates the kinetic energy of a 500 g ball moving at 4.0 m s<sup>−1</sup> using E<sub>k</sub> = <span class="frac"><span>1</span><span>2</span></span><i class="v">mv</i><sup>2</sup> and gets 4000 J. Explain what went wrong, and why the mistake gives an answer that is so much too big.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Any conversion you were unsure how to start.</li>
-      <li>Your answer to the explain question.</li>
+      <li>Can you convert km/h to m s<sup>−1</sup>, and grams to kilograms, without looking back?</li>
+      <li>Read your explain answer again. Does it give a reason, not just a fact?</li>
     </ul>
   </div>
 
@@ -265,8 +269,8 @@
     <h4>Worked example</h4>
     <p>Light travels at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>. The Sun is 1.5 × 10<sup>11</sup> m from Earth. How long does sunlight take to reach us?</p>
     <ol class="working">
-      <li><i class="v">v</i> = <i class="v">d</i> ÷ <i class="v">t</i>, so <i class="v">t</i> = <i class="v">d</i> ÷ <i class="v">v</i></li>
-      <li><i class="v">t</i> = (1.5 × 10<sup>11</sup>) ÷ (3.0 × 10<sup>8</sup>) <span class="why">divide the numbers, subtract the powers</span></li>
+      <li><i class="v">v</i> = <span class="frac"><span><i class="v">d</i></span><span><i class="v">t</i></span></span>, so <i class="v">t</i> = <span class="frac"><span><i class="v">d</i></span><span><i class="v">v</i></span></span></li>
+      <li><i class="v">t</i> = <span class="frac"><span>1.5 × 10<sup>11</sup></span><span>3.0 × 10<sup>8</sup></span></span> <span class="why">divide the numbers, subtract the powers</span></li>
       <li><i class="v">t</i> = 0.5 × 10<sup>3</sup> = 5.0 × 10<sup>2</sup> s <span class="why">about 8 minutes</span></li>
     </ol>
   </div>
@@ -282,18 +286,18 @@
         <details class="num"><summary>Check your number</summary><span>0.0032 A</span></details><div class="work-space"></div></li>
       <li class="q"><p>Each electron carries a charge of 1.6 × 10<sup>−19</sup> C. What is the total charge of 5.0 × 10<sup>18</sup> electrons?</p>
         <details class="num"><summary>Check your number</summary><span>0.80 C</span></details><div class="work-space"></div></li>
-      <li class="q"><p>A radio station broadcasts at a frequency of 9.0 × 10<sup>7</sup> Hz. Radio waves travel at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>. Use λ = <i class="v">v</i> ÷ <i class="v">f</i> to find the wavelength.</p>
+      <li class="q"><p>A radio station broadcasts at a frequency of 9.0 × 10<sup>7</sup> Hz. Radio waves travel at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>. Use λ = <span class="frac"><span><i class="v">v</i></span><span><i class="v">f</i></span></span> to find the wavelength.</p>
         <details class="num"><summary>Check your number</summary><span>3.3 m</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
-        <p>A student wants to calculate (3 × 10<sup>8</sup>) ÷ (2 × 10<sup>4</sup>). They type <code>3 × 10 ^ 8 ÷ 2 × 10 ^ 4</code> and get 1.5 × 10<sup>12</sup>. The correct answer is 1.5 × 10<sup>4</sup>. Explain what the calculator actually did, and how the student should type it.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain</span>
+        <p>A student wants to calculate <span class="frac"><span>3 × 10<sup>8</sup></span><span>2 × 10<sup>4</sup></span></span>. They type <code>3 × 10 ^ 8 ÷ 2 × 10 ^ 4</code> and get 1.5 × 10<sup>12</sup>. The correct answer is 1.5 × 10<sup>4</sup>. Explain what the calculator actually did, and how the student should type it.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your calculator, so you can practise the <code>EXP</code> button together.</li>
-      <li>Your answer to the explain question.</li>
+      <li>Practise the <code>EXP</code> button on your own calculator until it feels natural.</li>
+      <li>Read your explain answer again. Does it give a reason, not just a fact?</li>
     </ul>
   </div>
 
@@ -314,7 +318,7 @@
     <h4>Worked example</h4>
     <p>A runner covers 125 m in 4.6 s. Calculate their average speed.</p>
     <ol class="working">
-      <li><i class="v">v</i> = <i class="v">d</i> ÷ <i class="v">t</i> = 125 ÷ 4.6 = 27.1739… <span class="why">calculator display</span></li>
+      <li><i class="v">v</i> = <span class="frac"><span><i class="v">d</i></span><span><i class="v">t</i></span></span> = <span class="frac"><span>125</span><span>4.6</span></span> = 27.1739… <span class="why">calculator display</span></li>
       <li>125 has 3 s.f.; 4.6 has 2 s.f. The least precise is 2 s.f.</li>
       <li><i class="v">v</i> = 27 m s<sup>−1</sup></li>
     </ol>
@@ -331,18 +335,18 @@
         <details class="num"><summary>Check your number</summary><span>3</span></details><div class="work-space"></div></li>
       <li class="q"><p>Round 9.8067 to 3 significant figures.</p>
         <details class="num"><summary>Check your number</summary><span>9.81</span></details><div class="work-space"></div></li>
-      <li class="q"><p>A force of 12.5 N acts on a 3.2 kg trolley. Use <i class="v">a</i> = <i class="v">F</i> ÷ <i class="v">m</i> to find its acceleration, to a sensible number of significant figures.</p>
+      <li class="q"><p>A force of 12.5 N acts on a 3.2 kg trolley. Use <i class="v">a</i> = <span class="frac"><span><i class="v">F</i></span><span><i class="v">m</i></span></span> to find its acceleration, to a sensible number of significant figures.</p>
         <details class="num"><summary>Check your number</summary><span>3.9 m s<sup>−2</sup></span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A student calculates a speed, rounds it to 2 s.f., and then uses the rounded speed to calculate a kinetic energy. Their final answer is slightly different from the correct one. Explain why, and what they should have done.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Any number where you weren’t sure whether a zero counts.</li>
-      <li>Your answer to the explain question.</li>
+      <li>If you weren’t sure whether a zero counts, check it against the rules above.</li>
+      <li>Read your explain answer again. Does it give a reason, not just a fact?</li>
     </ul>
   </div>
 
@@ -361,11 +365,11 @@
     <h4>Worked example</h4>
     <p>A 2.0 kg ball has 100 J of kinetic energy. How fast is it moving?</p>
     <ol class="working">
-      <li>E<sub>k</sub> = ½<i class="v">mv</i><sup>2</sup></li>
+      <li>E<sub>k</sub> = <span class="frac"><span>1</span><span>2</span></span><i class="v">mv</i><sup>2</sup></li>
       <li>2E<sub>k</sub> = <i class="v">mv</i><sup>2</sup> <span class="why">multiply both sides by 2</span></li>
-      <li>2E<sub>k</sub> ÷ <i class="v">m</i> = <i class="v">v</i><sup>2</sup> <span class="why">divide both sides by m</span></li>
-      <li><i class="v">v</i> = √(2E<sub>k</sub> ÷ <i class="v">m</i>) <span class="why">square root both sides</span></li>
-      <li><i class="v">v</i> = √(2 × 100 ÷ 2.0) = √100 = 10 m s<sup>−1</sup></li>
+      <li><span class="frac"><span>2E<sub>k</sub></span><span><i class="v">m</i></span></span> = <i class="v">v</i><sup>2</sup> <span class="why">divide both sides by m</span></li>
+      <li><i class="v">v</i> = √(<span class="frac"><span>2E<sub>k</sub></span><span><i class="v">m</i></span></span>) <span class="why">square root both sides</span></li>
+      <li><i class="v">v</i> = √(<span class="frac"><span>2 × 100</span><span>2.0</span></span>) = √100 = 10 m s<sup>−1</sup></li>
     </ol>
   </div>
 
@@ -374,28 +378,28 @@
   <div class="questions">
     <h3>Your turn</h3>
     <ol>
-      <li class="q"><p>A cyclist travels at 8.0 m s<sup>−1</sup>. Use <i class="v">v</i> = <i class="v">d</i> ÷ <i class="v">t</i> to find how long they take to cover 200 m.</p>
+      <li class="q"><p>A cyclist travels at 8.0 m s<sup>−1</sup>. Use <i class="v">v</i> = <span class="frac"><span><i class="v">d</i></span><span><i class="v">t</i></span></span> to find how long they take to cover 200 m.</p>
         <details class="num"><summary>Check your number</summary><span>25 s</span></details><div class="work-space"></div></li>
       <li class="q"><p>A net force of 600 N gives a car an acceleration of 1.5 m s<sup>−2</sup>. Use <i class="v">F</i> = <i class="v">ma</i> to find the car’s mass.</p>
         <details class="num"><summary>Check your number</summary><span>400 kg</span></details><div class="work-space"></div></li>
       <li class="q"><p>A 3.0 kg box gains 90 J of gravitational potential energy when it is lifted. Use ΔE<sub>p</sub> = <i class="v">mg</i>Δ<i class="v">h</i> to find how high it was lifted.</p>
         <details class="num"><summary>Check your number</summary><span>3.0 m</span></details><div class="work-space"></div></li>
-      <li class="q"><p>A 0.20 kg ball has 10 J of kinetic energy. Use E<sub>k</sub> = ½<i class="v">mv</i><sup>2</sup> to find its speed.</p>
+      <li class="q"><p>A 0.20 kg ball has 10 J of kinetic energy. Use E<sub>k</sub> = <span class="frac"><span>1</span><span>2</span></span><i class="v">mv</i><sup>2</sup> to find its speed.</p>
         <details class="num"><summary>Check your number</summary><span>10 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
       <li class="q"><p>A current of 0.40 A flows through a resistor with 12 V across it. Use <i class="v">V</i> = <i class="v">IR</i> to find the resistance.</p>
         <details class="num"><summary>Check your number</summary><span>30 Ω</span></details><div class="work-space"></div></li>
       <li class="q"><p><span class="preview">Level 2 preview</span> A car starts from rest and accelerates at 2.0 m s<sup>−2</sup> over a distance of 25 m. Use <i class="v">v</i><sup>2</sup> = <i class="v">u</i><sup>2</sup> + 2<i class="v">ad</i> to find its final speed. (<i class="v">u</i> is the starting speed.)</p>
         <details class="num"><summary>Check your number</summary><span>10 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
-        <p>The “formula triangle” trick works for <i class="v">v</i> = <i class="v">d</i> ÷ <i class="v">t</i> but not for E<sub>k</sub> = ½<i class="v">mv</i><sup>2</sup>. Explain why.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain</span>
+        <p>The “formula triangle” trick works for <i class="v">v</i> = <span class="frac"><span><i class="v">d</i></span><span><i class="v">t</i></span></span> but not for E<sub>k</sub> = <span class="frac"><span>1</span><span>2</span></span><i class="v">mv</i><sup>2</sup>. Explain why.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Any rearrangement where you got stuck partway. Bring the attempt, not a blank page.</li>
-      <li>Your answer to the explain question.</li>
+      <li>If you got stuck partway through a rearrangement, compare your steps with the worked example, one line at a time.</li>
+      <li>Read your explain answer again. Does it give a reason, not just a fact?</li>
     </ul>
   </div>
 
@@ -404,9 +408,9 @@
 
   <p>Two things you can read from a graph appear again and again in physics.</p>
   <p><strong>Gradient</strong> is how steep the line is:</p>
-  <p class="eq">gradient = rise ÷ run = Δ<i>y</i> ÷ Δ<i>x</i></p>
+  <p class="eq">gradient = <span class="frac"><span>rise</span><span>run</span></span> = <span class="frac"><span>Δ<i>y</i></span><span>Δ<i>x</i></span></span></p>
   <p>The gradient has units: the <i>y</i> unit divided by the <i>x</i> unit. That tells you what it means.</p>
-  <p><strong>Area under the line</strong> is the region between the line and the <i>x</i> axis. Its units are the <i>y</i> unit multiplied by the <i>x</i> unit. Split it into rectangles and triangles (area of a triangle = ½ × base × height).</p>
+  <p><strong>Area under the line</strong> is the region between the line and the <i>x</i> axis. Its units are the <i>y</i> unit multiplied by the <i>x</i> unit. Split it into rectangles and triangles (area of a triangle = <span class="frac"><span>1</span><span>2</span></span> × base × height).</p>
   <table>
     <tr><th>Graph</th><th>Gradient gives</th><th>Area gives</th></tr>
     <tr><td>distance against time</td><td>speed (m s<sup>−1</sup>)</td><td>nothing useful</td></tr>
@@ -421,8 +425,8 @@
     </figure>
     <p>(a) Find the car’s acceleration in the first 4 s. (b) Find the total distance travelled in 10 s.</p>
     <ol class="working">
-      <li>(a) <i class="v">a</i> = gradient = Δ<i class="v">v</i> ÷ Δ<i class="v">t</i> = (12 − 0) ÷ (4 − 0) = 3.0 m s<sup>−2</sup></li>
-      <li>(b) Area of triangle (0 to 4 s) = ½ × 4 × 12 = 24 m</li>
+      <li>(a) <i class="v">a</i> = gradient = <span class="frac"><span>Δ<i class="v">v</i></span><span>Δ<i class="v">t</i></span></span> = <span class="frac"><span>12 − 0</span><span>4 − 0</span></span> = 3.0 m s<sup>−2</sup></li>
+      <li>(b) Area of triangle (0 to 4 s) = <span class="frac"><span>1</span><span>2</span></span> × 4 × 12 = 24 m</li>
       <li>Area of rectangle (4 to 10 s) = 6 × 12 = 72 m</li>
       <li>Total distance = 24 + 72 = 96 m</li>
     </ol>
@@ -448,16 +452,16 @@
         <details class="num"><summary>Check your number</summary><span>7.5 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
       <li class="q"><p>A distance against time graph is a straight line from (0 s, 0 m) to (8.0 s, 40 m). What is the speed?</p>
         <details class="num"><summary>Check your number</summary><span>5.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>On a distance against time graph, an object’s line curves upward, getting steeper as time goes on. Describe what the object is doing, and explain how you can tell from the graph.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your sketch of the shapes you split the area into for question 4.</li>
-      <li>Your answer to the explain question.</li>
+      <li>Check your working for question 4: did you split the area into shapes you can calculate?</li>
+      <li>Read your explain answer again. Does it give a reason, not just a fact?</li>
     </ul>
   </div>
 
@@ -480,10 +484,10 @@
 
   <ul>
     <li><strong>Pythagoras:</strong> hypotenuse<sup>2</sup> = adjacent<sup>2</sup> + opposite<sup>2</sup></li>
-    <li><strong>SOH:</strong> sin θ = opposite ÷ hypotenuse</li>
-    <li><strong>CAH:</strong> cos θ = adjacent ÷ hypotenuse</li>
-    <li><strong>TOA:</strong> tan θ = opposite ÷ adjacent</li>
-    <li>To find an angle, use the inverse button: θ = tan<sup>−1</sup>(opposite ÷ adjacent), and similarly for sin<sup>−1</sup> and cos<sup>−1</sup>.</li>
+    <li><strong>SOH:</strong> sin θ = <span class="frac"><span>opposite</span><span>hypotenuse</span></span></li>
+    <li><strong>CAH:</strong> cos θ = <span class="frac"><span>adjacent</span><span>hypotenuse</span></span></li>
+    <li><strong>TOA:</strong> tan θ = <span class="frac"><span>opposite</span><span>adjacent</span></span></li>
+    <li>To find an angle, use the inverse button: θ = tan<sup>−1</sup>(<span class="frac"><span>opposite</span><span>adjacent</span></span>), and similarly for sin<sup>−1</sup> and cos<sup>−1</sup>.</li>
   </ul>
   <p><strong>Check your calculator is in degrees</strong> (a small D or DEG on the screen). This is the most common reason for a wrong answer.</p>
 
@@ -493,7 +497,7 @@
     <ol class="working">
       <li>Draw the two vectors tip to tail. They form a right-angle triangle.</li>
       <li>speed = √(4.0<sup>2</sup> + 3.0<sup>2</sup>) = √25 = 5.0 m s<sup>−1</sup></li>
-      <li>θ = tan<sup>−1</sup>(3.0 ÷ 4.0) = 36.9° <span class="why">angle measured from north</span></li>
+      <li>θ = tan<sup>−1</sup>(<span class="frac"><span>3.0</span><span>4.0</span></span>) = 36.9° <span class="why">angle measured from north</span></li>
       <li>The boat moves at 5.0 m s<sup>−1</sup>, 37° east of north.</li>
     </ol>
   </div>
@@ -523,17 +527,17 @@
         <details class="num"><summary>Check your number</summary><span>13 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
       <li class="q"><p>A plane flies north at 70 m s<sup>−1</sup> while the wind blows it west at 15 m s<sup>−1</sup>. What is its actual speed?</p>
         <details class="num"><summary>Check your number</summary><span>72 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Two forces, 3 N and 4 N, act on the same object. Explain why the resultant force could be anything from 1 N to 7 N, and describe the arrangement that gives exactly 5 N.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your vector diagrams for questions 1, 2 and 6. A diagram is part of the working.</li>
-      <li>Your answer to the explain question.</li>
-      <li>Anything in this whole toolkit you would like to go over again.</li>
+      <li>Check your vector diagrams for questions 1, 2 and 6. A diagram is part of the working.</li>
+      <li>Read your explain answer again. Does it give a reason, not just a fact?</li>
+      <li>Look back over the whole toolkit and note anything you want to revisit.</li>
     </ul>
   </div>
 </main>

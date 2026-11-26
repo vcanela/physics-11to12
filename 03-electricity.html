@@ -103,7 +103,7 @@
   }
   details.num summary::-webkit-details-marker { display: none; }
   details.num[open] summary { background: var(--green-soft); }
-  details.num span {
+  details.num > span {
     display: inline-block;
     margin-left: 10px;
     font-family: "IBM Plex Serif", Georgia, serif;
@@ -190,6 +190,10 @@
     .work-space { display: block; height: 3.2cm; }
     .explain .work-space { height: 5cm; }
   }
+  /* Stacked fractions */
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; line-height: 1.2; margin: 0 0.12em; }
+  .frac > span { padding: 0 0.2em; }
+  .frac > span:first-child { border-bottom: 1px solid currentColor; }
 </style>
 </head>
 <body>
@@ -211,7 +215,7 @@
   </nav>
 
   <div class="note">
-    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: your tutor will look at your <em>working</em>. Explain and sketch questions have no answers here. Do your best attempt and bring it to your session.</p>
+    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. Use it only once you have finished: the number is the least important part, and your working is what matters, so write every step. Explain and sketch questions have no answers here. Write your best attempt in your book.</p>
   </div>
 
   <!-- ===================================================== 1 -->
@@ -243,17 +247,17 @@
         <details class="num"><summary>Check your number</summary><span>+4.0 × 10<sup>−6</sup> C</span></details><div class="work-space"></div></li>
       <li class="q"><p>How many electrons make up a charge of −1.0 C?</p>
         <details class="num"><summary>Check your number</summary><span>6.3 × 10<sup>18</sup> electrons</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>When a plastic rod is rubbed with a cloth, the rod becomes negative and the cloth becomes positive. Explain what has happened, and why it is electrons, not protons, that move.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A negatively charged balloon sticks to a neutral wall. Explain why, using the idea of induced charge. Draw a diagram showing where the charges are.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your balloon diagram and explanation.</li>
+      <li>Check that your balloon diagram shows where the charges sit in the wall.</li>
     </ul>
   </div>
 
@@ -261,10 +265,10 @@
   <h2 id="basics">2. Current, voltage and resistance</h2>
 
   <p><strong>Current</strong> is the rate at which charge flows past a point. It is measured in amperes (A), where 1 A is one coulomb per second.</p>
-  <p class="eq"><i>I</i> = <i>q</i> ÷ <i>t</i></p>
+  <p class="eq"><i>I</i> = <span class="frac"><span><i>q</i></span><span><i>t</i></span></span></p>
   <p>By convention, current flows from the positive terminal of the battery, around the circuit, to the negative terminal. The electrons actually move the other way, but we use the conventional direction.</p>
   <p><strong>Voltage</strong> (also called potential difference) is the energy carried by each coulomb of charge. The battery gives energy to the charge; components such as lamps use it up. It is measured in volts (V), where 1 V is one joule per coulomb.</p>
-  <p class="eq"><i>V</i> = <i>E</i> ÷ <i>q</i></p>
+  <p class="eq"><i>V</i> = <span class="frac"><span><i>E</i></span><span><i>q</i></span></span></p>
   <p><strong>Resistance</strong> is how strongly a component opposes the current. It is measured in ohms (Ω).</p>
   <p class="eq"><i>V</i> = <i>IR</i></p>
 
@@ -289,7 +293,7 @@
     <h4>Worked example</h4>
     <p>A lamp connected to a 12 V supply has a current of 0.50 A through it. (a) Find its resistance. (b) How much charge flows through it in one minute?</p>
     <ol class="working">
-      <li>(a) <i class="v">R</i> = <i class="v">V</i> ÷ <i class="v">I</i> = 12 ÷ 0.50 = 24 Ω</li>
+      <li>(a) <i class="v">R</i> = <span class="frac"><span><i class="v">V</i></span><span><i class="v">I</i></span></span> = <span class="frac"><span>12</span><span>0.50</span></span> = 24 Ω</li>
       <li>(b) <i class="v">q</i> = <i class="v">It</i> = 0.50 × 60 = 30 C <span class="why">one minute = 60 s</span></li>
     </ol>
   </div>
@@ -307,18 +311,18 @@
         <details class="num"><summary>Check your number</summary><span>12 V</span></details><div class="work-space"></div></li>
       <li class="q"><p>A battery gives 18 J of energy to 2.0 C of charge. What is its voltage?</p>
         <details class="num"><summary>Check your number</summary><span>9.0 V</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Draw a circuit with a battery, a switch and a lamp. Add an ammeter to measure the current through the lamp and a voltmeter to measure the voltage across it. Use the correct symbols.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A graph of voltage against current for a lamp is not a straight line. Explain why the lamp’s resistance increases as the current through it increases.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your circuit drawing. Check the meters are in the right places before you come.</li>
-      <li>Your lamp explanation.</li>
+      <li>Check the meters in your circuit drawing: ammeter in series, voltmeter in parallel.</li>
+      <li>Read your lamp explanation again. Does it give a reason, not just a fact?</li>
     </ul>
   </div>
 
@@ -330,7 +334,7 @@
     <tr><td>Paths</td><td>one path; the current goes through every component</td><td>several branches; the current splits</td></tr>
     <tr><td>Current</td><td>the same everywhere</td><td>branch currents add up to the total: <i class="v">I</i><sub>T</sub> = <i class="v">I</i><sub>1</sub> + <i class="v">I</i><sub>2</sub></td></tr>
     <tr><td>Voltage</td><td>shared between components: <i class="v">V</i><sub>T</sub> = <i class="v">V</i><sub>1</sub> + <i class="v">V</i><sub>2</sub></td><td>each branch gets the full supply voltage</td></tr>
-    <tr><td>Resistance</td><td><i class="v">R</i><sub>T</sub> = <i class="v">R</i><sub>1</sub> + <i class="v">R</i><sub>2</sub></td><td>1/<i class="v">R</i><sub>T</sub> = 1/<i class="v">R</i><sub>1</sub> + 1/<i class="v">R</i><sub>2</sub>; the total is <em>less</em> than the smallest resistor</td></tr>
+    <tr><td>Resistance</td><td><i class="v">R</i><sub>T</sub> = <i class="v">R</i><sub>1</sub> + <i class="v">R</i><sub>2</sub></td><td><span class="frac"><span>1</span><span><i class="v">R</i><sub>T</sub></span></span> = <span class="frac"><span>1</span><span><i class="v">R</i><sub>1</sub></span></span> + <span class="frac"><span>1</span><span><i class="v">R</i><sub>2</sub></span></span>; the total is <em>less</em> than the smallest resistor</td></tr>
     <tr><td>One lamp breaks</td><td>everything goes off</td><td>the other branches keep working</td></tr>
   </table>
   <p>Adding a resistor in series makes the total resistance bigger. Adding one in parallel makes it <em>smaller</em>, because you have given the current an extra path. That second idea surprises most people, so it is worth thinking about.</p>
@@ -341,7 +345,7 @@
     <p>Find the current, and the voltage across each resistor.</p>
     <ol class="working">
       <li><i class="v">R</i><sub>T</sub> = 4.0 + 2.0 = 6.0 Ω</li>
-      <li><i class="v">I</i> = <i class="v">V</i> ÷ <i class="v">R</i><sub>T</sub> = 12 ÷ 6.0 = 2.0 A <span class="why">the same through both resistors</span></li>
+      <li><i class="v">I</i> = <span class="frac"><span><i class="v">V</i></span><span><i class="v">R</i><sub>T</sub></span></span> = <span class="frac"><span>12</span><span>6.0</span></span> = 2.0 A <span class="why">the same through both resistors</span></li>
       <li><i class="v">V</i><sub>1</sub> = <i class="v">IR</i><sub>1</sub> = 2.0 × 4.0 = 8.0 V</li>
       <li><i class="v">V</i><sub>2</sub> = <i class="v">IR</i><sub>2</sub> = 2.0 × 2.0 = 4.0 V</li>
       <li>Check: 8.0 + 4.0 = 12 V ✓ <span class="why">the voltages share the supply</span></li>
@@ -354,10 +358,10 @@
     <p>Find the current in each branch, the total current, and the total resistance.</p>
     <ol class="working">
       <li>Each branch has the full 12 V across it.</li>
-      <li><i class="v">I</i><sub>1</sub> = 12 ÷ 4.0 = 3.0 A &nbsp;&nbsp; <i class="v">I</i><sub>2</sub> = 12 ÷ 6.0 = 2.0 A</li>
+      <li><i class="v">I</i><sub>1</sub> = <span class="frac"><span>12</span><span>4.0</span></span> = 3.0 A &nbsp;&nbsp; <i class="v">I</i><sub>2</sub> = <span class="frac"><span>12</span><span>6.0</span></span> = 2.0 A</li>
       <li><i class="v">I</i><sub>T</sub> = 3.0 + 2.0 = 5.0 A</li>
-      <li><i class="v">R</i><sub>T</sub> = <i class="v">V</i> ÷ <i class="v">I</i><sub>T</sub> = 12 ÷ 5.0 = 2.4 Ω</li>
-      <li>Check with the formula: 1/<i class="v">R</i><sub>T</sub> = 1/4.0 + 1/6.0 = 0.4167, so <i class="v">R</i><sub>T</sub> = 2.4 Ω ✓ <span class="why">less than 4.0 Ω</span></li>
+      <li><i class="v">R</i><sub>T</sub> = <span class="frac"><span><i class="v">V</i></span><span><i class="v">I</i><sub>T</sub></span></span> = <span class="frac"><span>12</span><span>5.0</span></span> = 2.4 Ω</li>
+      <li>Check with the formula: <span class="frac"><span>1</span><span><i class="v">R</i><sub>T</sub></span></span> = <span class="frac"><span>1</span><span>4.0</span></span> + <span class="frac"><span>1</span><span>6.0</span></span> = 0.4167, so <i class="v">R</i><sub>T</sub> = 2.4 Ω ✓ <span class="why">less than 4.0 Ω</span></li>
     </ol>
   </div>
 
@@ -407,17 +411,16 @@
         <details class="num"><summary>Check your number</summary><span>2.0 A</span></details><div class="work-space"></div></li>
       <li class="q"><p><span class="preview">Level 2 preview</span> In the circuit from question 6, find the current through the 6.0 Ω resistor.</p>
         <details class="num"><summary>Check your number</summary><span>0.67 A</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>Two identical lamps are connected to a battery, first in series and then in parallel. Explain which arrangement makes each lamp brighter. Then explain why the lights in a house are wired in parallel.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your working for questions 6 and 7. Draw the circuit first; it makes the steps much clearer.</li>
-      <li>Something the explorer showed you that you didn’t expect.</li>
-      <li>Your lamp brightness explanation.</li>
+      <li>For questions 6 and 7, draw the circuit first; it makes the steps much clearer.</li>
+      <li>Note one thing the explorer showed you that you didn’t expect.</li>
     </ul>
   </div>
 
@@ -425,8 +428,8 @@
   <h2 id="power">4. Power and energy</h2>
 
   <p><strong>Power</strong> is how fast energy is transformed, measured in watts (W). For electrical components:</p>
-  <p class="eq"><i>P</i> = <i>IV</i> &nbsp;&nbsp; and &nbsp;&nbsp; <i>P</i> = <i>E</i> ÷ <i>t</i></p>
-  <p>Combining <i class="v">P</i> = <i class="v">IV</i> with <i class="v">V</i> = <i class="v">IR</i> gives two shortcuts that you will use a lot at Level 2: <i class="v">P</i> = <i class="v">I</i><sup>2</sup><i class="v">R</i> and <i class="v">P</i> = <i class="v">V</i><sup>2</sup>/<i class="v">R</i>.</p>
+  <p class="eq"><i>P</i> = <i>IV</i> &nbsp;&nbsp; and &nbsp;&nbsp; <i>P</i> = <span class="frac"><span><i>E</i></span><span><i>t</i></span></span></p>
+  <p>Combining <i class="v">P</i> = <i class="v">IV</i> with <i class="v">V</i> = <i class="v">IR</i> gives two shortcuts that you will use a lot at Level 2: <i class="v">P</i> = <i class="v">I</i><sup>2</sup><i class="v">R</i> and <i class="v">P</i> = <span class="frac"><span><i class="v">V</i><sup>2</sup></span><span><i class="v">R</i></span></span>.</p>
 
   <h3>Kilowatt hours</h3>
   <p>A joule is tiny, so power companies charge by the <strong>kilowatt hour</strong> (kWh): the energy used by a 1 kW appliance running for one hour.</p>
@@ -437,7 +440,7 @@
     <h4>Worked example</h4>
     <p>A 2300 W heater runs on 230 V mains for 3.0 hours. Electricity costs 30 cents per kWh. (a) Find the current. (b) Find the cost.</p>
     <ol class="working">
-      <li>(a) <i class="v">I</i> = <i class="v">P</i> ÷ <i class="v">V</i> = 2300 ÷ 230 = 10 A</li>
+      <li>(a) <i class="v">I</i> = <span class="frac"><span><i class="v">P</i></span><span><i class="v">V</i></span></span> = <span class="frac"><span>2300</span><span>230</span></span> = 10 A</li>
       <li>(b) Energy = 2.3 kW × 3.0 h = 6.9 kWh <span class="why">2300 W = 2.3 kW</span></li>
       <li>Cost = 6.9 × 30 = 207 cents = $2.07</li>
     </ol>
@@ -458,16 +461,16 @@
         <details class="num"><summary>Check your number</summary><span>$2.40</span></details><div class="work-space"></div></li>
       <li class="q"><p>A 9.0 W LED bulb gives the same light as a 60 W old-style bulb. How much money does the LED save over 1000 hours of use, at 30 cents per kWh?</p>
         <details class="num"><summary>Check your number</summary><span>$15.30</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A toaster and a phone charger are both plugged into 230 V sockets. Explain why the toaster draws a much larger current than the charger.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your working for question 6. There is more than one way to do it.</li>
-      <li>Your toaster explanation.</li>
+      <li>Try question 6 a second way. There is more than one route to the answer.</li>
+      <li>Read your toaster explanation again. Does it use a formula to back up the reasoning?</li>
     </ul>
   </div>
 
@@ -507,22 +510,22 @@
   <div class="questions">
     <h3>Your turn</h3>
     <ol>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Two bar magnets are placed end to end with their north poles facing each other, a short gap apart. Sketch the field lines in and around the gap.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+      <li class="q explain"><span class="tag">Sketch</span>
         <p>Sketch the magnetic field around a wire carrying current <em>into</em> the page (⊗). Show the direction of the field lines.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A compass sits next to a wire. When the current is switched on, the compass needle swings round. Explain why.</p><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+      <li class="q explain"><span class="tag">Explain</span>
         <p>A scrapyard crane uses an electromagnet to lift cars. Describe three ways to make the electromagnet stronger, and explain why it is important that the magnet can be switched off.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your two sketches. We will check the field directions with a real compass if we can.</li>
-      <li>Your explanations.</li>
+      <li>Check the arrow directions in your two sketches.</li>
+      <li>If you have a compass, see how it lines up around a fridge magnet.</li>
     </ul>
   </div>
 
@@ -534,7 +537,7 @@
     <tr><th>Year 11 idea</th><th>What Level 2 adds</th></tr>
     <tr><td>Charge and forces between charges</td><td>Electric fields between charged plates, and the force on a charge in a field</td></tr>
     <tr><td>Series and parallel</td><td>Circuits that mix series and parallel in one</td></tr>
-    <tr><td>Power</td><td>Using <i class="v">P</i> = <i class="v">I</i><sup>2</sup><i class="v">R</i> and <i class="v">P</i> = <i class="v">V</i><sup>2</sup>/<i class="v">R</i> to compare components</td></tr>
+    <tr><td>Power</td><td>Using <i class="v">P</i> = <i class="v">I</i><sup>2</sup><i class="v">R</i> and <i class="v">P</i> = <span class="frac"><span><i class="v">V</i><sup>2</sup></span><span><i class="v">R</i></span></span> to compare components</td></tr>
     <tr><td>Field around a wire</td><td>The force on a current-carrying wire in a magnetic field, which is how motors work</td></tr>
     <tr><td>Electromagnets</td><td>Induction: moving a wire through a magnetic field creates a voltage, which is how generators work</td></tr>
   </table>
@@ -542,20 +545,20 @@
   <div class="questions">
     <h3>Have a go</h3>
     <ol>
-      <li class="q"><p><span class="preview">Level 2 preview</span> The electric field strength between two parallel plates is <i class="v">E</i> = <i class="v">V</i> ÷ <i class="v">d</i>, where <i class="v">d</i> is the gap. Find the field strength for plates 0.020 m apart with 100 V across them. (Units: V m<sup>−1</sup>.)</p>
+      <li class="q"><p><span class="preview">Level 2 preview</span> The electric field strength between two parallel plates is <i class="v">E</i> = <span class="frac"><span><i class="v">V</i></span><span><i class="v">d</i></span></span>, where <i class="v">d</i> is the gap. Find the field strength for plates 0.020 m apart with 100 V across them. (Units: V m<sup>−1</sup>.)</p>
         <details class="num"><summary>Check your number</summary><span>5000 V m<sup>−1</sup> (5.0 × 10<sup>3</sup> V m<sup>−1</sup>)</span></details><div class="work-space"></div></li>
-      <li class="q"><p><span class="preview">Level 2 preview</span> Use <i class="v">P</i> = <i class="v">V</i><sup>2</sup>/<i class="v">R</i> to find the power of a 46 Ω heating element connected to 230 V mains.</p>
+      <li class="q"><p><span class="preview">Level 2 preview</span> Use <i class="v">P</i> = <span class="frac"><span><i class="v">V</i><sup>2</sup></span><span><i class="v">R</i></span></span> to find the power of a 46 Ω heating element connected to 230 V mains.</p>
         <details class="num"><summary>Check your number</summary><span>1150 W</span></details><div class="work-space"></div></li>
-      <li class="q explain"><span class="tag">Explain · bring to your session</span>
-        <p><span class="preview">Level 2 preview</span> A straight wire hangs between the poles of a horseshoe magnet. When the current is switched on, the wire jumps sideways. Using what you know about the field around a wire, suggest why a force appears. We will test it together.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain</span>
+        <p><span class="preview">Level 2 preview</span> A straight wire hangs between the poles of a horseshoe magnet. When the current is switched on, the wire jumps sideways. Using what you know about the field around a wire, suggest why a force appears.</p><div class="work-space"></div></li>
     </ol>
   </div>
 
   <div class="bring">
-    <strong>Bring to your session</strong>
+    <strong>Before you move on</strong>
     <ul>
-      <li>Your prediction for the jumping wire.</li>
-      <li>Anything on this page you would like to go over again.</li>
+      <li>Make sure your jumping wire prediction includes a reason.</li>
+      <li>Note anything on this page you want to revisit.</li>
     </ul>
   </div>
 </main>
