@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maths Toolkit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d2433;
+    --muted: #5b6475;
+    --line: #d9dee7;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #1f5f8b;
+    --accent-soft: #e8f1f7;
+    --warm: #8a5210;
+    --warm-soft: #fbf1e3;
+    --green: #2e6b3f;
+    --green-soft: #e9f3ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 "IBM Plex Sans", system-ui, sans-serif;
+  }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 80px; }
+  h1, h2, h3 { font-family: "IBM Plex Serif", Georgia, serif; line-height: 1.25; }
+  h1 { font-size: 2rem; margin: 8px 0 8px; }
+  h2 {
+    font-size: 1.5rem;
+    margin: 64px 0 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--line);
+  }
+  h3 { font-size: 1.1rem; margin: 28px 0 8px; }
+  .back { color: var(--accent); text-decoration: none; font-size: 0.95rem; }
+  .lede { color: var(--muted); font-size: 1.1rem; margin: 0 0 24px; }
+  i.v { font-family: "IBM Plex Serif", Georgia, serif; }
+  .eq {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 12px 0;
+  }
+  code { font-family: "IBM Plex Mono", monospace; font-size: 0.92em; }
+
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 20px;
+  }
+  nav.toc ol { margin: 6px 0 0; padding-left: 22px; columns: 2; column-gap: 32px; }
+  nav.toc a { color: var(--accent); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  .note {
+    background: var(--warm-soft);
+    border-left: 4px solid var(--warm);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 20px 0;
+  }
+  .note p { margin: 0; }
+
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; max-width: 520px; }
+  th, td { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+  th { font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+
+  .example {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .example h4 { margin: 0 0 8px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+  .example p { margin: 6px 0; }
+  .working { margin: 8px 0 0; padding-left: 0; list-style: none; }
+  .working li { margin: 4px 0; font-family: "IBM Plex Serif", Georgia, serif; }
+  .working .why { font-family: "IBM Plex Sans", sans-serif; color: var(--muted); font-size: 0.9rem; margin-left: 8px; }
+
+  .questions { margin-top: 24px; }
+  .questions > h3 { margin-bottom: 4px; }
+  .questions ol { padding-left: 24px; }
+  .q { margin: 14px 0; padding-left: 4px; }
+  .q p { margin: 0 0 6px; }
+  details.num summary {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 99px;
+    padding: 1px 12px;
+    list-style: none;
+  }
+  details.num summary::-webkit-details-marker { display: none; }
+  details.num[open] summary { background: var(--green-soft); }
+  details.num span {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 600;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warm);
+    background: var(--warm-soft);
+    border-radius: 4px;
+    padding: 1px 8px;
+    margin-bottom: 4px;
+  }
+  .preview {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin-left: 4px;
+  }
+
+  .bring {
+    border: 2px dashed var(--warm);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 28px 0 0;
+  }
+  .bring strong { color: var(--warm); }
+  .bring ul { margin: 6px 0 0; padding-left: 20px; }
+
+  figure { margin: 16px 0; }
+  figure svg { width: 100%; max-width: 460px; height: auto; display: block; }
+  figcaption { font-size: 0.9rem; color: var(--muted); }
+  svg text { font-family: "IBM Plex Sans", sans-serif; font-size: 13px; fill: var(--ink); }
+  svg .grid { stroke: #e6e9ef; stroke-width: 1; }
+  svg .axis { stroke: var(--ink); stroke-width: 1.5; }
+  svg .plot { stroke: var(--accent); stroke-width: 3; fill: none; stroke-linejoin: round; }
+  svg .title { font-weight: 500; }
+
+  .work-space { display: none; }
+
+  @media (max-width: 560px) {
+    nav.toc ol { columns: 1; }
+    h1 { font-size: 1.7rem; }
+  }
+
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    main { max-width: none; padding: 0; }
+    .back, nav.toc, details.num { display: none; }
+    h2 { break-before: page; border-top: none; margin-top: 0; }
+    .example, .note, .bring { break-inside: avoid; }
+    .q { break-inside: avoid; }
+    .work-space { display: block; height: 3.2cm; }
+    .explain .work-space { height: 5cm; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← All topics</a>
+  <h1>1. Maths Toolkit</h1>
+  <p class="lede">The maths you will use in every physics calculation. Work through it in order; each section ends with questions.</p>
+
+  <nav class="toc">
+    <strong>Sections</strong>
+    <ol>
+      <li><a href="#units">Units and prefixes</a></li>
+      <li><a href="#sci">Scientific notation</a></li>
+      <li><a href="#sigfigs">Significant figures</a></li>
+      <li><a href="#rearrange">Rearranging formulae</a></li>
+      <li><a href="#graphs">Gradient and area</a></li>
+      <li><a href="#trig">Trigonometry and vectors</a></li>
+    </ol>
+  </nav>
+
+  <div class="note">
+    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: in your session, your tutor will look at your <em>working</em>, because that is where the marks and the understanding are. Explain questions have no answers here. Write your best attempt and bring it to your session.</p>
+  </div>
+
+  <!-- ===================================================== 1 -->
+  <h2 id="units">1. Units and prefixes</h2>
+
+  <p>Every physics quantity is a number <em>and</em> a unit. Before you substitute into any formula, convert everything to SI units: metres (m), kilograms (kg), seconds (s), amperes (A).</p>
+  <p>Prefixes are shorthand for powers of ten:</p>
+  <table>
+    <tr><th>Prefix</th><th>Symbol</th><th>Multiply by</th><th>Example</th></tr>
+    <tr><td>giga</td><td>G</td><td>10<sup>9</sup></td><td>2 GHz = 2 × 10<sup>9</sup> Hz</td></tr>
+    <tr><td>mega</td><td>M</td><td>10<sup>6</sup></td><td>5 MW = 5 × 10<sup>6</sup> W</td></tr>
+    <tr><td>kilo</td><td>k</td><td>10<sup>3</sup></td><td>3 km = 3000 m</td></tr>
+    <tr><td>centi</td><td>c</td><td>10<sup>−2</sup></td><td>45 cm = 0.45 m</td></tr>
+    <tr><td>milli</td><td>m</td><td>10<sup>−3</sup></td><td>20 mA = 0.020 A</td></tr>
+    <tr><td>micro</td><td>µ</td><td>10<sup>−6</sup></td><td>8 µs = 8 × 10<sup>−6</sup> s</td></tr>
+    <tr><td>nano</td><td>n</td><td>10<sup>−9</sup></td><td>600 nm = 6.00 × 10<sup>−7</sup> m</td></tr>
+  </table>
+  <p>Two traps catch everyone:</p>
+  <ul>
+    <li><strong>Mass is in kilograms, not grams.</strong> 250 g is 0.250 kg.</li>
+    <li><strong>Speed is in m s<sup>−1</sup>, not km/h.</strong> To convert km/h to m s<sup>−1</sup>, divide by 3.6. To go back, multiply by 3.6.</li>
+  </ul>
+  <p>In NCEA, units are written with negative powers: m s<sup>−1</sup> means metres per second, and m s<sup>−2</sup> means metres per second squared.</p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A car travels at 90 km/h. What is its speed in m s<sup>−1</sup>?</p>
+    <ol class="working">
+      <li>90 km/h = 90 000 m in 3600 s <span class="why">1 km = 1000 m, 1 h = 3600 s</span></li>
+      <li>v = 90 000 ÷ 3600 = 25 m s<sup>−1</sup></li>
+      <li>Check with the shortcut: 90 ÷ 3.6 = 25 ✓</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>Convert 2.5 km to metres.</p>
+        <details class="num"><summary>Check your number</summary><span>2500 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Convert 350 g to kilograms.</p>
+        <details class="num"><summary>Check your number</summary><span>0.35 kg</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A cyclist rides at 72 km/h. Convert this to m s<sup>−1</sup>.</p>
+        <details class="num"><summary>Check your number</summary><span>20 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A sprinter runs at 10 m s<sup>−1</sup>. Convert this to km/h.</p>
+        <details class="num"><summary>Check your number</summary><span>36 km/h</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A resistor is labelled 4.7 kΩ. What is its resistance in ohms?</p>
+        <details class="num"><summary>Check your number</summary><span>4700 Ω</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A current of 250 mA flows through a lamp. Write the current in amperes.</p>
+        <details class="num"><summary>Check your number</summary><span>0.25 A</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>A student calculates the kinetic energy of a 500 g ball moving at 4.0 m s<sup>−1</sup> using E<sub>k</sub> = ½<i class="v">mv</i><sup>2</sup> and gets 4000 J. Explain what went wrong, and why the mistake gives an answer that is so much too big.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Any conversion you were unsure how to start.</li>
+      <li>Your answer to the explain question.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 2 -->
+  <h2 id="sci">2. Scientific notation</h2>
+
+  <p>Physics deals with very large and very small numbers. Scientific notation writes them as</p>
+  <p class="eq"><i>a</i> × 10<sup><i>n</i></sup>, where 1 ≤ <i>a</i> &lt; 10</p>
+  <ul>
+    <li>A big number has a positive power: 6 400 000 m = 6.4 × 10<sup>6</sup> m.</li>
+    <li>A small number has a negative power: 0.000 25 s = 2.5 × 10<sup>−4</sup> s.</li>
+    <li>The power tells you how many places the decimal point moves.</li>
+  </ul>
+  <p><strong>On your calculator</strong>, use the <code>×10<sup>x</sup></code> or <code>EXP</code> button, not “× 10 ^”. Typing 3 × 10 ^ 8 ÷ 2 × 10 ^ 4 does not do what you expect, because the calculator works left to right. The <code>EXP</code> button keeps each number together as one block.</p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>Light travels at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>. The Sun is 1.5 × 10<sup>11</sup> m from Earth. How long does sunlight take to reach us?</p>
+    <ol class="working">
+      <li><i class="v">v</i> = <i class="v">d</i> ÷ <i class="v">t</i>, so <i class="v">t</i> = <i class="v">d</i> ÷ <i class="v">v</i></li>
+      <li><i class="v">t</i> = (1.5 × 10<sup>11</sup>) ÷ (3.0 × 10<sup>8</sup>) <span class="why">divide the numbers, subtract the powers</span></li>
+      <li><i class="v">t</i> = 0.5 × 10<sup>3</sup> = 5.0 × 10<sup>2</sup> s <span class="why">about 8 minutes</span></li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>Write 0.000 45 m in scientific notation.</p>
+        <details class="num"><summary>Check your number</summary><span>4.5 × 10<sup>−4</sup> m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>The radius of the Earth is 6 370 000 m. Write this in scientific notation.</p>
+        <details class="num"><summary>Check your number</summary><span>6.37 × 10<sup>6</sup> m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Write 3.2 × 10<sup>−3</sup> A as an ordinary number.</p>
+        <details class="num"><summary>Check your number</summary><span>0.0032 A</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Each electron carries a charge of 1.6 × 10<sup>−19</sup> C. What is the total charge of 5.0 × 10<sup>18</sup> electrons?</p>
+        <details class="num"><summary>Check your number</summary><span>0.80 C</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A radio station broadcasts at a frequency of 9.0 × 10<sup>7</sup> Hz. Radio waves travel at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>. Use λ = <i class="v">v</i> ÷ <i class="v">f</i> to find the wavelength.</p>
+        <details class="num"><summary>Check your number</summary><span>3.3 m</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>A student wants to calculate (3 × 10<sup>8</sup>) ÷ (2 × 10<sup>4</sup>). They type <code>3 × 10 ^ 8 ÷ 2 × 10 ^ 4</code> and get 1.5 × 10<sup>12</sup>. The correct answer is 1.5 × 10<sup>4</sup>. Explain what the calculator actually did, and how the student should type it.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your calculator, so you can practise the <code>EXP</code> button together.</li>
+      <li>Your answer to the explain question.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 3 -->
+  <h2 id="sigfigs">3. Significant figures</h2>
+
+  <p>Significant figures (s.f.) show how precisely a value is known. The rules for counting them:</p>
+  <ul>
+    <li>All non-zero digits count: 4.27 has 3 s.f.</li>
+    <li>Zeros <em>between</em> other digits count: 4.007 has 4 s.f.</li>
+    <li>Zeros at the <em>start</em> never count: 0.0052 has 2 s.f.</li>
+    <li>Zeros at the <em>end, after a decimal point</em> count: 3.50 has 3 s.f.</li>
+    <li>Zeros at the end of a whole number are unclear: 3000 could be 1 or 4 s.f. Scientific notation removes the doubt: 3.0 × 10<sup>3</sup> has 2 s.f.</li>
+  </ul>
+  <p><strong>For answers:</strong> give your final answer to the same number of significant figures as the <em>least precise</em> value in the question. Usually that is 2 or 3 s.f. Keep all the digits in your calculator while working, and round only once, at the end.</p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A runner covers 125 m in 4.6 s. Calculate their average speed.</p>
+    <ol class="working">
+      <li><i class="v">v</i> = <i class="v">d</i> ÷ <i class="v">t</i> = 125 ÷ 4.6 = 27.1739… <span class="why">calculator display</span></li>
+      <li>125 has 3 s.f.; 4.6 has 2 s.f. The least precise is 2 s.f.</li>
+      <li><i class="v">v</i> = 27 m s<sup>−1</sup></li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>How many significant figures are in 0.0520?</p>
+        <details class="num"><summary>Check your number</summary><span>3</span></details><div class="work-space"></div></li>
+      <li class="q"><p>How many significant figures are in 4.007?</p>
+        <details class="num"><summary>Check your number</summary><span>4</span></details><div class="work-space"></div></li>
+      <li class="q"><p>How many significant figures are in 2.50 × 10<sup>3</sup>?</p>
+        <details class="num"><summary>Check your number</summary><span>3</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Round 9.8067 to 3 significant figures.</p>
+        <details class="num"><summary>Check your number</summary><span>9.81</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A force of 12.5 N acts on a 3.2 kg trolley. Use <i class="v">a</i> = <i class="v">F</i> ÷ <i class="v">m</i> to find its acceleration, to a sensible number of significant figures.</p>
+        <details class="num"><summary>Check your number</summary><span>3.9 m s<sup>−2</sup></span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>A student calculates a speed, rounds it to 2 s.f., and then uses the rounded speed to calculate a kinetic energy. Their final answer is slightly different from the correct one. Explain why, and what they should have done.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Any number where you weren’t sure whether a zero counts.</li>
+      <li>Your answer to the explain question.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 4 -->
+  <h2 id="rearrange">4. Rearranging formulae</h2>
+
+  <p>Most physics questions give you a formula with the unknown in the wrong place. To rearrange, do the <strong>same thing to both sides</strong> until the unknown is on its own. Undo operations in reverse order:</p>
+  <ul>
+    <li>Multiplied by something? Divide both sides by it.</li>
+    <li>Divided by something? Multiply both sides by it.</li>
+    <li>Squared? Take the square root of both sides.</li>
+  </ul>
+  <p>Rearrange first, then substitute numbers. It is easier to follow, and easier to find your mistakes.</p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A 2.0 kg ball has 100 J of kinetic energy. How fast is it moving?</p>
+    <ol class="working">
+      <li>E<sub>k</sub> = ½<i class="v">mv</i><sup>2</sup></li>
+      <li>2E<sub>k</sub> = <i class="v">mv</i><sup>2</sup> <span class="why">multiply both sides by 2</span></li>
+      <li>2E<sub>k</sub> ÷ <i class="v">m</i> = <i class="v">v</i><sup>2</sup> <span class="why">divide both sides by m</span></li>
+      <li><i class="v">v</i> = √(2E<sub>k</sub> ÷ <i class="v">m</i>) <span class="why">square root both sides</span></li>
+      <li><i class="v">v</i> = √(2 × 100 ÷ 2.0) = √100 = 10 m s<sup>−1</sup></li>
+    </ol>
+  </div>
+
+  <p>In these questions, use <i class="v">g</i> = 10 m s<sup>−2</sup>.</p>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>A cyclist travels at 8.0 m s<sup>−1</sup>. Use <i class="v">v</i> = <i class="v">d</i> ÷ <i class="v">t</i> to find how long they take to cover 200 m.</p>
+        <details class="num"><summary>Check your number</summary><span>25 s</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A net force of 600 N gives a car an acceleration of 1.5 m s<sup>−2</sup>. Use <i class="v">F</i> = <i class="v">ma</i> to find the car’s mass.</p>
+        <details class="num"><summary>Check your number</summary><span>400 kg</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A 3.0 kg box gains 90 J of gravitational potential energy when it is lifted. Use ΔE<sub>p</sub> = <i class="v">mg</i>Δ<i class="v">h</i> to find how high it was lifted.</p>
+        <details class="num"><summary>Check your number</summary><span>3.0 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A 0.20 kg ball has 10 J of kinetic energy. Use E<sub>k</sub> = ½<i class="v">mv</i><sup>2</sup> to find its speed.</p>
+        <details class="num"><summary>Check your number</summary><span>10 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A current of 0.40 A flows through a resistor with 12 V across it. Use <i class="v">V</i> = <i class="v">IR</i> to find the resistance.</p>
+        <details class="num"><summary>Check your number</summary><span>30 Ω</span></details><div class="work-space"></div></li>
+      <li class="q"><p><span class="preview">Level 2 preview</span> A car starts from rest and accelerates at 2.0 m s<sup>−2</sup> over a distance of 25 m. Use <i class="v">v</i><sup>2</sup> = <i class="v">u</i><sup>2</sup> + 2<i class="v">ad</i> to find its final speed. (<i class="v">u</i> is the starting speed.)</p>
+        <details class="num"><summary>Check your number</summary><span>10 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>The “formula triangle” trick works for <i class="v">v</i> = <i class="v">d</i> ÷ <i class="v">t</i> but not for E<sub>k</sub> = ½<i class="v">mv</i><sup>2</sup>. Explain why.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Any rearrangement where you got stuck partway. Bring the attempt, not a blank page.</li>
+      <li>Your answer to the explain question.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 5 -->
+  <h2 id="graphs">5. Gradient and area</h2>
+
+  <p>Two things you can read from a graph appear again and again in physics.</p>
+  <p><strong>Gradient</strong> is how steep the line is:</p>
+  <p class="eq">gradient = rise ÷ run = Δ<i>y</i> ÷ Δ<i>x</i></p>
+  <p>The gradient has units: the <i>y</i> unit divided by the <i>x</i> unit. That tells you what it means.</p>
+  <p><strong>Area under the line</strong> is the region between the line and the <i>x</i> axis. Its units are the <i>y</i> unit multiplied by the <i>x</i> unit. Split it into rectangles and triangles (area of a triangle = ½ × base × height).</p>
+  <table>
+    <tr><th>Graph</th><th>Gradient gives</th><th>Area gives</th></tr>
+    <tr><td>distance against time</td><td>speed (m s<sup>−1</sup>)</td><td>nothing useful</td></tr>
+    <tr><td>speed against time</td><td>acceleration (m s<sup>−2</sup>)</td><td>distance travelled (m)</td></tr>
+  </table>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <figure>
+      <svg id="graphA" viewBox="0 0 440 290" role="img" aria-label="Speed against time graph: speed rises steadily from 0 to 12 metres per second in the first 4 seconds, then stays at 12 metres per second until 10 seconds."></svg>
+      <figcaption>Speed against time for a car pulling away from traffic lights.</figcaption>
+    </figure>
+    <p>(a) Find the car’s acceleration in the first 4 s. (b) Find the total distance travelled in 10 s.</p>
+    <ol class="working">
+      <li>(a) <i class="v">a</i> = gradient = Δ<i class="v">v</i> ÷ Δ<i class="v">t</i> = (12 − 0) ÷ (4 − 0) = 3.0 m s<sup>−2</sup></li>
+      <li>(b) Area of triangle (0 to 4 s) = ½ × 4 × 12 = 24 m</li>
+      <li>Area of rectangle (4 to 10 s) = 6 × 12 = 72 m</li>
+      <li>Total distance = 24 + 72 = 96 m</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <p>Questions 1 to 5 use this graph.</p>
+    <figure>
+      <svg id="graphB" viewBox="0 0 440 290" role="img" aria-label="Speed against time graph: speed rises from 0 to 10 metres per second between 0 and 5 seconds, stays at 10 metres per second until 15 seconds, then falls to 0 at 20 seconds."></svg>
+      <figcaption>Speed against time for a scooter on a short trip.</figcaption>
+    </figure>
+    <ol>
+      <li class="q"><p>Find the acceleration of the scooter in the first 5 s.</p>
+        <details class="num"><summary>Check your number</summary><span>2.0 m s<sup>−2</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>Find the acceleration between 15 s and 20 s. Think about the sign.</p>
+        <details class="num"><summary>Check your number</summary><span>−2.0 m s<sup>−2</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>How far does the scooter travel in the first 5 s?</p>
+        <details class="num"><summary>Check your number</summary><span>25 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>What is the total distance travelled in 20 s?</p>
+        <details class="num"><summary>Check your number</summary><span>150 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>What is the scooter’s average speed for the whole trip?</p>
+        <details class="num"><summary>Check your number</summary><span>7.5 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A distance against time graph is a straight line from (0 s, 0 m) to (8.0 s, 40 m). What is the speed?</p>
+        <details class="num"><summary>Check your number</summary><span>5.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>On a distance against time graph, an object’s line curves upward, getting steeper as time goes on. Describe what the object is doing, and explain how you can tell from the graph.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your sketch of the shapes you split the area into for question 4.</li>
+      <li>Your answer to the explain question.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 6 -->
+  <h2 id="trig">6. Trigonometry and vectors</h2>
+
+  <p>Some quantities only have a size, such as mass or time. These are <strong>scalars</strong>. Others have a size <em>and</em> a direction, such as velocity, force and displacement. These are <strong>vectors</strong>. At Level 2 you will combine vectors and split them into parts, and right-angle triangles are the tool for both.</p>
+
+  <figure>
+    <svg viewBox="0 0 440 230" role="img" aria-label="Right-angle triangle. The angle theta is at the bottom left. The hypotenuse is the long sloping side, the opposite side is the vertical side across from theta, and the adjacent side is the horizontal side next to theta.">
+      <polygon points="60,190 340,190 340,50" fill="#e8f1f7" stroke="#1d2433" stroke-width="2"/>
+      <polyline points="326,190 326,176 340,176" fill="none" stroke="#1d2433" stroke-width="1.5"/>
+      <path d="M 105 190 A 45 45 0 0 0 100.2 169.9" fill="none" stroke="#8a5210" stroke-width="2"/>
+      <text x="112" y="182" style="fill:#8a5210;font-style:italic">θ</text>
+      <text x="200" y="212" text-anchor="middle">adjacent</text>
+      <text x="352" y="124">opposite</text>
+      <text x="180" y="108" text-anchor="middle" transform="rotate(-26.6 180 108)">hypotenuse</text>
+    </svg>
+  </figure>
+
+  <ul>
+    <li><strong>Pythagoras:</strong> hypotenuse<sup>2</sup> = adjacent<sup>2</sup> + opposite<sup>2</sup></li>
+    <li><strong>SOH:</strong> sin θ = opposite ÷ hypotenuse</li>
+    <li><strong>CAH:</strong> cos θ = adjacent ÷ hypotenuse</li>
+    <li><strong>TOA:</strong> tan θ = opposite ÷ adjacent</li>
+    <li>To find an angle, use the inverse button: θ = tan<sup>−1</sup>(opposite ÷ adjacent), and similarly for sin<sup>−1</sup> and cos<sup>−1</sup>.</li>
+  </ul>
+  <p><strong>Check your calculator is in degrees</strong> (a small D or DEG on the screen). This is the most common reason for a wrong answer.</p>
+
+  <div class="example">
+    <h4>Worked example 1: combining two vectors</h4>
+    <p>A boat heads north at 4.0 m s<sup>−1</sup> while a current pushes it east at 3.0 m s<sup>−1</sup>. Find its actual speed and direction.</p>
+    <ol class="working">
+      <li>Draw the two vectors tip to tail. They form a right-angle triangle.</li>
+      <li>speed = √(4.0<sup>2</sup> + 3.0<sup>2</sup>) = √25 = 5.0 m s<sup>−1</sup></li>
+      <li>θ = tan<sup>−1</sup>(3.0 ÷ 4.0) = 36.9° <span class="why">angle measured from north</span></li>
+      <li>The boat moves at 5.0 m s<sup>−1</sup>, 37° east of north.</li>
+    </ol>
+  </div>
+
+  <div class="example">
+    <h4>Worked example 2: splitting a vector into components</h4>
+    <p>A rope pulls a sledge with a force of 50 N at 30° above the horizontal. How much of the force acts horizontally, and how much vertically?</p>
+    <ol class="working">
+      <li>The 50 N force is the hypotenuse.</li>
+      <li>horizontal = 50 × cos 30° = 43.3 = 43 N <span class="why">adjacent side, so CAH</span></li>
+      <li>vertical = 50 × sin 30° = 25 N <span class="why">opposite side, so SOH</span></li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>You walk 6.0 m east, then 8.0 m north. How far are you from where you started, in a straight line?</p>
+        <details class="num"><summary>Check your number</summary><span>10 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>For the walk in question 1, find the angle of your final position measured from east.</p>
+        <details class="num"><summary>Check your number</summary><span>53° north of east</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A ramp is 5.0 m long and rises 1.5 m. What angle does it make with the horizontal?</p>
+        <details class="num"><summary>Check your number</summary><span>17°</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A rugby ball is kicked at 20 m s<sup>−1</sup> at 40° above the horizontal. Find the horizontal component of its velocity.</p>
+        <details class="num"><summary>Check your number</summary><span>15 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>For the same kick, find the vertical component of its velocity.</p>
+        <details class="num"><summary>Check your number</summary><span>13 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A plane flies north at 70 m s<sup>−1</sup> while the wind blows it west at 15 m s<sup>−1</sup>. What is its actual speed?</p>
+        <details class="num"><summary>Check your number</summary><span>72 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Two forces, 3 N and 4 N, act on the same object. Explain why the resultant force could be anything from 1 N to 7 N, and describe the arrangement that gives exactly 5 N.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your vector diagrams for questions 1, 2 and 6. A diagram is part of the working.</li>
+      <li>Your answer to the explain question.</li>
+      <li>Anything in this whole toolkit you would like to go over again.</li>
+    </ul>
+  </div>
+</main>
+
+<script>
+  // Draws a speed against time graph into an empty <svg>.
+  // o.points is a list of [time, speed] pairs joined by straight lines.
+  function drawGraph(id, o) {
+    const L = 60, R = 420, T = 20, B = 240;          // plot area edges in SVG units
+    const X = t => L + (t / o.xMax) * (R - L);
+    const Y = v => B - (v / o.yMax) * (B - T);
+    let s = '';
+    for (let t = 0; t <= o.xMax; t += o.xGrid) {
+      s += `<line class="grid" x1="${X(t)}" y1="${T}" x2="${X(t)}" y2="${B}"/>`;
+      if (t % o.xLabel === 0) s += `<text x="${X(t)}" y="${B + 18}" text-anchor="middle">${t}</text>`;
+    }
+    for (let v = 0; v <= o.yMax; v += o.yGrid) {
+      s += `<line class="grid" x1="${L}" y1="${Y(v)}" x2="${R}" y2="${Y(v)}"/>`;
+      s += `<text x="${L - 8}" y="${Y(v) + 4}" text-anchor="end">${v}</text>`;
+    }
+    s += `<line class="axis" x1="${L}" y1="${B}" x2="${R}" y2="${B}"/>`;
+    s += `<line class="axis" x1="${L}" y1="${T}" x2="${L}" y2="${B}"/>`;
+    s += `<polyline class="plot" points="${o.points.map(p => X(p[0]) + ',' + Y(p[1])).join(' ')}"/>`;
+    s += `<text class="title" x="${(L + R) / 2}" y="${B + 42}" text-anchor="middle">time (s)</text>`;
+    s += `<text class="title" x="16" y="${(T + B) / 2}" text-anchor="middle" transform="rotate(-90 16 ${(T + B) / 2})">speed (m s⁻¹)</text>`;
+    document.getElementById(id).innerHTML = s;
+  }
+
+  drawGraph('graphA', { xMax: 10, xGrid: 1, xLabel: 2, yMax: 14, yGrid: 2,
+    points: [[0, 0], [4, 12], [10, 12]] });
+  drawGraph('graphB', { xMax: 20, xGrid: 1, xLabel: 5, yMax: 12, yGrid: 2,
+    points: [[0, 0], [5, 10], [15, 10], [20, 0]] });
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing Explanations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d2433;
+    --muted: #5b6475;
+    --line: #d9dee7;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #1f5f8b;
+    --accent-soft: #e8f1f7;
+    --warm: #8a5210;
+    --warm-soft: #fbf1e3;
+    --a: #8c96a8;
+    --m: #3f7fae;
+    --e: #1f4e79;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 "IBM Plex Sans", system-ui, sans-serif;
+  }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 80px; }
+  h1, h2, h3 { font-family: "IBM Plex Serif", Georgia, serif; line-height: 1.25; }
+  h1 { font-size: 2rem; margin: 8px 0 8px; }
+  h2 {
+    font-size: 1.5rem;
+    margin: 64px 0 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--line);
+  }
+  h3 { font-size: 1.15rem; margin: 32px 0 8px; }
+  a { color: var(--accent); }
+  .back { text-decoration: none; font-size: 0.95rem; }
+  .lede { color: var(--muted); font-size: 1.1rem; margin: 0 0 24px; }
+
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 20px;
+  }
+  nav.toc ol { margin: 6px 0 0; padding-left: 22px; columns: 2; column-gap: 32px; }
+  nav.toc a { text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  .note {
+    background: var(--warm-soft);
+    border-left: 4px solid var(--warm);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 20px 0;
+  }
+  .note p { margin: 0 0 8px; }
+  .note p:last-child { margin: 0; }
+
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border-bottom: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+
+  /* The grade ladder */
+  .ladder { display: grid; gap: 10px; margin: 16px 0; }
+  .rung { background: var(--card); border: 1px solid var(--line); border-left: 6px solid; border-radius: 8px; padding: 10px 16px; }
+  .rung strong { display: block; }
+  .rung p { margin: 2px 0 0; }
+  .lvl-a { border-left-color: var(--a); }
+  .lvl-m { border-left-color: var(--m); }
+  .lvl-e { border-left-color: var(--e); }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li { padding: 6px 0 6px 34px; position: relative; border-bottom: 1px solid var(--line); }
+  .checklist li::before { content: counter(list-item); position: absolute; left: 0; top: 6px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .frame {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 16px 0;
+    font-family: "IBM Plex Serif", Georgia, serif;
+  }
+  .frame p { margin: 4px 0; }
+  .frame .small { font-family: "IBM Plex Sans", sans-serif; font-size: 0.9rem; color: var(--muted); }
+
+  /* Example answers */
+  .question-box {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin: 12px 0;
+  }
+  .question-box .label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .question-box p { margin: 4px 0 0; }
+  .answer {
+    border-left: 6px solid;
+    border-radius: 8px;
+    background: var(--card);
+    padding: 12px 18px;
+    margin: 10px 0;
+  }
+  .answer .label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .answer.lvl-a .label { color: var(--a); }
+  .answer.lvl-m .label { color: var(--m); }
+  .answer.lvl-e .label { color: var(--e); }
+  .answer blockquote {
+    margin: 6px 0 10px;
+    font-family: "IBM Plex Serif", Georgia, serif;
+  }
+  .answer .why {
+    font-size: 0.93rem;
+    color: var(--muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 8px;
+    margin: 0;
+  }
+
+  .traps { padding-left: 0; list-style: none; }
+  .traps li { margin: 14px 0; }
+  .traps .weak, .traps .better { display: block; font-family: "IBM Plex Serif", Georgia, serif; padding-left: 26px; position: relative; }
+  .traps .weak::before { content: "✗"; position: absolute; left: 4px; color: #a3412c; font-family: "IBM Plex Sans", sans-serif; }
+  .traps .better::before { content: "✓"; position: absolute; left: 4px; color: #2e6b3f; font-family: "IBM Plex Sans", sans-serif; }
+
+  .questions ol { padding-left: 24px; }
+  .q { margin: 16px 0; padding-left: 4px; }
+  .q p { margin: 0 0 6px; }
+  .q .weak-answer {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    background: var(--card);
+    border: 1px dashed var(--a);
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin: 6px 0;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warm);
+    background: var(--warm-soft);
+    border-radius: 4px;
+    padding: 1px 8px;
+    margin-bottom: 4px;
+  }
+
+  .preflight { background: var(--card); border: 2px solid var(--accent); border-radius: 12px; padding: 14px 20px; margin: 24px 0; }
+  .preflight h3 { margin: 0 0 6px; }
+  .preflight label { display: block; padding: 4px 0; cursor: pointer; }
+  .preflight input { margin-right: 8px; accent-color: var(--accent); }
+
+  .bring {
+    border: 2px dashed var(--warm);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 28px 0 0;
+  }
+  .bring strong { color: var(--warm); }
+  .bring ul { margin: 6px 0 0; padding-left: 20px; }
+
+  .work-space { display: none; }
+
+  @media (max-width: 560px) {
+    nav.toc ol { columns: 1; }
+    h1 { font-size: 1.7rem; }
+    td:first-child { white-space: normal; }
+  }
+
+  @media print {
+    body { background: #fff; font-size: 11.5pt; }
+    main { max-width: none; padding: 0; }
+    .back, nav.toc { display: none; }
+    h2 { break-before: page; border-top: none; margin-top: 0; }
+    .answer, .question-box, .rung, .q, .preflight, .frame { break-inside: avoid; }
+    .work-space {
+      display: block;
+      height: 7cm;
+      background: repeating-linear-gradient(to bottom, transparent 0, transparent 0.8cm, #bbb 0.8cm, #bbb calc(0.8cm + 1px));
+    }
+  }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← All topics</a>
+  <h1>5. Writing Explanations</h1>
+  <p class="lede">Getting the physics right earns Achieved. Explaining it well is what earns Merit and Excellence. This page shows you how.</p>
+
+  <nav class="toc">
+    <strong>Sections</strong>
+    <ol>
+      <li><a href="#ladder">What lifts an answer a grade</a></li>
+      <li><a href="#strong">What a strong explanation contains</a></li>
+      <li><a href="#examples">One question, three answers</a></li>
+      <li><a href="#traps">How answers lose marks</a></li>
+      <li><a href="#practice">Practice</a></li>
+    </ol>
+  </nav>
+
+  <div class="note">
+    <p><strong>About this page.</strong> The example answers are illustrations written for this page, to show the difference between the grades. They are not official marking schedules; your tutor marks your work against those.</p>
+    <p>Everything you write in the practice section comes to your session. There are no answers on this page for any question you are asked to do.</p>
+  </div>
+
+  <!-- ===================================================== 1 -->
+  <h2 id="ladder">1. What lifts an answer a grade</h2>
+
+  <p>In NCEA physics, the three grades reward different depths of answer:</p>
+  <div class="ladder">
+    <div class="rung lvl-a"><strong>Achieved: describe</strong><p>You state the right physics idea, or describe what happens. The physics is correct, but the reasons are missing or incomplete.</p></div>
+    <div class="rung lvl-m"><strong>Merit: explain</strong><p>You give the reason <em>why</em>, linking cause and effect, and you use the physics idea correctly in this situation.</p></div>
+    <div class="rung lvl-e"><strong>Excellence: discuss</strong><p>You link several ideas into one complete chain, from the cause right through to the answer. You apply it fully to the situation, and you often support it with a calculation. Nothing important is left out.</p></div>
+  </div>
+  <p>The most important point: <strong>Excellence is not about writing more.</strong> It is about writing a complete, connected chain of reasoning. A long answer made of disconnected facts is still Achieved.</p>
+
+  <h3>Command words</h3>
+  <p>The first word of a question tells you what kind of answer it wants.</p>
+  <table>
+    <tr><th>Word</th><th>What it asks for</th></tr>
+    <tr><td>State, identify</td><td>A short, correct fact. No reasons needed.</td></tr>
+    <tr><td>Describe</td><td>What happens, or what something is like.</td></tr>
+    <tr><td>Explain</td><td>Why or how it happens: cause and effect, with reasons.</td></tr>
+    <tr><td>Compare</td><td>Similarities <em>and</em> differences, talking about both things in each point.</td></tr>
+    <tr><td>Discuss</td><td>Several linked ideas, developed fully and applied to the situation. Often includes a calculation and reaches a conclusion.</td></tr>
+    <tr><td>Justify</td><td>Reasons and evidence that support a claim or a choice.</td></tr>
+    <tr><td>Calculate, show that</td><td>Full working: formula, substitution, answer with units.</td></tr>
+  </table>
+
+  <!-- ===================================================== 2 -->
+  <h2 id="strong">2. What a strong explanation contains</h2>
+
+  <ol class="checklist">
+    <li><strong>Name the physics idea</strong> or law that applies: Newton’s second law, conservation of energy, the wave equation.</li>
+    <li><strong>Apply it to this situation.</strong> Use the objects, numbers and details from the question, not just general facts.</li>
+    <li><strong>Link each step to the next</strong> with words such as <em>because</em>, <em>so</em>, <em>this means</em> and <em>therefore</em>.</li>
+    <li><strong>Use physics words precisely.</strong> Mass is not weight; current is not voltage; energy is not power.</li>
+    <li><strong>Bring in numbers when they help.</strong> A calculation can prove a point, but say what it shows.</li>
+    <li><strong>Finish by answering the actual question.</strong> Your last sentence should be the answer to what was asked.</li>
+  </ol>
+
+  <h3>A sentence frame to start with</h3>
+  <div class="frame">
+    <p>The physics idea here is …</p>
+    <p>In this situation, …</p>
+    <p>This means that …, because …</p>
+    <p>Therefore, …</p>
+    <p class="small">Use this while you are learning. Once linking ideas comes naturally, drop the frame and write in your own words.</p>
+  </div>
+
+  <!-- ===================================================== 3 -->
+  <h2 id="examples">3. One question, three answers</h2>
+
+  <p>Each example below shows the same question answered three ways. Read the notes under each answer: they show exactly what moves it up a grade.</p>
+
+  <h3>Mechanics: the loaded car</h3>
+  <div class="question-box">
+    <span class="label">Question</span>
+    <p>A car’s engine produces the same driving force whether the car carries only the driver or is fully loaded with passengers and luggage. Explain why the loaded car accelerates more slowly.</p>
+  </div>
+  <div class="answer lvl-a">
+    <span class="label">Achieved-style</span>
+    <blockquote>The loaded car is heavier, so it accelerates more slowly. F = ma.</blockquote>
+    <p class="why">The idea is right and the formula is relevant, but the formula is just written down, not used. “Heavier” is vague: the point is the greater <em>mass</em>. There is no reasoning linking the force, the mass and the acceleration.</p>
+  </div>
+  <div class="answer lvl-m">
+    <span class="label">Merit-style</span>
+    <blockquote>The loaded car has a greater mass. By Newton’s second law, acceleration = net force ÷ mass. The driving force is the same, so with a bigger mass the acceleration is smaller.</blockquote>
+    <p class="why">Now there is cause and effect: the law is named and used to connect the mass to the acceleration. What is missing: it assumes the net force is the same without saying so, and nothing shows how big the effect is.</p>
+  </div>
+  <div class="answer lvl-e">
+    <span class="label">Excellence-style</span>
+    <blockquote>The loaded car has a greater mass. Newton’s second law gives a = F<sub>net</sub> ÷ m. If the driving force and the resistive forces are the same for both cars, the net force is the same, so a larger mass gives a smaller acceleration. For example, with a net force of 3000 N, a 1200 kg car accelerates at 2.5 m s<sup>−2</sup>, but a 1500 kg loaded car accelerates at only 2.0 m s<sup>−2</sup>. In practice, the extra weight also presses the tyres harder onto the road, which slightly increases the rolling resistance. That makes the net force smaller as well, so the loaded car’s acceleration is reduced even further.</blockquote>
+    <p class="why">The assumption is stated, the reasoning is a complete chain, and a calculation shows the size of the effect. It goes further than the simple case by considering a second factor, the resistive force, and linking it back to the acceleration. Every sentence connects to the next, and the answer ends on what was asked.</p>
+  </div>
+
+  <h3>Electricity: the power board</h3>
+  <div class="question-box">
+    <span class="label">Question</span>
+    <p>Explain why plugging more appliances into a power board increases the current drawn from the wall socket.</p>
+  </div>
+  <div class="answer lvl-a">
+    <span class="label">Achieved-style</span>
+    <blockquote>More appliances use more electricity, so more current flows.</blockquote>
+    <p class="why">Correct, but “electricity” is vague: it could mean energy, power, current or charge. There is no physics reason, such as how the appliances are connected.</p>
+  </div>
+  <div class="answer lvl-m">
+    <span class="label">Merit-style</span>
+    <blockquote>The appliances on a power board are connected in parallel. Each one has the full 230 V across it and draws its own current. The current from the wall is the sum of all the branch currents, so each extra appliance adds to the total.</blockquote>
+    <p class="why">The key physics idea, parallel circuits, is named and correctly applied. Each step follows from the one before. To go further, it could add a second way of seeing it, or use numbers.</p>
+  </div>
+  <div class="answer lvl-e">
+    <span class="label">Excellence-style</span>
+    <blockquote>The sockets on a power board are connected in parallel, so every appliance has the full 230 V across it and draws its own current, I = P ÷ V. The current from the wall is the sum of the branch currents. Another way to see this is that each extra parallel branch gives the current another path, which lowers the total resistance of the board; with the same 230 V, I = V ÷ R means a lower resistance gives a larger current. For example, a 2300 W heater draws 10 A and an 1840 W kettle draws 8.0 A, so together they draw 18 A through the one wall socket. This is why overloading a power board is dangerous: the current in the cord and socket can become large enough to overheat the wiring.</blockquote>
+    <p class="why">Two linked explanations that agree with each other, both tied to formulae. A calculation makes the effect concrete, and the answer follows through to a real consequence. All the physics words are used precisely.</p>
+  </div>
+
+  <h3>Waves: lightning and thunder</h3>
+  <div class="question-box">
+    <span class="label">Question</span>
+    <p>During a storm, you see the lightning before you hear the thunder. Explain why, and discuss how the time gap can be used to estimate how far away the lightning struck.</p>
+  </div>
+  <div class="answer lvl-a">
+    <span class="label">Achieved-style</span>
+    <blockquote>Light is faster than sound. You count the seconds to see how far away it is.</blockquote>
+    <p class="why">Both points are correct, but neither is explained. It does not say the two are produced at the same moment, and it does not say how the seconds become a distance.</p>
+  </div>
+  <div class="answer lvl-m">
+    <span class="label">Merit-style</span>
+    <blockquote>The lightning and the thunder are produced at the same moment, but light travels much faster than sound (3.0 × 10<sup>8</sup> m s<sup>−1</sup> compared with about 340 m s<sup>−1</sup>), so the light reaches you first. The longer the gap, the further away the lightning, because the sound takes longer to travel the distance.</blockquote>
+    <p class="why">The cause is explained properly, with the speeds as evidence. The second part is still only described: it says a longer gap means further away, but not how to turn the gap into a distance.</p>
+  </div>
+  <div class="answer lvl-e">
+    <span class="label">Excellence-style</span>
+    <blockquote>The lightning and the thunder happen at the same moment and place. Light travels at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>, so over a few kilometres it arrives almost instantly, while sound travels at only about 340 m s<sup>−1</sup> and takes several seconds. Because the light’s travel time is tiny, the gap you measure is almost exactly the time the sound takes, so distance = speed of sound × time gap. For a gap of 5.0 s, d = 340 × 5.0 = 1700 m, about 1.7 km. The light takes only 1700 ÷ (3.0 × 10<sup>8</sup>) ≈ 6 × 10<sup>−6</sup> s, which is far too small to matter. The answer is only an estimate, because the speed of sound changes with air temperature and it is hard to time the gap precisely by eye and ear.</blockquote>
+    <p class="why">The answer justifies the method, not just states it: it explains <em>why</em> the light’s travel time can be ignored, and checks it with a calculation. It finishes by judging how reliable the estimate is. This is what “discuss” asks for.</p>
+  </div>
+
+  <!-- ===================================================== 4 -->
+  <h2 id="traps">4. How answers lose marks</h2>
+
+  <ul class="traps">
+    <li><strong>Restating the question.</strong>
+      <span class="weak">The kettle uses more power because it is more powerful.</span>
+      <span class="better">At the same 230 V, the kettle draws a larger current than the lamp, so P = IV is larger …</span></li>
+    <li><strong>Vague words: “it”, “electricity”, “power”, “the force”.</strong>
+      <span class="weak">It has more force so it goes faster.</span>
+      <span class="better">The driving force is greater than the friction, so there is a net forward force and the trolley accelerates.</span></li>
+    <li><strong>Mixing up mass and weight.</strong>
+      <span class="weak">The astronaut weighs 70 kg on the Moon.</span>
+      <span class="better">The astronaut’s mass is still 70 kg, but their weight is only 70 × 1.6 = 112 N.</span></li>
+    <li><strong>General physics with no link to the situation.</strong>
+      <span class="weak">Pressure equals force divided by area.</span>
+      <span class="better">The tractor’s wide tyres spread its weight over a large area, so the pressure on the soft ground is small …</span></li>
+    <li><strong>A chain with the last link missing.</strong>
+      <span class="weak">Adding a lamp in parallel lowers the total resistance of the circuit.</span>
+      <span class="better">… lowers the total resistance, so with the same supply voltage the current from the battery increases.</span></li>
+    <li><strong>A calculation with no explanation.</strong> A number on its own proves nothing. Say what it shows: “so the loaded car’s acceleration is 0.5 m s<sup>−2</sup> smaller.”</li>
+    <li><strong>“Balanced forces, so it isn’t moving.”</strong> Balanced forces mean no <em>acceleration</em>. The object may be still, or moving at constant velocity.</li>
+  </ul>
+
+  <!-- ===================================================== 5 -->
+  <h2 id="practice">5. Practice</h2>
+
+  <p>Write your answers in your book, or print this section, which has lined space. Run the pre-flight check on each answer before you bring it.</p>
+
+  <div class="preflight">
+    <h3>Pre-flight check</h3>
+    <p style="margin:0 0 6px;color:var(--muted);font-size:0.95rem">Before you bring an answer, check it against these. This is not a mark, just a habit.</p>
+    <label><input type="checkbox"> I re-read the question, and I answered what it actually asked.</label>
+    <label><input type="checkbox"> I named the physics idea or law.</label>
+    <label><input type="checkbox"> I used the details of this situation, not just general facts.</label>
+    <label><input type="checkbox"> Each step links to the next with because, so or therefore.</label>
+    <label><input type="checkbox"> I used physics words precisely (mass and weight, current and voltage, speed and velocity).</label>
+    <label><input type="checkbox"> Every number has a unit, and every calculation says what it shows.</label>
+    <label><input type="checkbox"> My last sentence answers the question.</label>
+  </div>
+
+  <div class="questions">
+    <h3>Upgrade this answer</h3>
+    <p>Each question has a weak answer. Rewrite it as the best answer you can. Aim for Excellence.</p>
+    <ol>
+      <li class="q"><span class="tag">Rewrite · bring to your session</span>
+        <p>A heavy box is pushed across a floor at a constant speed. Explain why the pushing force must be the same size as the friction force.</p>
+        <div class="weak-answer">Because the forces are balanced.</div><div class="work-space"></div></li>
+      <li class="q"><span class="tag">Rewrite · bring to your session</span>
+        <p>Two identical lamps are connected in series to a battery. A third identical lamp is then added in series. Explain what happens to the brightness of the lamps.</p>
+        <div class="weak-answer">They get dimmer because there are more lamps.</div><div class="work-space"></div></li>
+      <li class="q"><span class="tag">Rewrite · bring to your session</span>
+        <p>A ray of light enters a glass block at an angle. Explain why it changes direction.</p>
+        <div class="weak-answer">Because glass is denser than air so the light bends.</div><div class="work-space"></div></li>
+    </ol>
+
+    <h3>Fresh questions</h3>
+    <ol start="4">
+      <li class="q"><span class="tag">Discuss · bring to your session</span>
+        <p>A ball is thrown straight up into the air. Ignoring air resistance, discuss the forces acting on the ball and how its speed changes on the way up, at the top, and on the way down.</p><div class="work-space"></div></li>
+      <li class="q"><span class="tag">Explain · bring to your session</span>
+        <p>Explain why a sharp knife cuts more easily than a blunt one, even when you push with the same force.</p><div class="work-space"></div></li>
+      <li class="q"><span class="tag">Discuss · bring to your session</span>
+        <p>A phone charger is labelled “5.0 V, 2.0 A”. Discuss what these two numbers tell you about the charger, and calculate how much energy it delivers to the phone in one hour.</p><div class="work-space"></div></li>
+      <li class="q"><span class="tag">Explain · bring to your session</span>
+        <p>A swimmer underwater and a friend standing on a jetty are the same distance from a boat. The swimmer hears the boat’s engine sooner. Explain why.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>All seven answers. We will mark them together against the grade ladder, so you can see where each one sits and what would move it up.</li>
+      <li>One explain question from any other topic page that you would like to rewrite after reading this page.</li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>

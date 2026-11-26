@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graphs and Investigations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d2433;
+    --muted: #5b6475;
+    --line: #d9dee7;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #1f5f8b;
+    --accent-soft: #e8f1f7;
+    --warm: #8a5210;
+    --warm-soft: #fbf1e3;
+    --green: #2e6b3f;
+    --green-soft: #e9f3ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 "IBM Plex Sans", system-ui, sans-serif;
+  }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 80px; }
+  h1, h2, h3 { font-family: "IBM Plex Serif", Georgia, serif; line-height: 1.25; }
+  h1 { font-size: 2rem; margin: 8px 0 8px; }
+  h2 {
+    font-size: 1.5rem;
+    margin: 64px 0 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--line);
+  }
+  h3 { font-size: 1.1rem; margin: 28px 0 8px; }
+  a { color: var(--accent); }
+  .back { text-decoration: none; font-size: 0.95rem; }
+  .lede { color: var(--muted); font-size: 1.1rem; margin: 0 0 24px; }
+  i.v { font-family: "IBM Plex Serif", Georgia, serif; }
+  .eq {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 12px 0;
+  }
+
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 20px;
+  }
+  nav.toc ol { margin: 6px 0 0; padding-left: 22px; columns: 2; column-gap: 32px; }
+  nav.toc a { text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  .note {
+    background: var(--warm-soft);
+    border-left: 4px solid var(--warm);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 20px 0;
+  }
+  .note p { margin: 0 0 8px; }
+  .note p:last-child { margin: 0; }
+
+  table { border-collapse: collapse; margin: 12px 0; }
+  th, td { border-bottom: 1px solid var(--line); padding: 6px 12px; text-align: left; vertical-align: top; }
+  th { font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+  table.data { min-width: 0; }
+  table.data th, table.data td { text-align: center; font-variant-numeric: tabular-nums; }
+  table.wide { width: 100%; }
+
+  .example {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .example h4 { margin: 0 0 8px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+  .example p { margin: 6px 0; }
+  .example table.data { background: var(--card); }
+  .working { margin: 8px 0 0; padding-left: 0; list-style: none; }
+  .working li { margin: 4px 0; font-family: "IBM Plex Serif", Georgia, serif; }
+  .working .why { font-family: "IBM Plex Sans", sans-serif; color: var(--muted); font-size: 0.9rem; margin-left: 8px; }
+
+  .questions { margin-top: 24px; }
+  .questions > h3 { margin-bottom: 4px; }
+  .questions ol { padding-left: 24px; }
+  .q { margin: 14px 0; padding-left: 4px; }
+  .q p { margin: 0 0 6px; }
+  details.num summary {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 99px;
+    padding: 1px 12px;
+    list-style: none;
+  }
+  details.num summary::-webkit-details-marker { display: none; }
+  details.num[open] summary { background: var(--green-soft); }
+  details.num span {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 600;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warm);
+    background: var(--warm-soft);
+    border-radius: 4px;
+    padding: 1px 8px;
+    margin-bottom: 4px;
+  }
+
+  .bring {
+    border: 2px dashed var(--warm);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 28px 0 0;
+  }
+  .bring strong { color: var(--warm); }
+  .bring ul { margin: 6px 0 0; padding-left: 20px; }
+
+  figure { margin: 16px 0; }
+  figure svg { width: 100%; max-width: 460px; height: auto; display: block; }
+  figcaption { font-size: 0.9rem; color: var(--muted); }
+  svg text { font-family: "IBM Plex Sans", sans-serif; font-size: 13px; fill: var(--ink); }
+  .twin { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .twin figure { margin: 8px 0; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; margin: 12px 0; }
+  .shape { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 0.9rem; }
+  .shape svg { width: 100%; height: auto; display: block; }
+  .shape strong { font-family: "IBM Plex Serif", Georgia, serif; }
+
+  /* Explorer */
+  .explorer {
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 24px 0;
+  }
+  .explorer h4 { margin: 0 0 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+  .explorer .hint { margin: 0 0 12px; color: var(--muted); font-size: 0.95rem; }
+  .explorer select, .explorer input[type="text"], .explorer textarea {
+    font: inherit; font-size: 0.95rem; border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; background: #fff; color: var(--ink);
+  }
+  .explorer .row { margin: 8px 0; }
+  .explorer .xchoice label { margin-right: 14px; cursor: pointer; white-space: nowrap; }
+  #own { display: none; background: var(--accent-soft); border-radius: 8px; padding: 10px 14px; margin: 8px 0; }
+  #own textarea { width: 100%; min-height: 130px; font-family: "IBM Plex Mono", monospace; font-size: 0.9rem; }
+  #own .names { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  #own .names input { width: 100%; }
+  #linPlot { width: 100%; max-width: 520px; height: auto; display: block; margin: 8px auto; }
+  .fit { font-family: "IBM Plex Mono", monospace; font-size: 0.92rem; margin: 4px 0; }
+  .explorer .try { margin: 6px 0 0; padding-left: 20px; font-size: 0.95rem; }
+
+  .work-space { display: none; }
+  .print-only { display: none; }
+
+  @media (max-width: 640px) {
+    .twin { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    nav.toc ol { columns: 1; }
+    h1 { font-size: 1.7rem; }
+    #own .names { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    main { max-width: none; padding: 0; }
+    .back, nav.toc, details.num, .explorer, .screen-only { display: none; }
+    h2 { break-before: page; border-top: none; margin-top: 0; }
+    .example, .note, .bring, .q, figure { break-inside: avoid; }
+    .work-space { display: block; height: 3.2cm; }
+    .explain .work-space { height: 5cm; }
+    .print-only { display: block; }
+    #graphPaper { break-before: page; }
+    #graphPaper svg { width: 18cm; height: 24cm; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← All topics</a>
+  <h1>6. Graphs and Investigations</h1>
+  <p class="lede">How to plan an experiment, handle data, draw graphs by hand, and turn a curve into a straight line. This is the toolkit for the Level 2 practical investigation.</p>
+
+  <nav class="toc">
+    <strong>Sections</strong>
+    <ol>
+      <li><a href="#plan">Planning a fair test</a></li>
+      <li><a href="#record">Recording data</a></li>
+      <li><a href="#lines">Graphs and straight lines</a></li>
+      <li><a href="#curves">Recognising curves</a></li>
+      <li><a href="#linearise">Straightening curves</a></li>
+      <li><a href="#writeup">Writing it up</a></li>
+    </ol>
+  </nav>
+
+  <div class="note">
+    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: your tutor will look at your <em>working</em>, and on this page, at your graphs. When you read a gradient from a hand-drawn line, your answer will differ slightly from anyone else’s. That is expected, so the checks give a sensible range.</p>
+    <p class="screen-only">You will need graph paper. If you print this page, the last sheet is a page of graph paper.</p>
+  </div>
+
+  <!-- ===================================================== 1 -->
+  <h2 id="plan">1. Planning a fair test</h2>
+
+  <ul>
+    <li>The <strong>independent variable</strong> is the one you choose and change.</li>
+    <li>The <strong>dependent variable</strong> is the one you measure, to see how it responds.</li>
+    <li><strong>Controlled variables</strong> are everything else that could affect the result. Keep them the same, and say how you did it.</li>
+  </ul>
+  <p><strong>Range and number of values.</strong> Use a wide range of the independent variable and at least six different values, spread evenly. A curve is impossible to spot from three points.</p>
+  <p><strong>Repeats.</strong> Measure each value at least three times and take the average. Repeats reduce the effect of random errors and let you spot a reading that doesn’t fit.</p>
+  <p><strong>Reducing uncertainty.</strong> When a measurement is small compared with your reaction time or the scale divisions, measure many at once. For example, time ten vibrations, then divide by ten. Your reaction-time error is spread across all ten.</p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A student investigates how the length of a guitar string affects the pitch of the note it plays.</p>
+    <ol class="working">
+      <li>Independent: the vibrating length of the string (she changes it by pressing at different frets).</li>
+      <li>Dependent: the frequency of the note, measured with a phone app.</li>
+      <li>Controlled: the same string, the same tension (no retuning), plucked at the same point.</li>
+      <li>Values: six lengths from 0.20 m to 0.65 m, with three readings at each length.</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>Three timings of the same event are 2.31 s, 2.45 s and 2.38 s. Find the average.</p>
+        <details class="num"><summary>Check your number</summary><span>2.38 s</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Ten vibrations of a ruler clamped to a desk take 3.4 s. Find the time for one vibration.</p>
+        <details class="num"><summary>Check your number</summary><span>0.34 s</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Four readings are 4.2, 4.3, 5.9 and 4.1 cm. One looks wrong. Find the average of the other three.</p>
+        <details class="num"><summary>Check your number</summary><span>4.2 cm</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>A student investigates how the height a ball is dropped from affects how high it bounces. Name the independent and dependent variables, and two variables they should control. Say how they would control each one.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Explain why timing ten vibrations and dividing by ten gives a more precise answer than timing one vibration.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <!-- ===================================================== 2 -->
+  <h2 id="record">2. Recording data</h2>
+
+  <ul>
+    <li>Independent variable in the first column, then the repeats, then the average.</li>
+    <li>Put the quantity and its unit in the <strong>heading</strong>, such as “length (m)”. Do not write the unit in every cell.</li>
+    <li>Record every value to the same number of decimal places, matching the precision of your instrument.</li>
+    <li>If one repeat is far from the others, it is probably an <strong>outlier</strong>. Measure it again if you can; if not, leave it out of the average and say so.</li>
+  </ul>
+
+  <div class="example">
+    <h4>A well-set-out table</h4>
+    <table class="data">
+      <tr><th>length (m)</th><th>f₁ (Hz)</th><th>f₂ (Hz)</th><th>f₃ (Hz)</th><th>average f (Hz)</th></tr>
+      <tr><td>0.20</td><td>441</td><td>437</td><td>443</td><td>440</td></tr>
+      <tr><td>0.30</td><td>294</td><td>292</td><td>296</td><td>294</td></tr>
+      <tr><td>0.40</td><td>221</td><td>219</td><td>222</td><td>221</td></tr>
+    </table>
+    <p>Units in the headings, the same precision throughout, and an average column.</p>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol start="6">
+      <li class="q explain"><span class="tag">Rewrite · bring to your session</span>
+        <p>A student’s results are written like this: “1 kg = 12cm, 1 kg = 11.5 cm, 2kg 24 cm, 2 kg = 23.75, 3 kg: 35cm and 36 cm.” Draw a proper results table for them, including an average column.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <!-- ===================================================== 3 -->
+  <h2 id="lines">3. Graphs and straight lines</h2>
+
+  <h3>Drawing a graph by hand</h3>
+  <ul>
+    <li>Independent variable on the horizontal (<i class="v">x</i>) axis, dependent variable on the vertical (<i class="v">y</i>) axis.</li>
+    <li>Label each axis with the quantity and unit, just like the table headings.</li>
+    <li>Choose scales that use most of the page and go up in easy steps (1, 2, 5 or 10 per square, never 3 or 7).</li>
+    <li>Plot each point as a small neat cross.</li>
+    <li>Draw a <strong>line of best fit</strong>: one smooth straight line or curve that passes as close as possible to all the points, with about as many above as below. Never join the dots.</li>
+  </ul>
+
+  <h3>Reading a straight line</h3>
+  <p>A straight-line graph has the equation</p>
+  <p class="eq"><i>y</i> = <i>mx</i> + <i>c</i></p>
+  <p>where <i class="v">m</i> is the gradient and <i class="v">c</i> is where the line crosses the <i class="v">y</i> axis (the intercept). If the line goes through the origin, <i class="v">c</i> = 0 and <i class="v">y</i> is <strong>proportional</strong> to <i class="v">x</i>: double <i class="v">x</i> and <i class="v">y</i> doubles.</p>
+  <p>Find the gradient from your <strong>line</strong>, not from two data points, and use a large triangle covering most of the line. Always give the gradient its units, and write the final equation with the real physics symbols, not <i class="v">y</i> and <i class="v">x</i>.</p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A beaker of water is heated steadily and its temperature recorded each minute.</p>
+    <table class="data">
+      <tr><th>time (min)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><th>temperature (°C)</th><td>20</td><td>26</td><td>31</td><td>38</td><td>43</td><td>49</td></tr>
+    </table>
+    <figure><svg id="heatGraph" viewBox="0 0 440 290" role="img" aria-label="Temperature against time: six points lying close to a straight line that starts at 20 degrees and rises about 5.8 degrees per minute."></svg></figure>
+    <ol class="working">
+      <li>The points lie close to a straight line that does not pass through the origin.</li>
+      <li>Large triangle on the line, from (0 min, 20 °C) to (5 min, 49 °C):</li>
+      <li>gradient = (49 − 20) ÷ (5 − 0) = 5.8 °C per minute <span class="why">the rate of heating</span></li>
+      <li>intercept = 20 °C <span class="why">the starting temperature</span></li>
+      <li>Equation: <i class="v">T</i> = 5.8<i class="v">t</i> + 20, with <i class="v">T</i> in °C and <i class="v">t</i> in minutes</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <p>A trolley’s speed is measured as it rolls along a track.</p>
+    <table class="data">
+      <tr><th>time (s)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><th>speed (m s<sup>−1</sup>)</th><td>0.4</td><td>0.9</td><td>1.5</td><td>1.9</td><td>2.5</td><td>3.0</td></tr>
+    </table>
+    <ol start="7">
+      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+        <p>Plot this data on graph paper and draw a line of best fit.</p><div class="work-space"></div></li>
+      <li class="q"><p>Find the gradient of your line of best fit, with its units.</p>
+        <details class="num"><summary>Check your number</summary><span>about 0.52 m s<sup>−2</sup> (anything from 0.48 to 0.56 is reasonable)</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Read the intercept on the speed axis.</p>
+        <details class="num"><summary>Check your number</summary><span>about 0.4 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>Assuming the pattern continues, predict the speed at 8.0 s.</p>
+        <details class="num"><summary>Check your number</summary><span>about 4.6 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>What physical quantity do the gradient and the intercept represent here? Write the equation of the line using physics symbols.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your hand-drawn graph, with the gradient triangle drawn on it.</li>
+      <li>Your answers to questions 4, 5, 6 and 11.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 4 -->
+  <h2 id="curves">4. Recognising curves</h2>
+
+  <p>Many relationships in physics are not straight lines. At Level 2 you need to recognise four common shapes. In each, <i class="v">k</i> is a constant.</p>
+  <div class="gallery" id="gallery"></div>
+  <p>The curves for 1/<i class="v">x</i> and 1/<i class="v">x</i><sup>2</sup> look similar, as do <i class="v">x</i><sup>2</sup> and a steep straight line over a short range. You usually cannot tell them apart by eye, which is why the next section matters.</p>
+  <p>A quick test: think about what happens when <i class="v">x</i> doubles.</p>
+  <table class="wide">
+    <tr><th>Relationship</th><th>When <i class="v">x</i> doubles, <i class="v">y</i> …</th></tr>
+    <tr><td><i class="v">y</i> ∝ <i class="v">x</i></td><td>doubles (× 2)</td></tr>
+    <tr><td><i class="v">y</i> ∝ <i class="v">x</i><sup>2</sup></td><td>quadruples (× 4)</td></tr>
+    <tr><td><i class="v">y</i> ∝ √<i class="v">x</i></td><td>increases by × 1.41 (√2)</td></tr>
+    <tr><td><i class="v">y</i> ∝ 1/<i class="v">x</i></td><td>halves (× ½)</td></tr>
+    <tr><td><i class="v">y</i> ∝ 1/<i class="v">x</i><sup>2</sup></td><td>becomes a quarter (× ¼)</td></tr>
+  </table>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol start="12">
+      <li class="q"><p>If <i class="v">y</i> ∝ <i class="v">x</i><sup>2</sup> and <i class="v">x</i> is tripled, by what factor does <i class="v">y</i> change?</p>
+        <details class="num"><summary>Check your number</summary><span>× 9</span></details><div class="work-space"></div></li>
+      <li class="q"><p>If <i class="v">y</i> ∝ √<i class="v">x</i> and <i class="v">x</i> is multiplied by 4, by what factor does <i class="v">y</i> change?</p>
+        <details class="num"><summary>Check your number</summary><span>× 2</span></details><div class="work-space"></div></li>
+      <li class="q"><p>If <i class="v">y</i> ∝ 1/<i class="v">x</i><sup>2</sup> and <i class="v">x</i> is tripled, by what factor does <i class="v">y</i> change?</p>
+        <details class="num"><summary>Check your number</summary><span>× 1/9 (about 0.11)</span></details><div class="work-space"></div></li>
+      <li class="q"><p>In an experiment, when <i class="v">x</i> goes from 2.0 to 4.0, <i class="v">y</i> goes from 36 to 9.0. Which of the four relationships fits? Give the power of <i class="v">x</i> (for example, 2 for <i class="v">x</i><sup>2</sup> or −1 for 1/<i class="v">x</i>).</p>
+        <details class="num"><summary>Check your number</summary><span>−2 (y ∝ 1/x²)</span></details><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <!-- ===================================================== 5 -->
+  <h2 id="linearise">5. Straightening curves</h2>
+
+  <p>A curve is hard to read accurately, and hard to tell apart from other curves. A straight line is easy. So physicists <strong>linearise</strong>: they choose what to plot so that the graph becomes a straight line.</p>
+  <p>If you suspect <i class="v">y</i> = <i class="v">k</i><i class="v">x</i><sup>2</sup>, plot <i class="v">y</i> against <i class="v">x</i><sup>2</sup> instead of against <i class="v">x</i>. If you are right, you get a straight line through the origin, and its gradient is <i class="v">k</i>.</p>
+  <table class="wide">
+    <tr><th>If you suspect …</th><th>plot <i class="v">y</i> against …</th><th>and the gradient is</th></tr>
+    <tr><td><i class="v">y</i> = <i class="v">kx</i><sup>2</sup></td><td><i class="v">x</i><sup>2</sup></td><td><i class="v">k</i></td></tr>
+    <tr><td><i class="v">y</i> = <i class="v">k</i>√<i class="v">x</i></td><td>√<i class="v">x</i></td><td><i class="v">k</i></td></tr>
+    <tr><td><i class="v">y</i> = <i class="v">k</i>/<i class="v">x</i></td><td>1/<i class="v">x</i></td><td><i class="v">k</i></td></tr>
+    <tr><td><i class="v">y</i> = <i class="v">k</i>/<i class="v">x</i><sup>2</sup></td><td>1/<i class="v">x</i><sup>2</sup></td><td><i class="v">k</i></td></tr>
+  </table>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A toy car is launched along carpet at different speeds, and its stopping distance is measured.</p>
+    <table class="data">
+      <tr><th>speed <i class="v">v</i> (m s<sup>−1</sup>)</th><td>0.5</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td></tr>
+      <tr><th>distance <i class="v">d</i> (m)</th><td>0.06</td><td>0.19</td><td>0.46</td><td>0.78</td><td>1.27</td><td>1.79</td></tr>
+      <tr><th><i class="v">v</i><sup>2</sup> (m<sup>2</sup> s<sup>−2</sup>)</th><td>0.25</td><td>1.00</td><td>2.25</td><td>4.00</td><td>6.25</td><td>9.00</td></tr>
+    </table>
+    <div class="twin">
+      <figure><svg id="carRaw" viewBox="0 0 440 290" role="img" aria-label="Stopping distance against speed: the points curve upwards."></svg><figcaption>Distance against speed: a curve.</figcaption></figure>
+      <figure><svg id="carLin" viewBox="0 0 440 290" role="img" aria-label="Stopping distance against speed squared: the points lie on a straight line through the origin."></svg><figcaption>Distance against speed squared: a straight line.</figcaption></figure>
+    </div>
+    <ol class="working">
+      <li>The first graph curves upward. Doubling the speed from 1.0 to 2.0 m s<sup>−1</sup> roughly quadruples the distance (0.19 to 0.78 m), which suggests <i class="v">d</i> ∝ <i class="v">v</i><sup>2</sup>.</li>
+      <li>Plot <i class="v">d</i> against <i class="v">v</i><sup>2</sup>. The points lie on a straight line through the origin, which confirms it.</li>
+      <li>gradient = (1.80 − 0) ÷ (9.00 − 0) = 0.20 s<sup>2</sup> m<sup>−1</sup> <span class="why">from the line, using a large triangle</span></li>
+      <li>Equation: <i class="v">d</i> = 0.20<i class="v">v</i><sup>2</sup></li>
+    </ol>
+  </div>
+
+  <div class="explorer" id="explorer">
+    <h4>Explorer: straighten the curve</h4>
+    <p class="hint">Pick a data set, then try each choice for the horizontal axis. When the points line up along the line, you have found the relationship. You can also type in data from an experiment. Nothing is marked.</p>
+    <div class="row">
+      <label for="dataset">Data set:</label>
+      <select id="dataset"></select>
+    </div>
+    <div id="own">
+      <div class="names">
+        <label>Horizontal quantity and unit<br><input type="text" id="ownX" value="x"></label>
+        <label>Vertical quantity and unit<br><input type="text" id="ownY" value="y"></label>
+      </div>
+      <label for="ownData">One pair of values per line, separated by a comma or a space:</label>
+      <textarea id="ownData">1, 2.1
+2, 7.8
+3, 18.3
+4, 31.6
+5, 50.4</textarea>
+    </div>
+    <div class="row xchoice">Plot against:
+      <label><input type="radio" name="xform" value="x" checked> <i>x</i></label>
+      <label><input type="radio" name="xform" value="x2"> <i>x</i>²</label>
+      <label><input type="radio" name="xform" value="sqrt"> √<i>x</i></label>
+      <label><input type="radio" name="xform" value="inv"> 1/<i>x</i></label>
+      <label><input type="radio" name="xform" value="inv2"> 1/<i>x</i>²</label>
+    </div>
+    <svg id="linPlot" viewBox="0 0 440 290" aria-label="Graph of the chosen data with a line of best fit"></svg>
+    <p class="fit" id="fit"></p>
+    <p><strong>Things to try:</strong></p>
+    <ul class="try">
+      <li>For each built-in data set, which choice gives the straightest line? Does that line go through the origin?</li>
+      <li>For the plucked string, compare the 1/<i>x</i> and 1/<i>x</i>² graphs. How can you tell which is right?</li>
+      <li>Bring data from an experiment you do with your tutor and try it here.</li>
+    </ul>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <p>A student measures the power <i class="v">P</i> given out by a resistor for different currents <i class="v">I</i>.</p>
+    <table class="data">
+      <tr><th>current <i class="v">I</i> (A)</th><td>0.5</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td></tr>
+      <tr><th>power <i class="v">P</i> (W)</th><td>1.3</td><td>5.0</td><td>11.2</td><td>20.1</td><td>31.2</td></tr>
+    </table>
+    <ol start="16">
+      <li class="q"><p>Doubling the current from 1.0 A to 2.0 A multiplies the power by about what factor?</p>
+        <details class="num"><summary>Check your number</summary><span>about × 4</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Calculate <i class="v">I</i><sup>2</sup> for <i class="v">I</i> = 2.5 A.</p>
+        <details class="num"><summary>Check your number</summary><span>6.25 A<sup>2</sup></span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+        <p>Add an <i class="v">I</i><sup>2</sup> row to the table, then plot <i class="v">P</i> against <i class="v">I</i><sup>2</sup> on graph paper and draw a line of best fit.</p><div class="work-space"></div></li>
+      <li class="q"><p>Find the gradient of your line, with its units.</p>
+        <details class="num"><summary>Check your number</summary><span>about 5.0 W A<sup>−2</sup></span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Write the equation linking <i class="v">P</i> and <i class="v">I</i>. Then use the <a href="03-electricity.html#power">electricity page</a> to work out which physical quantity the gradient represents.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Explain why physicists prefer to straighten a curve before finding a relationship, instead of working from the curve directly.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your graph of <i class="v">P</i> against <i class="v">I</i><sup>2</sup>, with the gradient triangle.</li>
+      <li>Your answers to questions 20 and 21.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 6 -->
+  <h2 id="writeup">6. Writing it up</h2>
+
+  <p>A Level 2 investigation report usually follows this order. Your teacher will give you the exact requirements, but the structure is much the same everywhere.</p>
+  <ol>
+    <li><strong>Aim:</strong> what you are investigating, in one sentence.</li>
+    <li><strong>Variables:</strong> independent, dependent and controlled, and how you controlled each one.</li>
+    <li><strong>Method:</strong> clear enough for someone else to repeat, including how you reduced uncertainty.</li>
+    <li><strong>Results:</strong> a well-set-out table with repeats and averages.</li>
+    <li><strong>Graphs:</strong> the raw graph, then the straightened graph with its line of best fit.</li>
+    <li><strong>Equation:</strong> the gradient with units, and the final equation in physics symbols.</li>
+    <li><strong>Discussion:</strong> what the relationship means physically, sources of error and uncertainty, any outliers, and how you would improve the experiment.</li>
+  </ol>
+  <p>The discussion is where the higher grades are decided. Use the skills from <a href="05-writing-explanations.html">Writing explanations</a>: link each source of error to how it affected your results.</p>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Anything on this page you would like to go over again.</li>
+      <li>Ideas for an experiment we could do together to practise the whole process.</li>
+    </ul>
+  </div>
+
+  <section id="graphPaper" class="print-only">
+    <svg viewBox="0 0 180 240" aria-hidden="true"></svg>
+  </section>
+</main>
+
+<script>
+  const INK = '#1d2433', ACCENT = '#1f5f8b', WARM = '#c2701a', MUTED = '#5b6475', GRID = '#e6e9ef';
+  const $ = id => document.getElementById(id);
+
+  // ---------- Axis helpers ----------
+  // Picks a tidy step (1, 2, 2.5 or 5 times a power of ten) giving about five gridlines.
+  function niceStep(raw) {
+    const p = 10 ** Math.floor(Math.log10(raw));
+    for (const m of [1, 2, 2.5, 5, 10]) if (m * p >= raw * 0.9999) return m * p;
+  }
+  function niceAxis(vmax) {
+    const step = niceStep((vmax > 0 ? vmax : 1) / 5);
+    return { max: Math.ceil(vmax / step - 1e-9) * step || step, step };
+  }
+  // Enough decimal places to show the step size cleanly.
+  function tickLabel(v, step) {
+    let d = 0;
+    while (Math.abs(Math.round(step * 10 ** d) - step * 10 ** d) > 1e-6 && d < 6) d++;
+    return v.toFixed(d);
+  }
+
+  // ---------- Plotting ----------
+  // o.xAxis and o.yAxis are {max, step}. o.points are [x, y] pairs.
+  // o.line is [gradient, intercept] for a line of best fit; o.curve is a function to draw smoothly.
+  function drawPlot(svg, o) {
+    const L = 64, R = 420, T = 20, B = 232;
+    const X = x => L + (x / o.xAxis.max) * (R - L);
+    const Y = y => B - (y / o.yAxis.max) * (B - T);
+    const clipId = svg.id + '-clip';
+    let s = `<defs><clipPath id="${clipId}"><rect x="${L}" y="${T}" width="${R - L}" height="${B - T}"/></clipPath></defs>`;
+    const nx = Math.round(o.xAxis.max / o.xAxis.step), ny = Math.round(o.yAxis.max / o.yAxis.step);
+    for (let i = 0; i <= nx; i++) {
+      const x = i * o.xAxis.step;
+      s += `<line x1="${X(x)}" y1="${T}" x2="${X(x)}" y2="${B}" stroke="${GRID}"/>`;
+      s += `<text x="${X(x)}" y="${B + 18}" text-anchor="middle">${tickLabel(x, o.xAxis.step)}</text>`;
+    }
+    for (let j = 0; j <= ny; j++) {
+      const y = j * o.yAxis.step;
+      s += `<line x1="${L}" y1="${Y(y)}" x2="${R}" y2="${Y(y)}" stroke="${GRID}"/>`;
+      s += `<text x="${L - 8}" y="${Y(y) + 4}" text-anchor="end">${tickLabel(y, o.yAxis.step)}</text>`;
+    }
+    s += `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" stroke="${INK}" stroke-width="1.5"/>`;
+    s += `<line x1="${L}" y1="${T}" x2="${L}" y2="${B}" stroke="${INK}" stroke-width="1.5"/>`;
+    if (o.line) {
+      const [m, c] = o.line;
+      s += `<line x1="${X(0)}" y1="${Y(c)}" x2="${X(o.xAxis.max)}" y2="${Y(m * o.xAxis.max + c)}" stroke="${WARM}" stroke-width="2.5" clip-path="url(#${clipId})"/>`;
+    }
+    if (o.curve) {
+      const pts = [];
+      for (let i = 0; i <= 100; i++) { const x = o.xAxis.max * i / 100; pts.push(X(x) + ',' + Y(o.curve(x))); }
+      s += `<polyline points="${pts.join(' ')}" fill="none" stroke="${WARM}" stroke-width="2.5" clip-path="url(#${clipId})"/>`;
+    }
+    for (const [x, y] of o.points) {
+      // A small cross, the way you would plot by hand.
+      s += `<path d="M${X(x) - 5},${Y(y) - 5} L${X(x) + 5},${Y(y) + 5} M${X(x) - 5},${Y(y) + 5} L${X(x) + 5},${Y(y) - 5}" stroke="${ACCENT}" stroke-width="2.2"/>`;
+    }
+    s += `<text x="${(L + R) / 2}" y="${B + 44}" text-anchor="middle" style="font-weight:500">${o.xTitle}</text>`;
+    s += `<text x="16" y="${(T + B) / 2}" text-anchor="middle" transform="rotate(-90 16 ${(T + B) / 2})" style="font-weight:500">${o.yTitle}</text>`;
+    svg.innerHTML = s;
+  }
+
+  // Least-squares straight line through a set of points: returns [gradient, intercept].
+  function bestFit(pts) {
+    const n = pts.length;
+    const mx = pts.reduce((a, p) => a + p[0], 0) / n, my = pts.reduce((a, p) => a + p[1], 0) / n;
+    let sxy = 0, sxx = 0;
+    for (const [x, y] of pts) { sxy += (x - mx) * (y - my); sxx += (x - mx) ** 2; }
+    const m = sxx ? sxy / sxx : 0;
+    return [m, my - m * mx];
+  }
+
+  // ---------- Static graphs ----------
+  const heat = [[0, 20], [1, 26], [2, 31], [3, 38], [4, 43], [5, 49]];
+  drawPlot($('heatGraph'), { xAxis: { max: 5, step: 1 }, yAxis: { max: 60, step: 10 }, points: heat, line: [5.8, 20],
+    xTitle: 'time (min)', yTitle: 'temperature (°C)' });
+
+  const car = [[0.5, 0.06], [1.0, 0.19], [1.5, 0.46], [2.0, 0.78], [2.5, 1.27], [3.0, 1.79]];
+  drawPlot($('carRaw'), { xAxis: { max: 3, step: 0.5 }, yAxis: { max: 2, step: 0.5 }, points: car, curve: v => 0.2 * v * v,
+    xTitle: 'speed v (m s⁻¹)', yTitle: 'distance d (m)' });
+  drawPlot($('carLin'), { xAxis: { max: 10, step: 2 }, yAxis: { max: 2, step: 0.5 }, points: car.map(([v, d]) => [v * v, d]), line: [0.2, 0],
+    xTitle: 'v² (m² s⁻²)', yTitle: 'distance d (m)' });
+
+  // ---------- Shape gallery ----------
+  (function () {
+    const shapes = [
+      ['y ∝ x²', 'curves upward, getting steeper', x => x * x],
+      ['y ∝ √x', 'rises steeply, then levels off', x => Math.sqrt(x)],
+      ['y ∝ 1/x', 'falls, then levels off towards the axis', x => 0.15 / x],
+      ['y ∝ 1/x²', 'falls even more sharply, then levels off', x => 0.03 / (x * x)]
+    ];
+    $('gallery').innerHTML = shapes.map(([name, desc, f]) => {
+      const pts = [];
+      for (let i = 1; i <= 100; i++) {
+        const x = i / 100, y = f(x);
+        if (y <= 1.05) pts.push((15 + x * 140) + ',' + (110 - Math.min(y, 1) * 95));
+      }
+      return `<div class="shape"><svg viewBox="0 0 160 130">` +
+        `<line x1="15" y1="110" x2="158" y2="110" stroke="${INK}" stroke-width="1.5"/><line x1="15" y1="8" x2="15" y2="110" stroke="${INK}" stroke-width="1.5"/>` +
+        `<polyline points="${pts.join(' ')}" fill="none" stroke="${ACCENT}" stroke-width="2.5"/>` +
+        `<text x="150" y="124" text-anchor="end" style="font-size:11px;font-style:italic">x</text><text x="6" y="16" style="font-size:11px;font-style:italic">y</text>` +
+        `</svg><strong>${name}</strong><br>${desc}</div>`;
+    }).join('');
+  })();
+
+  // ---------- Explorer: straighten the curve ----------
+  // Made-up data with realistic scatter. Each set follows one of the four relationships.
+  const DATASETS = [
+    { name: 'Stopping distance of a toy car', x: 'speed (m s⁻¹)', y: 'distance (m)',
+      pts: [[0.5, 0.06], [1.0, 0.19], [1.5, 0.46], [2.0, 0.78], [2.5, 1.27], [3.0, 1.79]] },
+    { name: 'Water draining from a bottle', x: 'hole diameter (mm)', y: 'time to empty (s)',
+      pts: [[2, 98], [3, 45], [4, 25.5], [5, 15.7], [6, 11.3], [8, 6.2]] },
+    { name: 'Wave speed on a stretched string', x: 'tension (N)', y: 'wave speed (m s⁻¹)',
+      pts: [[1, 20.4], [2, 27.9], [4, 40.6], [6, 48.5], [8, 57.0], [10, 62.8]] },
+    { name: 'Pitch of a plucked string', x: 'length (m)', y: 'frequency (Hz)',
+      pts: [[0.2, 436], [0.3, 296], [0.4, 222], [0.5, 174], [0.6, 148], [0.8, 111]] }
+  ];
+  const XFORMS = {
+    x:    { f: x => x,              label: q => q },
+    x2:   { f: x => x * x,          label: q => `(${q})²` },
+    sqrt: { f: x => Math.sqrt(x),   label: q => `√(${q})` },
+    inv:  { f: x => 1 / x,          label: q => `1 / (${q})` },
+    inv2: { f: x => 1 / (x * x),    label: q => `1 / (${q})²` }
+  };
+
+  $('dataset').innerHTML = DATASETS.map((d, i) => `<option value="${i}">${d.name}</option>`).join('') +
+    '<option value="own">Your own data</option>';
+
+  function parseOwn() {
+    return $('ownData').value.split('\n')
+      .map(line => line.trim().split(/[\s,;]+/).map(Number))
+      .filter(p => p.length >= 2 && isFinite(p[0]) && isFinite(p[1]))
+      .map(p => [p[0], p[1]]);
+  }
+
+  function updateExplorer() {
+    const choice = $('dataset').value;
+    const own = choice === 'own';
+    $('own').style.display = own ? 'block' : 'none';
+    const set = own ? { x: $('ownX').value || 'x', y: $('ownY').value || 'y', pts: parseOwn() } : DATASETS[+choice];
+    const xf = XFORMS[document.querySelector('input[name="xform"]:checked').value];
+    const pts = set.pts.map(([x, y]) => [xf.f(x), y]).filter(([x, y]) => isFinite(x) && isFinite(y) && x >= 0 && y >= 0);
+
+    if (pts.length < 2) {
+      $('linPlot').innerHTML = `<text x="220" y="140" text-anchor="middle">Enter at least two pairs of positive numbers.</text>`;
+      $('fit').textContent = '';
+      return;
+    }
+    const xAxis = niceAxis(Math.max(...pts.map(p => p[0])));
+    const yAxis = niceAxis(Math.max(...pts.map(p => p[1])));
+    const [m, c] = bestFit(pts);
+    drawPlot($('linPlot'), { xAxis, yAxis, points: pts, line: [m, c], xTitle: xf.label(set.x), yTitle: set.y });
+    const sig = v => Number(v.toPrecision(3)).toString();
+    $('fit').textContent = `line of best fit: gradient ≈ ${sig(m)}, intercept ≈ ${sig(c)}`;
+  }
+
+  document.querySelectorAll('#explorer select, #explorer input, #explorer textarea')
+    .forEach(el => el.addEventListener('input', updateExplorer));
+  updateExplorer();
+
+  // ---------- Graph paper (printed only) ----------
+  (function () {
+    let s = '';
+    for (let i = 0; i <= 90; i++) {           // every 2 mm across (180 mm)
+      const x = i * 2, major = i % 5 === 0;
+      s += `<line x1="${x}" y1="0" x2="${x}" y2="240" stroke="${major ? '#9aa3b2' : '#d5dae2'}" stroke-width="${major ? 0.35 : 0.15}"/>`;
+    }
+    for (let j = 0; j <= 120; j++) {          // every 2 mm down (240 mm)
+      const y = j * 2, major = j % 5 === 0;
+      s += `<line x1="0" y1="${y}" x2="180" y2="${y}" stroke="${major ? '#9aa3b2' : '#d5dae2'}" stroke-width="${major ? 0.35 : 0.15}"/>`;
+    }
+    document.querySelector('#graphPaper svg').innerHTML = s;
+  })();
+</script>
+</body>
+</html>

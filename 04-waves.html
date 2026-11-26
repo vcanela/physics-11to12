@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waves and Light</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d2433;
+    --muted: #5b6475;
+    --line: #d9dee7;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #1f5f8b;
+    --accent-soft: #e8f1f7;
+    --warm: #8a5210;
+    --warm-soft: #fbf1e3;
+    --green: #2e6b3f;
+    --green-soft: #e9f3ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 "IBM Plex Sans", system-ui, sans-serif;
+  }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 80px; }
+  h1, h2, h3 { font-family: "IBM Plex Serif", Georgia, serif; line-height: 1.25; }
+  h1 { font-size: 2rem; margin: 8px 0 8px; }
+  h2 {
+    font-size: 1.5rem;
+    margin: 64px 0 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--line);
+  }
+  h3 { font-size: 1.1rem; margin: 28px 0 8px; }
+  a { color: var(--accent); }
+  .back { text-decoration: none; font-size: 0.95rem; }
+  .lede { color: var(--muted); font-size: 1.1rem; margin: 0 0 24px; }
+  i.v { font-family: "IBM Plex Serif", Georgia, serif; }
+  .eq {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 12px 0;
+  }
+
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 20px;
+  }
+  nav.toc ol { margin: 6px 0 0; padding-left: 22px; columns: 2; column-gap: 32px; }
+  nav.toc a { text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  .note {
+    background: var(--warm-soft);
+    border-left: 4px solid var(--warm);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 20px 0;
+  }
+  .note p { margin: 0 0 8px; }
+  .note p:last-child { margin: 0; }
+
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+
+  .example {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .example h4 { margin: 0 0 8px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+  .example p { margin: 6px 0; }
+  .working { margin: 8px 0 0; padding-left: 0; list-style: none; }
+  .working li { margin: 4px 0; font-family: "IBM Plex Serif", Georgia, serif; }
+  .working .why { font-family: "IBM Plex Sans", sans-serif; color: var(--muted); font-size: 0.9rem; margin-left: 8px; }
+
+  .questions { margin-top: 24px; }
+  .questions > h3 { margin-bottom: 4px; }
+  .questions ol { padding-left: 24px; }
+  .q { margin: 14px 0; padding-left: 4px; }
+  .q p { margin: 0 0 6px; }
+  details.num summary {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 99px;
+    padding: 1px 12px;
+    list-style: none;
+  }
+  details.num summary::-webkit-details-marker { display: none; }
+  details.num[open] summary { background: var(--green-soft); }
+  details.num span {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 600;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warm);
+    background: var(--warm-soft);
+    border-radius: 4px;
+    padding: 1px 8px;
+    margin-bottom: 4px;
+  }
+  .preview {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin-right: 4px;
+  }
+
+  .bring {
+    border: 2px dashed var(--warm);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 28px 0 0;
+  }
+  .bring strong { color: var(--warm); }
+  .bring ul { margin: 6px 0 0; padding-left: 20px; }
+
+  figure { margin: 16px 0; }
+  figure svg { width: 100%; max-width: 460px; height: auto; display: block; }
+  figcaption { font-size: 0.9rem; color: var(--muted); }
+  svg text { font-family: "IBM Plex Sans", sans-serif; font-size: 13px; fill: var(--ink); }
+
+  /* Explorer */
+  .explorer {
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 24px 0;
+  }
+  .explorer h4 { margin: 0 0 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+  .explorer .hint { margin: 0 0 12px; color: var(--muted); font-size: 0.95rem; }
+  .explorer .mode label { margin-right: 18px; cursor: pointer; }
+  .explorer button {
+    font: inherit;
+    font-size: 0.9rem;
+    border: 1px solid var(--accent);
+    background: var(--card);
+    color: var(--accent);
+    border-radius: 6px;
+    padding: 4px 12px;
+    cursor: pointer;
+  }
+  .sliders { display: grid; grid-template-columns: max-content 1fr 4.5em; gap: 4px 12px; align-items: center; margin: 12px 0; }
+  .sliders output { font-family: "IBM Plex Mono", monospace; font-size: 0.9rem; text-align: right; }
+  .sliders input { width: 100%; accent-color: var(--accent); }
+  #waveView { width: 100%; height: auto; display: block; margin: 8px 0; }
+  .speed { font-family: "IBM Plex Mono", monospace; font-size: 0.95rem; margin: 4px 0 8px; }
+  .explorer .try { margin: 6px 0 0; padding-left: 20px; font-size: 0.95rem; }
+
+  .work-space { display: none; }
+
+  @media (max-width: 560px) {
+    nav.toc ol { columns: 1; }
+    h1 { font-size: 1.7rem; }
+    .sliders { grid-template-columns: 1fr 4.5em; }
+    .sliders label { grid-column: 1 / -1; }
+  }
+
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    main { max-width: none; padding: 0; }
+    .back, nav.toc, details.num, .explorer { display: none; }
+    h2 { break-before: page; border-top: none; margin-top: 0; }
+    .example, .note, .bring, .q, figure { break-inside: avoid; }
+    .work-space { display: block; height: 3.2cm; }
+    .explain .work-space { height: 5cm; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← All topics</a>
+  <h1>4. Waves and Light</h1>
+  <p class="lede">How waves carry energy, how sound works, and how light reflects and bends.</p>
+
+  <nav class="toc">
+    <strong>Sections</strong>
+    <ol>
+      <li><a href="#waves">What a wave is</a></li>
+      <li><a href="#describing">Describing waves</a></li>
+      <li><a href="#sound">Sound</a></li>
+      <li><a href="#reflection">Light and reflection</a></li>
+      <li><a href="#refraction">Refraction</a></li>
+      <li><a href="#next">What comes next</a></li>
+    </ol>
+  </nav>
+
+  <div class="note">
+    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: your tutor will look at your <em>working</em>. Explain and sketch questions have no answers here. Do your best attempt and bring it to your session.</p>
+  </div>
+
+  <!-- ===================================================== 1 -->
+  <h2 id="waves">1. What a wave is</h2>
+
+  <p>A <strong>wave</strong> is a disturbance that carries <strong>energy</strong> from one place to another <strong>without carrying matter</strong> with it. As a wave passes, the particles of the material (the <strong>medium</strong>) move back and forth around one spot, then settle back where they started.</p>
+  <ul>
+    <li><strong>Transverse waves:</strong> the particles move at right angles to the direction the wave travels. Examples: ripples on water, a wave on a rope, light.</li>
+    <li><strong>Longitudinal waves:</strong> the particles move back and forth along the direction the wave travels, making squashed regions (<strong>compressions</strong>) and stretched regions (<strong>rarefactions</strong>). Example: sound.</li>
+    <li><strong>Mechanical waves</strong>, such as sound and water waves, need a medium to travel through.</li>
+    <li><strong>Electromagnetic waves</strong>, such as light and radio, can travel through empty space.</li>
+  </ul>
+
+  <div class="explorer" id="explorer">
+    <h4>Explorer: waves in motion</h4>
+    <p class="hint">Watch the orange particle. Change the settings and see what happens. The scale is slowed right down so you can follow it. Nothing is marked.</p>
+    <div class="mode">
+      <label><input type="radio" name="wmode" value="transverse" checked> Transverse</label>
+      <label><input type="radio" name="wmode" value="longitudinal"> Longitudinal</label>
+      <button id="pause" type="button">Pause</button>
+    </div>
+    <div class="sliders">
+      <label for="sF">Frequency</label><input id="sF" type="range" min="0.1" max="2" step="0.1" value="0.5"><output id="oF"></output>
+      <label for="sL">Wavelength</label><input id="sL" type="range" min="0.5" max="4" step="0.1" value="2"><output id="oL"></output>
+    </div>
+    <label><input type="checkbox" id="lockV"> Keep the speed fixed, as it would be in one medium</label>
+    <svg id="waveView" viewBox="0 0 440 200" aria-label="Animated wave"></svg>
+    <p class="speed" id="speed"></p>
+    <p><strong>Things to try:</strong></p>
+    <ul class="try">
+      <li>Does the orange particle travel along with the wave?</li>
+      <li>Switch to longitudinal. Find a compression and a rarefaction. Where is the orange particle when a compression passes it?</li>
+      <li>Tick “keep the speed fixed”, then increase the frequency. What happens to the wavelength?</li>
+    </ul>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>A duck sits on a pond. As ripples pass, it bobs up and down but does not move across the pond with them. Explain what this tells you about waves.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Sort these into transverse and longitudinal: ripples on a pond, sound, light, a slinky pushed back and forth along its length, a slinky shaken side to side. Give a reason for each.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>We can see the Sun, but we cannot hear the huge explosions happening on it. Explain why.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your three answers, and anything the explorer showed you that surprised you.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 2 -->
+  <h2 id="describing">2. Describing waves</h2>
+
+  <figure>
+    <svg id="transverseFig" viewBox="0 0 440 210" role="img" aria-label="Transverse wave. The amplitude is the height from the rest position to a crest. The wavelength is the distance from one crest to the next."></svg>
+    <figcaption>A transverse wave. The amplitude is measured from the rest position, not from crest to trough.</figcaption>
+  </figure>
+  <figure>
+    <svg id="longitudinalFig" viewBox="0 0 440 190" role="img" aria-label="Longitudinal wave drawn as vertical lines, bunched together at compressions and spread apart at rarefactions. The wavelength is the distance from one compression to the next."></svg>
+    <figcaption>A longitudinal wave. One wavelength is from the middle of one compression to the middle of the next.</figcaption>
+  </figure>
+
+  <table>
+    <tr><th>Quantity</th><th>Meaning</th><th>Unit</th></tr>
+    <tr><td>Amplitude, <i class="v">A</i></td><td>the biggest displacement from the rest position; bigger amplitude means more energy</td><td>m</td></tr>
+    <tr><td>Wavelength, λ</td><td>the length of one complete wave, for example crest to crest</td><td>m</td></tr>
+    <tr><td>Frequency, <i class="v">f</i></td><td>the number of waves passing a point each second</td><td>hertz (Hz)</td></tr>
+    <tr><td>Period, <i class="v">T</i></td><td>the time for one complete wave to pass</td><td>s</td></tr>
+    <tr><td>Speed, <i class="v">v</i></td><td>how fast the wave travels</td><td>m s<sup>−1</sup></td></tr>
+  </table>
+  <p class="eq"><i>v</i> = <i>f</i>λ &nbsp;&nbsp;&nbsp;&nbsp; <i>T</i> = 1 ÷ <i>f</i></p>
+  <p><strong>An important idea for later:</strong> the <em>source</em> sets the frequency, and the <em>medium</em> sets the speed. When a wave passes into a different medium, its frequency stays the same, so its speed and wavelength change together.</p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>Four complete waves pass along a rope in 2.0 s. Each wave is 1.5 m long. Find the frequency, the period and the speed.</p>
+    <ol class="working">
+      <li><i class="v">f</i> = 4 waves ÷ 2.0 s = 2.0 Hz</li>
+      <li><i class="v">T</i> = 1 ÷ <i class="v">f</i> = 1 ÷ 2.0 = 0.50 s</li>
+      <li><i class="v">v</i> = <i class="v">f</i>λ = 2.0 × 1.5 = 3.0 m s<sup>−1</sup></li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>A wave has a frequency of 50 Hz and a wavelength of 0.40 m. Find its speed.</p>
+        <details class="num"><summary>Check your number</summary><span>20 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>Sound travels at 340 m s<sup>−1</sup>. Find the wavelength of a 680 Hz note.</p>
+        <details class="num"><summary>Check your number</summary><span>0.50 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Find the period of a wave with a frequency of 25 Hz.</p>
+        <details class="num"><summary>Check your number</summary><span>0.040 s</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A diagram of a wave on a rope shows exactly 3 complete waves along 12 m. The height from a crest to a trough is 0.80 m. Find the wavelength.</p>
+        <details class="num"><summary>Check your number</summary><span>4.0 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>For the same wave, find the amplitude. Read the question carefully.</p>
+        <details class="num"><summary>Check your number</summary><span>0.40 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Ocean wave crests are 20 m apart, and a new crest reaches the beach every 5.0 s. Find the speed of the waves.</p>
+        <details class="num"><summary>Check your number</summary><span>4.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A radio station broadcasts at 100 MHz. Radio waves travel at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>. Find the wavelength.</p>
+        <details class="num"><summary>Check your number</summary><span>3.0 m</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Water waves slow down as they move from deep water into shallow water. Explain what happens to their frequency and to their wavelength.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your working for questions 4 to 6. Draw a quick sketch of the wave for each one.</li>
+      <li>Your deep and shallow water explanation. It is the key idea behind refraction.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 3 -->
+  <h2 id="sound">3. Sound</h2>
+
+  <ul>
+    <li>Sound is a <strong>longitudinal</strong> wave made by something vibrating. It needs a medium, so it cannot travel through empty space.</li>
+    <li>It travels faster in solids than in liquids, and faster in liquids than in gases. In air it travels at about 340 m s<sup>−1</sup>.</li>
+    <li><strong>Pitch</strong> depends on frequency: higher frequency, higher pitch. Humans hear roughly 20 Hz to 20 000 Hz. Sound above that is <strong>ultrasound</strong>.</li>
+    <li><strong>Loudness</strong> depends on amplitude: bigger amplitude, louder sound.</li>
+    <li>An <strong>echo</strong> is sound reflected from a surface. The sound travels there <em>and back</em>, so the distance to the surface is half the total distance travelled.</li>
+  </ul>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>You shout towards a cliff and hear the echo 0.60 s later. How far away is the cliff?</p>
+    <ol class="working">
+      <li>Total distance travelled by the sound: <i class="v">d</i> = <i class="v">vt</i> = 340 × 0.60 = 204 m</li>
+      <li>That is there and back, so the cliff is 204 ÷ 2 = 102 m away</li>
+      <li>To 2 s.f.: 1.0 × 10<sup>2</sup> m</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>You clap your hands in front of a tall building and hear the echo 1.5 s later. How far away is the building?</p>
+        <details class="num"><summary>Check your number</summary><span>260 m (255 m before rounding)</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A ship’s sonar sends a sound pulse to the seabed. The echo returns after 0.80 s. Sound travels at 1500 m s<sup>−1</sup> in seawater. How deep is the water?</p>
+        <details class="num"><summary>Check your number</summary><span>600 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>You see a lightning flash and hear the thunder 3.0 s later. How far away was the lightning? (Light arrives almost instantly.)</p>
+        <details class="num"><summary>Check your number</summary><span>1.0 × 10<sup>3</sup> m (1020 m before rounding)</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A bat uses ultrasound with a frequency of 40 kHz. Find its wavelength in air.</p>
+        <details class="num"><summary>Check your number</summary><span>8.5 × 10<sup>−3</sup> m</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Question 3 does not halve the time, but question 1 does. Explain why.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>One guitar string is plucked harder. Another is tightened so it plays a higher note. Describe how the sound wave is different in each case.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your explanations for questions 5 and 6.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 4 -->
+  <h2 id="reflection">4. Light and reflection</h2>
+
+  <p>Light is an electromagnetic wave. It travels at 3.0 × 10<sup>8</sup> m s<sup>−1</sup> in a vacuum, and it travels in straight lines, so we draw it as <strong>rays</strong>.</p>
+  <p>Visible light is one small part of the <strong>electromagnetic spectrum</strong>. In order of increasing frequency (and decreasing wavelength): radio, microwaves, infrared, visible light, ultraviolet, X-rays, gamma rays. They all travel at the same speed in a vacuum.</p>
+
+  <h3>The law of reflection</h3>
+  <p>The <strong>normal</strong> is an imaginary line drawn at 90° to a surface, where the ray hits it. Angles are always measured from the normal, not from the surface.</p>
+  <p class="eq">angle of incidence = angle of reflection &nbsp;&nbsp; (<i>i</i> = <i>r</i>)</p>
+  <figure>
+    <svg id="reflectFig" viewBox="0 0 440 210" role="img" aria-label="A ray hits a flat mirror and reflects. A dashed normal line is drawn at 90 degrees to the mirror. The angle of incidence i and the angle of reflection r are equal."></svg>
+    <figcaption>The angle of incidence <i>i</i> equals the angle of reflection <i>r</i>, both measured from the normal.</figcaption>
+  </figure>
+
+  <h3>Images in a flat mirror</h3>
+  <p>When you look in a flat mirror, the reflected rays reach your eye. Your brain traces them back in straight lines, so the image appears to be behind the mirror. The image is:</p>
+  <ul>
+    <li>the same size as the object, and upright,</li>
+    <li>the same distance behind the mirror as the object is in front,</li>
+    <li><strong>virtual</strong>: no light actually comes from where the image appears to be,</li>
+    <li>laterally inverted: left and right are swapped.</li>
+  </ul>
+  <figure>
+    <svg id="mirrorFig" viewBox="0 0 440 255" role="img" aria-label="An object in front of a vertical mirror. Rays from the top and bottom of the object reflect off the mirror into an eye. Dashed lines trace the reflected rays back behind the mirror, where they meet at the image, the same distance behind the mirror as the object is in front."></svg>
+    <figcaption>Solid lines are real rays. Dashed lines are where your brain traces them back to.</figcaption>
+  </figure>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A ray hits a mirror at 25° to the mirror’s surface. Find the angle of reflection.</p>
+    <ol class="working">
+      <li>The angle is given from the surface, but we need it from the normal.</li>
+      <li><i class="v">i</i> = 90° − 25° = 65°</li>
+      <li><i class="v">r</i> = <i class="v">i</i> = 65°</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>A ray hits a mirror with an angle of incidence of 35°. What is the angle of reflection?</p>
+        <details class="num"><summary>Check your number</summary><span>35°</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A ray hits a mirror at 20° to the mirror’s surface. What is the angle of reflection?</p>
+        <details class="num"><summary>Check your number</summary><span>70°</span></details><div class="work-space"></div></li>
+      <li class="q"><p>For the ray in question 2, what is the angle between the incoming ray and the reflected ray?</p>
+        <details class="num"><summary>Check your number</summary><span>140°</span></details><div class="work-space"></div></li>
+      <li class="q"><p>You stand 1.5 m in front of a flat mirror. How far are you from your image?</p>
+        <details class="num"><summary>Check your number</summary><span>3.0 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>The Moon is 3.8 × 10<sup>8</sup> m from Earth. How long does moonlight take to reach us?</p>
+        <details class="num"><summary>Check your number</summary><span>1.3 s</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+        <p>Draw a ray diagram showing how a person sees the image of a pencil in a flat mirror. Use a ruler, mark the normals, and show where the image is.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Explain why the image in a flat mirror is called a virtual image.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your ray diagram and your ruler. Ray diagrams are a big part of Level 2.</li>
+      <li>Your virtual image explanation.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 5 -->
+  <h2 id="refraction">5. Refraction</h2>
+
+  <p>Light travels more slowly in glass and water than in air. When light crosses into a new material <em>at an angle</em>, the change in speed makes it change direction. This is <strong>refraction</strong>.</p>
+  <ul>
+    <li>Going into a material where it is <strong>slower</strong> (air into glass), light bends <strong>towards</strong> the normal.</li>
+    <li>Going into a material where it is <strong>faster</strong> (glass into air), light bends <strong>away from</strong> the normal.</li>
+    <li>A ray travelling along the normal does not bend, although it still changes speed.</li>
+    <li>The frequency stays the same, so the wavelength changes along with the speed.</li>
+  </ul>
+  <p>Picture a car driving at an angle off a road onto sand. The wheel that reaches the sand first slows down first, so the car turns. Light does the same at a boundary.</p>
+  <figure>
+    <svg id="blockFig" viewBox="0 0 440 280" role="img" aria-label="A ray passes through a rectangular glass block. Entering the block it bends towards the normal; leaving the block it bends away from the normal, and comes out parallel to its original direction."></svg>
+    <figcaption>A ray through a glass block. It comes out parallel to the direction it went in, shifted sideways.</figcaption>
+  </figure>
+
+  <h3>Total internal reflection</h3>
+  <p>When light goes from glass or water into air, it bends away from the normal. If the angle of incidence is big enough (bigger than the <strong>critical angle</strong>), the light cannot get out at all, and all of it reflects back inside. This is <strong>total internal reflection</strong>. Optical fibres use it to carry light, and internet data, along thin glass threads, even round bends.</p>
+
+  <h3>Dispersion</h3>
+  <p>Different colours of light slow down by slightly different amounts in glass, so they bend by different amounts. A prism spreads white light into a spectrum, and raindrops do the same to make a rainbow.</p>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>Red light has a frequency of 4.6 × 10<sup>14</sup> Hz. Find its wavelength in air, where it travels at 3.0 × 10<sup>8</sup> m s<sup>−1</sup>.</p>
+        <details class="num"><summary>Check your number</summary><span>6.5 × 10<sup>−7</sup> m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>The same red light enters glass, where it travels at 2.0 × 10<sup>8</sup> m s<sup>−1</sup>. Its frequency does not change. Find its wavelength in the glass.</p>
+        <details class="num"><summary>Check your number</summary><span>4.3 × 10<sup>−7</sup> m</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+        <p>Draw a ray of light passing from air into water at an angle. Mark the normal and show which way the ray bends.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+        <p>Draw a ray passing from glass into air at a small angle. Then draw a second ray hitting the same surface at a large angle, where total internal reflection happens.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>A straw standing in a glass of water looks bent at the water’s surface. Explain why.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Explain how an optical fibre keeps light inside it, even when the fibre bends.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your two sketches.</li>
+      <li>Your straw and optical fibre explanations.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 6 -->
+  <h2 id="next">6. What comes next</h2>
+
+  <p>Level 2 waves builds on everything on this page.</p>
+  <table>
+    <tr><th>Year 11 idea</th><th>What Level 2 adds</th></tr>
+    <tr><td>Wave properties and <i class="v">v</i> = <i class="v">f</i>λ</td><td>Diffraction (waves spreading through gaps) and interference (two sets of waves combining)</td></tr>
+    <tr><td>Flat mirrors</td><td>Curved mirrors, with ray diagrams and calculations of where the image forms</td></tr>
+    <tr><td>Refraction</td><td>Snell’s law, which calculates exactly how much light bends, using the <a href="01-maths-toolkit.html#trig">trigonometry from the toolkit</a></td></tr>
+    <tr><td>Total internal reflection</td><td>Calculating the critical angle</td></tr>
+    <tr><td>Light bending in glass</td><td>Lenses: ray diagrams, image position and magnification</td></tr>
+  </table>
+
+  <div class="questions">
+    <h3>Have a go</h3>
+    <ol>
+      <li class="q"><p><span class="preview">Level 2 preview</span> The refractive index of a material is <i class="v">n</i> = <i class="v">c</i> ÷ <i class="v">v</i>, where <i class="v">c</i> = 3.0 × 10<sup>8</sup> m s<sup>−1</sup> is the speed of light in a vacuum. Find the refractive index of glass, where light travels at 2.0 × 10<sup>8</sup> m s<sup>−1</sup>.</p>
+        <details class="num"><summary>Check your number</summary><span>1.5</span></details><div class="work-space"></div></li>
+      <li class="q"><p><span class="preview">Level 2 preview</span> Snell’s law is <i class="v">n</i><sub>1</sub> sin θ<sub>1</sub> = <i class="v">n</i><sub>2</sub> sin θ<sub>2</sub>. Light passes from air (<i class="v">n</i> = 1.00) into glass (<i class="v">n</i> = 1.50) with an angle of incidence of 40°. Find the angle of refraction.</p>
+        <details class="num"><summary>Check your number</summary><span>25°</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p><span class="preview">Level 2 preview</span> You can hear someone talking around the corner of a building, but you cannot see them. Both sound and light are waves. Suggest why sound gets round the corner and light does not. Hint: compare their wavelengths with the size of a doorway.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your answer to the corner question.</li>
+      <li>Anything on this page you would like to go over again.</li>
+    </ul>
+  </div>
+</main>
+
+<script>
+  const INK = '#1d2433', ACCENT = '#1f5f8b', WARM = '#c2701a', MUTED = '#5b6475';
+  const $ = id => document.getElementById(id);
+
+  // ---------- Small SVG helpers ----------
+  function line(x1, y1, x2, y2, stroke = INK, width = 2, dash = '') {
+    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" stroke-width="${width}"${dash ? ` stroke-dasharray="${dash}"` : ''}/>`;
+  }
+  function text(x, y, s, anchor = 'middle', style = '') {
+    return `<text x="${x}" y="${y}" text-anchor="${anchor}"${style ? ` style="${style}"` : ''}>${s}</text>`;
+  }
+  // A small arrowhead at the middle of a line, pointing from (x1, y1) towards (x2, y2).
+  function arrowMid(x1, y1, x2, y2, fill = INK) {
+    const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+    const deg = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+    return `<polygon points="-6,-5 -6,5 6,0" fill="${fill}" transform="translate(${mx},${my}) rotate(${deg})"/>`;
+  }
+  // A line with arrowheads at both ends, for marking lengths.
+  function measure(x1, y1, x2, y2) {
+    const deg = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+    return line(x1, y1, x2, y2, INK, 1.5) +
+      `<polygon points="0,0 9,-4 9,4" fill="${INK}" transform="translate(${x1},${y1}) rotate(${deg})"/>` +
+      `<polygon points="0,0 -9,-4 -9,4" fill="${INK}" transform="translate(${x2},${y2}) rotate(${deg})"/>`;
+  }
+
+  // ---------- Transverse wave figure ----------
+  (function () {
+    // Two full wavelengths from x = 110 to 430; crests at 150 and 310, troughs at 230 and 390.
+    const y0 = 110, A = 50, lam = 160, x0 = 110;
+    const pts = [];
+    for (let x = x0; x <= x0 + 2 * lam; x += 2) pts.push(x + ',' + (y0 - A * Math.sin(2 * Math.PI * (x - x0) / lam)));
+    let s = line(20, y0, 435, y0, MUTED, 1, '5 4');
+    s += `<polyline points="${pts.join(' ')}" fill="none" stroke="${ACCENT}" stroke-width="3"/>`;
+    s += line(88, y0 - A, 150, y0 - A, MUTED, 1, '3 3');           // guide from the crest across to the amplitude arrow
+    s += measure(95, y0, 95, y0 - A) + text(88, y0 - 20, 'amplitude', 'end');
+    s += measure(150, 34, 310, 34) + text(230, 26, 'wavelength λ');
+    s += line(150, 38, 150, 56, MUTED, 1, '3 3') + line(310, 38, 310, 56, MUTED, 1, '3 3');
+    s += text(322, 52, 'crest', 'start') + text(230, 182, 'trough');
+    s += text(20, y0 + 18, 'rest position', 'start', `fill:${MUTED};font-size:12px`);
+    $('transverseFig').innerHTML = s;
+  })();
+
+  // ---------- Longitudinal wave figure ----------
+  (function () {
+    const lam = 160, a = 20, c = 110;
+    let s = '';
+    for (let x0 = 30; x0 <= 410; x0 += 8) {
+      // Each line is shifted from its rest position; neighbours bunch up at compressions.
+      const x = x0 - a * Math.sin(2 * Math.PI * (x0 - c) / lam);
+      s += line(x, 60, x, 130, ACCENT, 2);
+    }
+    // With this shift, compressions sit at 110 and 270, with a rarefaction halfway between at 190.
+    const small = 'font-size:12px';
+    s += text(110, 150, 'compression', 'middle', small) + text(190, 168, 'rarefaction', 'middle', small) + text(270, 150, 'compression', 'middle', small);
+    s += measure(110, 40, 270, 40) + text(190, 30, 'wavelength λ');
+    $('longitudinalFig').innerHTML = s;
+  })();
+
+  // ---------- Reflection figure ----------
+  (function () {
+    const px = 220, py = 170;
+    let s = '';
+    for (let x = 90; x <= 350; x += 14) s += line(x, py + 2, x - 10, py + 14, MUTED, 1);   // hatching behind the mirror
+    s += line(80, py, 360, py, INK, 3);
+    s += line(px, 30, px, py, MUTED, 1.5, '6 4') + text(px, 22, 'normal');
+    s += line(120, 70, px, py, ACCENT, 2.5) + arrowMid(120, 70, px, py, ACCENT);
+    s += line(px, py, 320, 70, ACCENT, 2.5) + arrowMid(px, py, 320, 70, ACCENT);
+    // Angle arcs, radius 40, between the normal and each ray (both rays at 45° here).
+    s += `<path d="M${px},${py - 40} A40,40 0 0 0 ${px - 28.3},${py - 28.3}" fill="none" stroke="${WARM}" stroke-width="2"/>`;
+    s += `<path d="M${px},${py - 40} A40,40 0 0 1 ${px + 28.3},${py - 28.3}" fill="none" stroke="${WARM}" stroke-width="2"/>`;
+    s += text(px - 18, py - 50, 'i', 'middle', 'font-style:italic;font-size:15px');
+    s += text(px + 18, py - 50, 'r', 'middle', 'font-style:italic;font-size:15px');
+    s += text(110, 62, 'incident ray', 'end') + text(330, 62, 'reflected ray', 'start') + text(360, py + 30, 'mirror', 'end');
+    $('reflectFig').innerHTML = s;
+  })();
+
+  // ---------- Flat mirror image figure ----------
+  (function () {
+    // The eye sits below and in front of the object, so the rays reaching it pass beneath the object.
+    const mx = 220, eye = [90, 215];
+    const obj = [[120, 80], [120, 170]], img = [[320, 80], [320, 170]];
+    let s = '';
+    for (let y = 40; y <= 225; y += 14) s += line(mx + 2, y, mx + 14, y - 10, MUTED, 1);   // hatching behind the mirror
+    s += line(mx, 30, mx, 230, INK, 3) + text(mx, 22, 'mirror');
+    // Object (solid arrow) and image (dashed arrow).
+    s += line(120, 170, 120, 84, INK, 3) + `<polygon points="120,72 113,88 127,88" fill="${INK}"/>` + text(120, 62, 'object');
+    s += line(320, 170, 320, 84, MUTED, 2, '6 4') + `<polygon points="320,72 313,88 327,88" fill="${MUTED}"/>` + text(320, 62, 'image');
+    // For each point, the ray to the eye appears to come from the image point.
+    obj.forEach(([ox, oy], k) => {
+      const [ix, iy] = img[k];
+      const t = (mx - eye[0]) / (ix - eye[0]);
+      const hy = eye[1] + t * (iy - eye[1]);                  // where the ray hits the mirror
+      s += line(ox, oy, mx, hy, ACCENT, 2) + arrowMid(ox, oy, mx, hy, ACCENT);
+      s += line(mx, hy, eye[0], eye[1], ACCENT, 2) + arrowMid(mx, hy, eye[0], eye[1], ACCENT);
+      s += line(mx, hy, ix, iy, MUTED, 1.5, '5 4');
+    });
+    s += `<ellipse cx="${eye[0] - 8}" cy="${eye[1] + 4}" rx="14" ry="8" fill="#fff" stroke="${INK}" stroke-width="2"/><circle cx="${eye[0] - 4}" cy="${eye[1] + 3}" r="4" fill="${INK}"/>`;
+    s += text(eye[0] - 26, eye[1] + 8, 'eye', 'end');
+    s += line(120, 174, 120, 246, MUTED, 1, '2 3') + line(320, 174, 320, 246, MUTED, 1, '2 3');
+    s += measure(120, 242, 218, 242) + measure(222, 242, 320, 242);
+    s += text(170, 236, 'd', 'middle', 'font-style:italic') + text(270, 236, 'd', 'middle', 'font-style:italic');
+    $('mirrorFig').innerHTML = s;
+  })();
+
+  // ---------- Glass block figure ----------
+  (function () {
+    const top = 90, bottom = 190, n = 1.5, i = 45 * Math.PI / 180;
+    const r = Math.asin(Math.sin(i) / n);                     // angle inside the glass
+    const ax = 160, bx = ax + (bottom - top) * Math.tan(r);   // entry and exit points
+    let s = `<rect x="60" y="${top}" width="320" height="${bottom - top}" fill="#dceaf3" stroke="${INK}" stroke-width="1.5"/>`;
+    s += text(390, 60, 'air', 'end') + text(370, 175, 'glass', 'end') + text(390, 255, 'air', 'end');
+    s += line(ax, top - 60, ax, top + 50, MUTED, 1.5, '6 4') + line(bx, bottom - 50, bx, bottom + 60, MUTED, 1.5, '6 4');
+    s += line(ax - 80, top - 80, ax, top, ACCENT, 2.5) + arrowMid(ax - 80, top - 80, ax, top, ACCENT);
+    s += line(ax, top, bx, bottom, ACCENT, 2.5) + arrowMid(ax, top, bx, bottom, ACCENT);
+    s += line(bx, bottom, bx + 70, bottom + 70, ACCENT, 2.5) + arrowMid(bx, bottom, bx + 70, bottom + 70, ACCENT);
+    s += line(ax - 80, top - 80, ax + 110, top + 110, MUTED, 1, '2 4');   // original direction, for comparison
+    s += text(ax - 12, top + 34, 'bends towards the normal', 'end', 'font-size:12px');
+    s += text(bx - 12, bottom + 30, 'bends away from the normal', 'end', 'font-size:12px');
+    $('blockFig').innerHTML = s;
+  })();
+
+  // ---------- Explorer: waves in motion ----------
+  // Distances are in metres on a 4 m stretch, drawn at 100 pixels per metre.
+  const X = m => 20 + m * 100;
+  let f = 0.5, lam = 2.0, t = 0, last = null, paused = false, vLocked = null;
+
+  function setOutputs() {
+    $('oF').textContent = f.toFixed(2) + ' Hz';
+    $('oL').textContent = lam.toFixed(2) + ' m';
+    $('speed').textContent = `speed v = f × λ = ${f.toFixed(2)} × ${lam.toFixed(2)} = ${(f * lam).toFixed(2)} m/s`;
+  }
+
+  function drawWave() {
+    const mode = document.querySelector('input[name="wmode"]:checked').value;
+    const phase = x => 2 * Math.PI * (x / lam - f * t);
+    let s = '';
+    for (let m = 0; m <= 4; m++) s += line(X(m), 182, X(m), 190, MUTED, 1) + text(X(m), 200, m + ' m', 'middle', `fill:${MUTED};font-size:11px`);
+    s += line(X(0), 186, X(4), 186, MUTED, 1);
+    s += text(420, 16, 'wave travels →', 'end', `fill:${MUTED};font-size:12px`);
+    if (mode === 'transverse') {
+      const A = 50, y0 = 100, yAt = x => y0 - A * Math.sin(phase(x));
+      const pts = [];
+      for (let x = 0; x <= 4.0001; x += 0.02) pts.push(X(x) + ',' + yAt(x));
+      s += line(X(0), y0, X(4), y0, MUTED, 1, '4 4');
+      s += `<polyline points="${pts.join(' ')}" fill="none" stroke="${ACCENT}" stroke-width="2.5"/>`;
+      for (let x = 0; x <= 4.0001; x += 0.25) s += `<circle cx="${X(x)}" cy="${yAt(x)}" r="4" fill="${INK}"/>`;
+      s += line(X(2), y0 - A - 6, X(2), y0 + A + 6, WARM, 1.5, '3 3');
+      s += `<circle cx="${X(2)}" cy="${yAt(2)}" r="8" fill="${WARM}" stroke="#fff" stroke-width="2"/>`;
+    } else {
+      const a = Math.min(0.3, 0.13 * lam);               // small enough that particles never pass each other
+      const xAt = x0 => x0 - a * Math.sin(phase(x0));
+      for (const y of [65, 100, 135]) {
+        for (let x0 = 0; x0 <= 4.0001; x0 += 0.125) {
+          if (y === 100 && Math.abs(x0 - 2) < 0.01) continue;
+          s += `<circle cx="${X(xAt(x0))}" cy="${y}" r="3" fill="${ACCENT}"/>`;
+        }
+      }
+      s += line(X(2 - a), 160, X(2 + a), 160, WARM, 2);
+      s += `<circle cx="${X(xAt(2))}" cy="100" r="7" fill="${WARM}" stroke="#fff" stroke-width="2"/>`;
+    }
+    $('waveView').innerHTML = s;
+  }
+
+  function frame(now) {
+    if (last !== null && !paused) t += (now - last) / 1000;
+    last = now;
+    drawWave();
+    requestAnimationFrame(frame);
+  }
+
+  const clamp = (x, lo, hi) => Math.min(hi, Math.max(lo, x));
+  $('sF').addEventListener('input', () => {
+    f = +$('sF').value;
+    if (vLocked !== null) { lam = clamp(vLocked / f, 0.5, 4); f = vLocked / lam; $('sL').value = lam; }
+    setOutputs();
+  });
+  $('sL').addEventListener('input', () => {
+    lam = +$('sL').value;
+    if (vLocked !== null) { f = clamp(vLocked / lam, 0.1, 2); lam = vLocked / f; $('sF').value = f; }
+    setOutputs();
+  });
+  $('lockV').addEventListener('change', e => { vLocked = e.target.checked ? f * lam : null; });
+  $('pause').addEventListener('click', () => {
+    paused = !paused;
+    $('pause').textContent = paused ? 'Play' : 'Pause';
+  });
+
+  setOutputs();
+  requestAnimationFrame(frame);
+</script>
+</body>
+</html>

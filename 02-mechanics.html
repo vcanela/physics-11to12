@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mechanics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d2433;
+    --muted: #5b6475;
+    --line: #d9dee7;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #1f5f8b;
+    --accent-soft: #e8f1f7;
+    --warm: #8a5210;
+    --warm-soft: #fbf1e3;
+    --green: #2e6b3f;
+    --green-soft: #e9f3ec;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 "IBM Plex Sans", system-ui, sans-serif;
+  }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 80px; }
+  h1, h2, h3 { font-family: "IBM Plex Serif", Georgia, serif; line-height: 1.25; }
+  h1 { font-size: 2rem; margin: 8px 0 8px; }
+  h2 {
+    font-size: 1.5rem;
+    margin: 64px 0 16px;
+    padding-top: 16px;
+    border-top: 2px solid var(--line);
+  }
+  h3 { font-size: 1.1rem; margin: 28px 0 8px; }
+  a { color: var(--accent); }
+  .back { text-decoration: none; font-size: 0.95rem; }
+  .lede { color: var(--muted); font-size: 1.1rem; margin: 0 0 24px; }
+  i.v { font-family: "IBM Plex Serif", Georgia, serif; }
+  .eq {
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.1rem;
+    text-align: center;
+    margin: 12px 0;
+  }
+
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 20px;
+  }
+  nav.toc ol { margin: 6px 0 0; padding-left: 22px; columns: 2; column-gap: 32px; }
+  nav.toc a { text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  .note {
+    background: var(--warm-soft);
+    border-left: 4px solid var(--warm);
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 20px 0;
+  }
+  .note p { margin: 0 0 8px; }
+  .note p:last-child { margin: 0; }
+
+  table { border-collapse: collapse; margin: 12px 0; width: 100%; }
+  th, td { border-bottom: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { font-weight: 600; font-size: 0.9rem; color: var(--muted); }
+
+  .example {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .example h4 { margin: 0 0 8px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+  .example p { margin: 6px 0; }
+  .working { margin: 8px 0 0; padding-left: 0; list-style: none; }
+  .working li { margin: 4px 0; font-family: "IBM Plex Serif", Georgia, serif; }
+  .working .why { font-family: "IBM Plex Sans", sans-serif; color: var(--muted); font-size: 0.9rem; margin-left: 8px; }
+
+  .questions { margin-top: 24px; }
+  .questions > h3 { margin-bottom: 4px; }
+  .questions ol { padding-left: 24px; }
+  .q { margin: 14px 0; padding-left: 4px; }
+  .q p { margin: 0 0 6px; }
+  details.num summary {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-radius: 99px;
+    padding: 1px 12px;
+    list-style: none;
+  }
+  details.num summary::-webkit-details-marker { display: none; }
+  details.num[open] summary { background: var(--green-soft); }
+  details.num span {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-weight: 600;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warm);
+    background: var(--warm-soft);
+    border-radius: 4px;
+    padding: 1px 8px;
+    margin-bottom: 4px;
+  }
+  .preview {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin-right: 4px;
+  }
+
+  .bring {
+    border: 2px dashed var(--warm);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin: 28px 0 0;
+  }
+  .bring strong { color: var(--warm); }
+  .bring ul { margin: 6px 0 0; padding-left: 20px; }
+
+  figure { margin: 16px 0; }
+  figure svg { width: 100%; max-width: 460px; height: auto; display: block; }
+  figcaption { font-size: 0.9rem; color: var(--muted); }
+  svg text { font-family: "IBM Plex Sans", sans-serif; font-size: 13px; fill: var(--ink); }
+  svg .grid { stroke: #e6e9ef; stroke-width: 1; }
+  svg .axis { stroke: var(--ink); stroke-width: 1.5; }
+  svg .plot { stroke: var(--accent); stroke-width: 3; fill: none; stroke-linejoin: round; }
+  svg .title { font-weight: 500; }
+  .twin { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .twin figure { margin: 8px 0; }
+
+  /* Explorer */
+  .explorer {
+    background: var(--card);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 24px 0;
+  }
+  .explorer h4 { margin: 0 0 6px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); }
+  .explorer .hint { margin: 0 0 12px; color: var(--muted); font-size: 0.95rem; }
+  .explorer button {
+    font: inherit;
+    font-size: 0.9rem;
+    border: 1px solid var(--accent);
+    background: var(--card);
+    color: var(--accent);
+    border-radius: 6px;
+    padding: 4px 12px;
+    margin: 0 6px 6px 0;
+    cursor: pointer;
+  }
+  .explorer button:hover:not(:disabled) { background: var(--accent-soft); }
+  .explorer button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .explorer button.primary { background: var(--accent); color: #fff; }
+  .story { min-height: 34px; margin: 6px 0 10px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .story .chip { background: var(--accent-soft); border-radius: 99px; padding: 2px 10px; font-size: 0.85rem; }
+  .story .empty { color: var(--muted); font-size: 0.9rem; font-style: italic; }
+  .readout { font-family: "IBM Plex Mono", monospace; font-size: 0.9rem; margin: 4px 0 0; }
+  #track { width: 100%; height: auto; display: block; margin: 8px 0; }
+
+  .work-space { display: none; }
+
+  @media (max-width: 640px) {
+    .twin { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    nav.toc ol { columns: 1; }
+    h1 { font-size: 1.7rem; }
+  }
+
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    main { max-width: none; padding: 0; }
+    .back, nav.toc, details.num, .explorer { display: none; }
+    h2 { break-before: page; border-top: none; margin-top: 0; }
+    .example, .note, .bring, .q, figure { break-inside: avoid; }
+    .work-space { display: block; height: 3.2cm; }
+    .explain .work-space { height: 5cm; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← All topics</a>
+  <h1>2. Mechanics</h1>
+  <p class="lede">How things move, why they move, and the energy involved. Your <a href="mechanics-summary-notes.pdf">mechanics summary notes</a> cover the same ideas on two pages, so keep them handy.</p>
+
+  <nav class="toc">
+    <strong>Sections</strong>
+    <ol>
+      <li><a href="#speed">Speed and acceleration</a></li>
+      <li><a href="#graphs">Motion graphs</a></li>
+      <li><a href="#forces">Forces</a></li>
+      <li><a href="#pressure">Pressure</a></li>
+      <li><a href="#energy">Energy, work and power</a></li>
+      <li><a href="#next">What comes next</a></li>
+      <li><a href="#exam">Exam practice</a></li>
+    </ol>
+  </nav>
+
+  <div class="note">
+    <p><strong>About the answers.</strong> Calculation questions have a “Check your number” button. The number is the least important part: your tutor will look at your <em>working</em>. Explain and sketch questions have no answers here. Do your best attempt and bring it to your session.</p>
+    <p>Use <i class="v">g</i> = 10 m s<sup>−2</sup> throughout.</p>
+  </div>
+
+  <!-- ===================================================== 1 -->
+  <h2 id="speed">1. Speed and acceleration</h2>
+
+  <p><strong>Speed</strong> is how fast something is moving: the distance it covers each second.</p>
+  <p class="eq"><i>v</i> = Δ<i>d</i> ÷ Δ<i>t</i> &nbsp;&nbsp; units: m s<sup>−1</sup></p>
+  <p>The Δ (delta) means “change in”. When speed varies during a journey, this formula gives the <em>average</em> speed.</p>
+  <p><strong>Velocity</strong> is speed in a particular direction. A car going round a corner at a steady speed has a changing velocity, because its direction is changing. At Year 11 the two words are often used loosely; at Level 2 the difference matters.</p>
+  <p><strong>Acceleration</strong> is how quickly the speed changes: the change in speed each second.</p>
+  <p class="eq"><i>a</i> = Δ<i>v</i> ÷ Δ<i>t</i> &nbsp;&nbsp; units: m s<sup>−2</sup></p>
+  <p>Slowing down gives a negative acceleration, often called deceleration.</p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A bus speeds up from 5.0 m s<sup>−1</sup> to 15 m s<sup>−1</sup> in 4.0 s. Find its acceleration.</p>
+    <ol class="working">
+      <li>Δ<i class="v">v</i> = 15 − 5.0 = 10 m s<sup>−1</sup> <span class="why">final speed minus starting speed</span></li>
+      <li><i class="v">a</i> = Δ<i class="v">v</i> ÷ Δ<i class="v">t</i> = 10 ÷ 4.0 = 2.5 m s<sup>−2</sup></li>
+      <li>The bus gains 2.5 m s<sup>−1</sup> of speed every second.</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>A runner completes a 400 m lap in 80 s. What is her average speed?</p>
+        <details class="num"><summary>Check your number</summary><span>5.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A car travels at a steady 25 m s<sup>−1</sup> for 12 s. How far does it go?</p>
+        <details class="num"><summary>Check your number</summary><span>300 m</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A car accelerates from rest to 18 m s<sup>−1</sup> in 6.0 s. Find its acceleration.</p>
+        <details class="num"><summary>Check your number</summary><span>3.0 m s<sup>−2</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A cyclist brakes from 12 m s<sup>−1</sup> to 4.0 m s<sup>−1</sup> in 2.0 s. Find the acceleration. Think about the sign.</p>
+        <details class="num"><summary>Check your number</summary><span>−4.0 m s<sup>−2</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A skateboarder moving at 2.0 m s<sup>−1</sup> accelerates at 1.5 m s<sup>−2</sup> for 4.0 s. What is her final speed?</p>
+        <details class="num"><summary>Check your number</summary><span>8.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>A car drives all the way round a roundabout at a steady 30 km/h. Explain why its speed is constant but its velocity is not. Is the car accelerating?</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your answer to the roundabout question. It is a first look at an important Level 2 idea.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 2 -->
+  <h2 id="graphs">2. Motion graphs</h2>
+
+  <p>You already know how to find gradients and areas from the <a href="01-maths-toolkit.html#graphs">maths toolkit</a>. This section is about reading the <em>shape</em> of a graph, and drawing one from a description.</p>
+
+  <table>
+    <tr><th>What the object does</th><th>Distance against time</th><th>Speed against time</th></tr>
+    <tr><td>Stays still</td><td>flat line</td><td>flat line <em>on the time axis</em> (speed = 0)</td></tr>
+    <tr><td>Constant speed</td><td>straight sloping line; steeper means faster</td><td>flat line above the axis</td></tr>
+    <tr><td>Speeds up</td><td>curve getting steeper</td><td>line sloping up; steeper means bigger acceleration</td></tr>
+    <tr><td>Slows down</td><td>curve levelling off</td><td>line sloping down</td></tr>
+  </table>
+  <p><strong>The classic trap:</strong> a flat line means “not moving” on a distance graph, but “constant speed” on a speed graph. Always read the axis labels first.</p>
+
+  <div class="explorer" id="explorer">
+    <h4>Explorer: build a motion story</h4>
+    <p class="hint">Add up to eight 3-second steps, then press Play to watch the car and both graphs. Before you press Play, try to predict what each graph will look like. This is for exploring, so nothing is marked.</p>
+    <div>
+      <button data-seg="up">+ Speed up</button>
+      <button data-seg="steady">+ Constant speed</button>
+      <button data-seg="down">+ Slow down</button>
+      <button data-seg="wait">+ Stay still</button>
+    </div>
+    <div class="story" id="story"></div>
+    <div>
+      <button class="primary" id="play">▶ Play</button>
+      <button id="undo">Undo</button>
+      <button id="clear">Clear</button>
+    </div>
+    <svg id="track" viewBox="0 0 440 70" aria-label="Track showing the car's position"></svg>
+    <div class="twin">
+      <figure><svg id="exD" viewBox="0 0 440 290" aria-label="Distance against time graph for your story"></svg></figure>
+      <figure><svg id="exV" viewBox="0 0 440 290" aria-label="Speed against time graph for your story"></svg></figure>
+    </div>
+    <p class="readout" id="readout"></p>
+  </div>
+
+  <div class="example">
+    <h4>Worked example: from story to graphs</h4>
+    <p>A cyclist starts from rest and speeds up steadily for 10 s, reaching 6.0 m s<sup>−1</sup>. She rides at that speed for 20 s, then brakes steadily and stops 5 s later.</p>
+    <div class="twin">
+      <figure><svg id="cycD" viewBox="0 0 440 290" role="img" aria-label="Distance against time: a curve getting steeper from 0 to 10 seconds, a straight sloping line from 10 to 30 seconds, then a curve levelling off to flat at 35 seconds."></svg><figcaption>Distance against time</figcaption></figure>
+      <figure><svg id="cycV" viewBox="0 0 440 290" role="img" aria-label="Speed against time: a straight line rising from 0 to 6 metres per second over 10 seconds, flat at 6 until 30 seconds, then falling to 0 at 35 seconds."></svg><figcaption>Speed against time</figcaption></figure>
+    </div>
+    <ol class="working">
+      <li>0 to 10 s: speeding up. The speed graph slopes up; the distance graph curves, getting steeper.</li>
+      <li>10 to 30 s: constant speed. The speed graph is flat; the distance graph is a straight sloping line.</li>
+      <li>30 to 35 s: slowing down. The speed graph slopes down to zero; the distance graph levels off until it is flat.</li>
+      <li>Notice the distance graph never goes down: she never travels backwards.</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <p>Questions 1 to 4 use this graph.</p>
+    <figure>
+      <svg id="walkD" viewBox="0 0 440 290" role="img" aria-label="Distance against time: a straight line from 0 metres at 0 seconds to 50 metres at 10 seconds, flat at 50 metres until 20 seconds, then a steeper straight line to 150 metres at 30 seconds."></svg>
+      <figcaption>Distance against time for a dog on a walk.</figcaption>
+    </figure>
+    <ol>
+      <li class="q"><p>Find the dog’s speed in the first 10 s.</p>
+        <details class="num"><summary>Check your number</summary><span>5.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>Find the dog’s speed between 20 s and 30 s.</p>
+        <details class="num"><summary>Check your number</summary><span>10 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>Find the dog’s average speed for the whole 30 s.</p>
+        <details class="num"><summary>Check your number</summary><span>5.0 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+        <p>Sketch the speed against time graph for the dog’s walk. Label the axes and mark the speeds.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+        <p>A ball rolls down a ramp, speeding up. It then rolls across a carpet, slowing down steadily until it stops. Sketch both the distance against time and the speed against time graphs.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>A graph shows a flat horizontal line at 8 m s<sup>−1</sup>. One student says the object is not moving. Explain what the graph actually shows and why this mistake is so common.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your three sketches. Draw them in your book, not just in your head.</li>
+      <li>One story you built in the explorer where the graphs surprised you.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 3 -->
+  <h2 id="forces">3. Forces</h2>
+
+  <p>A <strong>force</strong> is a push or a pull, measured in newtons (N). We draw forces as arrows: the direction shows which way the force acts, and the length shows how big it is.</p>
+  <p>The <strong>net force</strong> is the total of all the forces on an object. Forces in the same direction add; forces in opposite directions subtract.</p>
+  <ul>
+    <li><strong>Balanced forces</strong> (net force = 0): the object stays still, or keeps moving at constant speed in a straight line. This is <strong>Newton’s first law</strong>. Balanced forces do not mean “not moving”.</li>
+    <li><strong>Unbalanced forces</strong> (net force ≠ 0): the object accelerates in the direction of the net force. <strong>Newton’s second law</strong> tells you how much:</li>
+  </ul>
+  <p class="eq"><i>F</i><sub>net</sub> = <i>ma</i></p>
+
+  <h3>Mass and weight</h3>
+  <p><strong>Mass</strong> is the amount of matter in an object, in kilograms. It is the same everywhere. <strong>Weight</strong> is the gravitational force on the object, in newtons:</p>
+  <p class="eq"><i>F</i><sub>g</sub> = <i>mg</i></p>
+  <p>On Earth <i class="v">g</i> = 10 m s<sup>−2</sup>, but on the Moon <i class="v">g</i> = 1.6 m s<sup>−2</sup>. So an astronaut’s mass stays the same while their weight changes.</p>
+
+  <h3>Friction and air resistance</h3>
+  <p>Friction acts between surfaces and opposes motion. Air resistance is friction from moving through air, and it gets <em>bigger as speed increases</em>. That one fact explains terminal velocity.</p>
+
+  <div class="example">
+    <h4>Worked example: net force and acceleration</h4>
+    <figure>
+      <svg viewBox="0 0 440 220" role="img" aria-label="Force diagram for a car: a 3000 newton driving force to the right, a 600 newton friction force to the left, weight downward and an equal support force upward.">
+        <defs>
+          <marker id="arrowHead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#1d2433"/>
+          </marker>
+        </defs>
+        <rect x="180" y="85" width="80" height="50" rx="6" fill="#e8f1f7" stroke="#1d2433" stroke-width="2"/>
+        <text x="220" y="115" text-anchor="middle">car</text>
+        <line x1="260" y1="110" x2="400" y2="110" stroke="#1d2433" stroke-width="2.5" marker-end="url(#arrowHead)"/>
+        <text x="330" y="100" text-anchor="middle">driving force 3000 N</text>
+        <line x1="180" y1="110" x2="152" y2="110" stroke="#1d2433" stroke-width="2.5" marker-end="url(#arrowHead)"/>
+        <text x="110" y="100" text-anchor="middle">friction 600 N</text>
+        <line x1="220" y1="135" x2="220" y2="200" stroke="#1d2433" stroke-width="2.5" marker-end="url(#arrowHead)"/>
+        <text x="232" y="190">weight</text>
+        <line x1="220" y1="85" x2="220" y2="20" stroke="#1d2433" stroke-width="2.5" marker-end="url(#arrowHead)"/>
+        <text x="232" y="34">support force</text>
+      </svg>
+    </figure>
+    <p>A 1200 kg car has a driving force of 3000 N and friction of 600 N acting on it. Find its acceleration.</p>
+    <ol class="working">
+      <li>Up and down: weight and support force are equal, so they cancel. <span class="why">the car doesn’t sink or float</span></li>
+      <li><i class="v">F</i><sub>net</sub> = 3000 − 600 = 2400 N forward</li>
+      <li><i class="v">a</i> = <i class="v">F</i><sub>net</sub> ÷ <i class="v">m</i> = 2400 ÷ 1200 = 2.0 m s<sup>−2</sup> forward</li>
+    </ol>
+  </div>
+
+  <div class="example">
+    <h4>Worked example: the falling parachutist</h4>
+    <p>This story appears in exam after exam, so it is worth knowing step by step.</p>
+    <ol class="working">
+      <li><strong>Just after jumping:</strong> speed is low, so air resistance is small. Weight is bigger than air resistance, so the net force is downward and she accelerates.</li>
+      <li><strong>Falling faster:</strong> as speed increases, air resistance increases. The net force gets smaller, so her acceleration gets smaller. She is still speeding up, just less each second.</li>
+      <li><strong>Terminal velocity:</strong> air resistance grows until it equals her weight. The forces are balanced, the net force is zero, and she falls at a constant speed.</li>
+      <li><strong>Parachute opens:</strong> the large area makes air resistance suddenly much bigger than her weight. The net force is upward, so she slows down.</li>
+      <li><strong>New terminal velocity:</strong> as she slows, air resistance decreases until it equals her weight again. She falls at a new, much lower constant speed.</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>What is the weight of a 55 kg student on Earth?</p>
+        <details class="num"><summary>Check your number</summary><span>550 N</span></details><div class="work-space"></div></li>
+      <li class="q"><p>What would the same student weigh on the Moon, where <i class="v">g</i> = 1.6 m s<sup>−2</sup>?</p>
+        <details class="num"><summary>Check your number</summary><span>88 N</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A cyclist and bike have a combined mass of 70 kg. The forward force is 500 N and the total resistance is 150 N. Find the acceleration.</p>
+        <details class="num"><summary>Check your number</summary><span>5.0 m s<sup>−2</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A boat’s engine pushes it forward with 2000 N, and the boat moves at a constant speed. How big are the resistive forces on the boat?</p>
+        <details class="num"><summary>Check your number</summary><span>2000 N</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A 0.50 kg ball accelerates at 12 m s<sup>−2</sup> when it is kicked. What is the net force on it?</p>
+        <details class="num"><summary>Check your number</summary><span>6.0 N</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A 1500 kg car brakes from 20 m s<sup>−1</sup> to rest in 4.0 s. Find the size of the braking force. (Two steps: acceleration first.)</p>
+        <details class="num"><summary>Check your number</summary><span>7500 N</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Sketch · bring to your session</span>
+        <p>Draw a labelled force diagram for a car driving at constant speed along a flat road. Make the arrow lengths show which forces are equal.</p><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Without looking at the worked example, explain why a skydiver who jumps from a plane speeds up at first but eventually falls at a constant speed. Use the words <em>weight</em>, <em>air resistance</em>, <em>net force</em> and <em>acceleration</em>.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your force diagram and your skydiver explanation. Explanations like this are where Merit and Excellence marks come from.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 4 -->
+  <h2 id="pressure">4. Pressure</h2>
+
+  <p>Pressure tells you how concentrated a force is: how much force pushes on each square metre.</p>
+  <p class="eq"><i>P</i> = <i>F</i> ÷ <i>A</i> &nbsp;&nbsp; units: pascals (Pa), where 1 Pa = 1 N m<sup>−2</sup></p>
+  <ul>
+    <li>The same force on a <strong>smaller area</strong> gives a <strong>bigger pressure</strong>. This is why knives are sharp and snowshoes are wide.</li>
+    <li>When something rests on the ground, the force is usually its weight, so you will often need <i class="v">F</i> = <i class="v">mg</i> first.</li>
+  </ul>
+  <p><strong>The area trap:</strong> 1 m = 100 cm, so 1 m<sup>2</sup> = 100 × 100 = 10 000 cm<sup>2</sup>. To convert cm<sup>2</sup> to m<sup>2</sup>, divide by 10 000, not by 100.</p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A 60 kg person stands on both feet. Each foot has an area of 150 cm<sup>2</sup> touching the floor. What pressure do they exert on the floor?</p>
+    <ol class="working">
+      <li><i class="v">F</i> = <i class="v">mg</i> = 60 × 10 = 600 N</li>
+      <li><i class="v">A</i> = 2 × 150 = 300 cm<sup>2</sup> = 300 ÷ 10 000 = 0.030 m<sup>2</sup> <span class="why">two feet</span></li>
+      <li><i class="v">P</i> = <i class="v">F</i> ÷ <i class="v">A</i> = 600 ÷ 0.030 = 20 000 Pa = 2.0 × 10<sup>4</sup> Pa</li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>A force of 200 N acts on an area of 0.50 m<sup>2</sup>. Find the pressure.</p>
+        <details class="num"><summary>Check your number</summary><span>400 Pa</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Convert 25 cm<sup>2</sup> to m<sup>2</sup>.</p>
+        <details class="num"><summary>Check your number</summary><span>0.0025 m<sup>2</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A box weighing 300 N sits on a base 0.40 m by 0.50 m. What pressure does it exert on the floor?</p>
+        <details class="num"><summary>Check your number</summary><span>1500 Pa</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A 70 kg snowboarder stands on a board with an area of 0.30 m<sup>2</sup>. Find the pressure on the snow.</p>
+        <details class="num"><summary>Check your number</summary><span>2300 Pa</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A thumb pushes a drawing pin with a force of 20 N. The point of the pin has an area of 0.10 mm<sup>2</sup>, which is 1.0 × 10<sup>−7</sup> m<sup>2</sup>. Find the pressure at the point.</p>
+        <details class="num"><summary>Check your number</summary><span>2.0 × 10<sup>8</sup> Pa</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>Explain why a person wearing snowshoes sinks much less into soft snow than the same person wearing boots, even though their weight hasn’t changed.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your working for question 4. The two-step questions are where most mistakes happen.</li>
+      <li>Your snowshoe explanation.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 5 -->
+  <h2 id="energy">5. Energy, work and power</h2>
+
+  <p class="eq"><strong>Energy is never created or destroyed. It only changes from one form to another.</strong></p>
+  <p>This is the most important idea in physics. In mechanics, the two forms you calculate are:</p>
+  <ul>
+    <li><strong>Gravitational potential energy</strong>, stored because of height: Δ<i class="v">E</i><sub>p</sub> = <i class="v">mg</i>Δ<i class="v">h</i></li>
+    <li><strong>Kinetic energy</strong>, the energy of movement: <i class="v">E</i><sub>k</sub> = ½<i class="v">mv</i><sup>2</sup></li>
+  </ul>
+  <p>When an object falls with no air resistance, potential energy turns into kinetic energy and the total stays the same. In real life, some energy becomes heat and sound because of air resistance and friction.</p>
+  <p><strong>Work</strong> is done when a force moves something. It is the amount of energy transformed:</p>
+  <p class="eq"><i>W</i> = <i>Fd</i> &nbsp;&nbsp; and &nbsp;&nbsp; <i>W</i> = Δ<i>E</i> &nbsp;&nbsp; units: joules (J)</p>
+  <p>The distance must be in the same direction as the force. Lifting something, the force is its weight and the distance is the height.</p>
+  <p><strong>Power</strong> is how fast work is done:</p>
+  <p class="eq"><i>P</i> = <i>W</i> ÷ <i>t</i> &nbsp;&nbsp; units: watts (W), where 1 W = 1 J s<sup>−1</sup></p>
+
+  <div class="example">
+    <h4>Worked example</h4>
+    <p>A 0.50 kg ball is dropped from a height of 5.0 m. Ignoring air resistance, how fast is it moving just before it hits the ground?</p>
+    <ol class="working">
+      <li><i class="v">E</i><sub>p</sub> at the top = <i class="v">mg</i>Δ<i class="v">h</i> = 0.50 × 10 × 5.0 = 25 J</li>
+      <li>All of this becomes kinetic energy, so <i class="v">E</i><sub>k</sub> at the bottom = 25 J <span class="why">conservation of energy</span></li>
+      <li><i class="v">v</i> = √(2<i class="v">E</i><sub>k</sub> ÷ <i class="v">m</i>) = √(2 × 25 ÷ 0.50) = √100 = 10 m s<sup>−1</sup></li>
+    </ol>
+  </div>
+
+  <div class="questions">
+    <h3>Your turn</h3>
+    <ol>
+      <li class="q"><p>How much gravitational potential energy does a 12 kg bag gain when it is lifted 1.5 m onto a shelf?</p>
+        <details class="num"><summary>Check your number</summary><span>180 J</span></details><div class="work-space"></div></li>
+      <li class="q"><p>Find the kinetic energy of a 1000 kg car moving at 15 m s<sup>−1</sup>.</p>
+        <details class="num"><summary>Check your number</summary><span>1.1 × 10<sup>5</sup> J (112 500 J)</span></details><div class="work-space"></div></li>
+      <li class="q"><p>You push a trolley with a force of 40 N for 25 m. How much work do you do?</p>
+        <details class="num"><summary>Check your number</summary><span>1000 J</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A crane lifts a 500 kg load through 20 m in 25 s. Find the power of the crane.</p>
+        <details class="num"><summary>Check your number</summary><span>4000 W (4.0 kW)</span></details><div class="work-space"></div></li>
+      <li class="q"><p>A diver drops from a 10 m platform. Ignoring air resistance, how fast is she moving when she reaches the water?</p>
+        <details class="num"><summary>Check your number</summary><span>14 m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p>A 50 kg student runs up a flight of stairs 3.0 m high in 4.0 s. Find her power.</p>
+        <details class="num"><summary>Check your number</summary><span>380 W</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p>A ball is dropped from a balcony. Describe the energy changes from the moment it is released to just before it hits the ground. Then explain why its real speed at the ground is a little less than the speed you would calculate.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your working for the diver and the stairs questions.</li>
+      <li>Your energy explanation.</li>
+    </ul>
+  </div>
+
+  <!-- ===================================================== 6 -->
+  <h2 id="next">6. What comes next</h2>
+
+  <p>Level 2 mechanics builds directly on everything on this page. Here is where each idea goes next.</p>
+  <table>
+    <tr><th>Year 11 idea</th><th>What Level 2 adds</th></tr>
+    <tr><td>Speed and acceleration</td><td>Equations of motion, which link distance, speed, acceleration and time in one step</td></tr>
+    <tr><td>Speed versus velocity</td><td>Vectors: adding and splitting velocities and forces using the <a href="01-maths-toolkit.html#trig">trigonometry from the toolkit</a></td></tr>
+    <tr><td>Moving objects</td><td>Projectiles: things thrown or kicked, moving sideways and falling at the same time</td></tr>
+    <tr><td>Net force and acceleration</td><td>Momentum and impulse, which describe collisions</td></tr>
+    <tr><td>Force and direction</td><td>Circular motion: why a force is needed just to go round a corner</td></tr>
+    <tr><td>Forces on objects</td><td>Torque: forces that make things turn, like a spanner or a see-saw</td></tr>
+    <tr><td>Energy</td><td>Springs and elastic potential energy</td></tr>
+  </table>
+
+  <div class="questions">
+    <h3>Have a go</h3>
+    <ol>
+      <li class="q"><p><span class="preview">Level 2 preview</span> Momentum is <i class="v">p</i> = <i class="v">mv</i>. Find the momentum of a 60 kg runner moving at 5.0 m s<sup>−1</sup>. (Units: kg m s<sup>−1</sup>.)</p>
+        <details class="num"><summary>Check your number</summary><span>300 kg m s<sup>−1</sup></span></details><div class="work-space"></div></li>
+      <li class="q"><p><span class="preview">Level 2 preview</span> A car starts from rest and accelerates at 2.0 m s<sup>−2</sup> for 5.0 s. Use <i class="v">d</i> = <i class="v">ut</i> + ½<i class="v">at</i><sup>2</sup> to find how far it travels. (<i class="v">u</i> is the starting speed.)</p>
+        <details class="num"><summary>Check your number</summary><span>25 m</span></details><div class="work-space"></div></li>
+      <li class="q explain"><span class="tag">Explain · bring to your session</span>
+        <p><span class="preview">Level 2 preview</span> One ball is dropped from a table at the same moment as another is rolled off the edge sideways. Which hits the floor first? Make a prediction and give your reasoning. We will test it together.</p><div class="work-space"></div></li>
+    </ol>
+  </div>
+
+  <!-- ===================================================== exam -->
+  <h2 id="exam">Exam practice</h2>
+
+  <p>These questions come from real Year 11 mechanics exams (2011 to 2016) in the past exam booklet from your tutor. Each question mixes several ideas; the list shows its main topic. Write full answers in your book, and bring them to your session. Your tutor has the marking schedules.</p>
+
+  <table>
+    <tr><th>Main topic</th><th>Exam questions</th></tr>
+    <tr><td>Motion and graphs</td><td>2011 Q2 Running · 2012 Q2 100 Metre Race · 2014 Q4 Go-cart Racing</td></tr>
+    <tr><td>Forces</td><td>2011 Q1 Parachuting · 2013 Q1 The Runner · 2015 Q2 Forces</td></tr>
+    <tr><td>Pressure</td><td>2011 Q4 Football Boots · 2013 Q4 Fun in the Snow · 2014 Q2 Furniture</td></tr>
+    <tr><td>Energy, work and power</td><td>2011 Q3 Rope Climbing · 2012 Q4 Ramps · 2013 Q2 Dropping a Ball · 2013 Q3 Lifting Boxes · 2014 Q3 Construction</td></tr>
+    <tr><td>Full paper</td><td>2016 Questions 1 to 3, in one sitting of about an hour</td></tr>
+  </table>
+
+  <div class="bring">
+    <strong>Bring to your session</strong>
+    <ul>
+      <li>Your written exam answers. Leave nothing blank; a partial answer gives us something to work with.</li>
+      <li>Anything on this page you would like to go over again.</li>
+    </ul>
+  </div>
+</main>
+
+<script>
+  // ---------- Graph drawing ----------
+  // Draws axes, gridlines and a line into an <svg>.
+  // o.points is a list of [x, y] pairs joined by straight lines.
+  // Returns the line element and the scale functions, so the explorer can redraw the line.
+  function drawGraph(svg, o) {
+    const L = 60, R = 420, T = 20, B = 240;          // plot area edges in SVG units
+    const X = x => L + (x / o.xMax) * (R - L);
+    const Y = y => B - (y / o.yMax) * (B - T);
+    let s = '';
+    for (let x = 0; x <= o.xMax; x += o.xGrid) {
+      s += `<line class="grid" x1="${X(x)}" y1="${T}" x2="${X(x)}" y2="${B}"/>`;
+      if (x % o.xLabel === 0) s += `<text x="${X(x)}" y="${B + 18}" text-anchor="middle">${x}</text>`;
+    }
+    for (let y = 0; y <= o.yMax; y += o.yGrid) {
+      s += `<line class="grid" x1="${L}" y1="${Y(y)}" x2="${R}" y2="${Y(y)}"/>`;
+      s += `<text x="${L - 8}" y="${Y(y) + 4}" text-anchor="end">${y}</text>`;
+    }
+    s += `<line class="axis" x1="${L}" y1="${B}" x2="${R}" y2="${B}"/>`;
+    s += `<line class="axis" x1="${L}" y1="${T}" x2="${L}" y2="${B}"/>`;
+    s += `<polyline class="plot" points=""/>`;
+    s += `<text class="title" x="${(L + R) / 2}" y="${B + 42}" text-anchor="middle">${o.xTitle}</text>`;
+    s += `<text class="title" x="16" y="${(T + B) / 2}" text-anchor="middle" transform="rotate(-90 16 ${(T + B) / 2})">${o.yTitle}</text>`;
+    svg.innerHTML = s;
+    const line = svg.querySelector('.plot');
+    const plot = pts => line.setAttribute('points', pts.map(p => X(p[0]) + ',' + Y(p[1])).join(' '));
+    if (o.points) plot(o.points);
+    return plot;
+  }
+  const $ = id => document.getElementById(id);
+  const TIME = 'time (s)', DIST = 'distance (m)', SPEED = 'speed (m s⁻¹)';
+
+  // ---------- Static graphs ----------
+  // Cyclist: speeds up at 0.6 m s⁻² for 10 s, constant 6 m s⁻¹ for 20 s, slows at 1.2 m s⁻² for 5 s.
+  const cyc = [];
+  for (let t = 0; t <= 35; t += 0.5) {
+    let d;
+    if (t <= 10) d = 0.3 * t * t;
+    else if (t <= 30) d = 30 + 6 * (t - 10);
+    else { const u = t - 30; d = 150 + 6 * u - 0.6 * u * u; }
+    cyc.push([t, d]);
+  }
+  drawGraph($('cycD'), { xMax: 35, xGrid: 5, xLabel: 5, yMax: 180, yGrid: 30, xTitle: TIME, yTitle: DIST, points: cyc });
+  drawGraph($('cycV'), { xMax: 35, xGrid: 5, xLabel: 5, yMax: 8, yGrid: 2, xTitle: TIME, yTitle: SPEED,
+    points: [[0, 0], [10, 6], [30, 6], [35, 0]] });
+  drawGraph($('walkD'), { xMax: 30, xGrid: 2, xLabel: 10, yMax: 160, yGrid: 20, xTitle: TIME, yTitle: DIST,
+    points: [[0, 0], [10, 50], [20, 50], [30, 150]] });
+
+  // ---------- Explorer: build a motion story ----------
+  // Each step lasts 3 s. Speeding up or slowing down uses ±2 m s⁻², so speed is always 0, 6 or 12 m s⁻¹.
+  const STEPS = {
+    up:     { label: 'Speed up',       a: 2 },
+    steady: { label: 'Constant speed', a: 0 },
+    down:   { label: 'Slow down',      a: -2 },
+    wait:   { label: 'Stay still',     a: 0 }
+  };
+  const STEP_T = 3, MAX_STEPS = 8, V_MAX = 12, DT = 0.05, PLAYBACK = 2;
+  let story = [];
+  let playing = false;
+
+  const speedAfter = list => list.reduce((v, k) => Math.min(V_MAX, Math.max(0, v + STEPS[k].a * STEP_T)), 0);
+
+  // Steps through the story in small time slices and records [t, d, v] at each one.
+  function simulate(list) {
+    const pts = [[0, 0, 0]];
+    let t = 0, d = 0, v = 0;
+    for (const k of list) {
+      for (let i = 0; i < STEP_T / DT; i++) {
+        const vNew = Math.min(V_MAX, Math.max(0, v + STEPS[k].a * DT));
+        d += (v + vNew) / 2 * DT;
+        v = vNew;
+        t += DT;
+        pts.push([t, d, v]);
+      }
+    }
+    return pts;
+  }
+
+  let plotD, plotV, dMax = 50;
+  function resetGraphs() {
+    const dEnd = simulate(story).at(-1)[1];
+    dMax = Math.max(50, Math.ceil(dEnd / 50) * 50);
+    const dGrid = dMax <= 50 ? 10 : dMax <= 100 ? 20 : 50;
+    plotD = drawGraph($('exD'), { xMax: 24, xGrid: 3, xLabel: 3, yMax: dMax, yGrid: dGrid, xTitle: TIME, yTitle: DIST });
+    plotV = drawGraph($('exV'), { xMax: 24, xGrid: 3, xLabel: 3, yMax: 14, yGrid: 2, xTitle: TIME, yTitle: SPEED });
+    drawTrack(0);
+    showReadout(0, 0, 0);
+  }
+
+  function drawTrack(d) {
+    const x = 20 + (d / dMax) * 370;
+    $('track').innerHTML =
+      `<line x1="20" y1="52" x2="420" y2="52" stroke="#5b6475" stroke-width="2"/>` +
+      `<text x="20" y="68">0 m</text><text x="420" y="68" text-anchor="end">${dMax} m</text>` +
+      `<g transform="translate(${x},0)">` +
+        `<rect x="0" y="28" width="30" height="16" rx="4" fill="#1f5f8b"/>` +
+        `<rect x="6" y="20" width="16" height="10" rx="3" fill="#1f5f8b"/>` +
+        `<circle cx="7" cy="46" r="4" fill="#1d2433"/><circle cx="23" cy="46" r="4" fill="#1d2433"/>` +
+      `</g>`;
+  }
+
+  function showReadout(t, d, v) {
+    $('readout').textContent = `t = ${t.toFixed(1)} s    distance = ${d.toFixed(0)} m    speed = ${v.toFixed(1)} m/s`;
+  }
+
+  function renderStory() {
+    $('story').innerHTML = story.length
+      ? story.map((k, i) => `<span class="chip">${i + 1}. ${STEPS[k].label}</span>`).join('')
+      : '<span class="empty">No steps yet. The car starts at rest.</span>';
+    const v = speedAfter(story);
+    const full = story.length >= MAX_STEPS;
+    document.querySelectorAll('[data-seg]').forEach(b => {
+      const k = b.dataset.seg;
+      b.disabled = playing || full ||
+        (k === 'up' && v >= V_MAX) ||
+        ((k === 'down' || k === 'steady') && v === 0) ||
+        (k === 'wait' && v > 0);
+    });
+    $('play').disabled = playing || story.length === 0;
+    $('undo').disabled = playing || story.length === 0;
+    $('clear').disabled = playing || story.length === 0;
+    resetGraphs();
+  }
+
+  function play() {
+    const pts = simulate(story);
+    playing = true;
+    renderStory();
+    const start = performance.now();
+    function frame(now) {
+      // The first frame's timestamp can be slightly earlier than start, so clamp at 0.
+      const i = Math.max(0, Math.min(pts.length - 1, Math.floor((now - start) / 1000 * PLAYBACK / DT)));
+      const shown = pts.slice(0, i + 1);
+      plotD(shown.map(p => [p[0], p[1]]));
+      plotV(shown.map(p => [p[0], p[2]]));
+      drawTrack(pts[i][1]);
+      showReadout(...pts[i]);
+      if (i < pts.length - 1) requestAnimationFrame(frame);
+      else { playing = false; renderStory(); plotD(pts.map(p => [p[0], p[1]])); plotV(pts.map(p => [p[0], p[2]])); drawTrack(pts[i][1]); showReadout(...pts[i]); }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  document.querySelectorAll('[data-seg]').forEach(b =>
+    b.addEventListener('click', () => { story.push(b.dataset.seg); renderStory(); }));
+  $('play').addEventListener('click', play);
+  $('undo').addEventListener('click', () => { story.pop(); renderStory(); });
+  $('clear').addEventListener('click', () => { story = []; renderStory(); });
+  renderStory();
+</script>
+</body>
+</html>

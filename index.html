@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics Catch-Up Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d2433;
+    --muted: #5b6475;
+    --line: #d9dee7;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --accent: #1f5f8b;
+    --accent-soft: #e8f1f7;
+    --warm: #8a5210;
+    --warm-soft: #fbf1e3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 "IBM Plex Sans", system-ui, sans-serif;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 48px 16px 80px; }
+  h1, h2 { font-family: "IBM Plex Serif", Georgia, serif; line-height: 1.25; }
+  h1 { font-size: 2.1rem; margin: 0 0 8px; }
+  .lede { color: var(--muted); font-size: 1.1rem; margin: 0 0 32px; }
+  h2 { font-size: 1.3rem; margin: 40px 0 12px; }
+
+  .how {
+    background: var(--warm-soft);
+    border-left: 4px solid var(--warm);
+    padding: 16px 20px;
+    border-radius: 6px;
+  }
+  .how ol { margin: 8px 0 0; padding-left: 22px; }
+  .how li { margin: 6px 0; }
+
+  .topics { list-style: none; padding: 0; margin: 0; counter-reset: topic; }
+  .topic {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 4px 16px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .num {
+    grid-row: span 2;
+    font-family: "IBM Plex Serif", Georgia, serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+  }
+  .topic h3 { margin: 0; font-size: 1.1rem; }
+  .topic h3 a { color: var(--accent); text-decoration: none; }
+  .topic h3 a:hover { text-decoration: underline; }
+  .topic p { margin: 0; color: var(--muted); }
+  .topic .why { color: var(--ink); }
+  .soon .num, .soon h3 { color: var(--muted); }
+  .badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 1px 8px;
+    border-radius: 99px;
+    background: var(--line);
+    color: var(--muted);
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  footer { margin-top: 48px; color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Year 11 Physics Catch-Up</h1>
+  <p class="lede">The Year 11 ideas you need before starting Level 2 Physics, worked through at your own pace.</p>
+
+  <div class="how">
+    <strong>How to use these pages</strong>
+    <ol>
+      <li>Work through the topics in order. The maths toolkit comes first because everything else uses it.</li>
+      <li>Read the key ideas and worked examples, then do the questions in your book with <em>full working</em>.</li>
+      <li>Calculation questions let you check your final number. The number is the least important part: your tutor wants to see how you got there.</li>
+      <li>Explain questions have no answers here. Write your best attempt and bring it to your session.</li>
+      <li>Anything that confuses you is useful. Write it down and bring it along.</li>
+    </ol>
+  </div>
+
+  <h2>Topics</h2>
+  <ol class="topics">
+    <li class="topic">
+      <span class="num">1</span>
+      <h3><a href="01-maths-toolkit.html">Maths toolkit</a></h3>
+      <p>Units, scientific notation, significant figures, rearranging formulae, reading graphs, and right-angle trigonometry. <span class="why">Every Level 2 calculation depends on these.</span></p>
+    </li>
+    <li class="topic">
+      <span class="num">2</span>
+      <h3><a href="02-mechanics.html">Mechanics</a></h3>
+      <p>Speed, acceleration, motion graphs, forces, energy, work and power. <span class="why">Leads into Level 2 vectors, projectiles, momentum and circular motion.</span></p>
+    </li>
+    <li class="topic">
+      <span class="num">3</span>
+      <h3><a href="03-electricity.html">Electricity and magnetism</a></h3>
+      <p>Circuits, current, voltage, resistance, power and magnetic fields. <span class="why">Leads into Level 2 electric fields, DC circuits and electromagnetism.</span></p>
+    </li>
+    <li class="topic">
+      <span class="num">4</span>
+      <h3><a href="04-waves.html">Waves and light</a></h3>
+      <p>Wave properties, the wave equation, reflection and refraction. <span class="why">Leads into Level 2 mirrors, lenses and wave behaviour.</span></p>
+    </li>
+    <li class="topic">
+      <span class="num">5</span>
+      <h3><a href="05-writing-explanations.html">Writing explanations</a></h3>
+      <p>How to answer “explain” and “discuss” questions. <span class="why">This is what moves an answer from Achieved to Merit and Excellence.</span></p>
+    </li>
+    <li class="topic">
+      <span class="num">6</span>
+      <h3><a href="06-graphs-investigations.html">Graphs and investigations</a></h3>
+      <p>Plotting data, lines of best fit, and turning curves into straight lines. <span class="why">Prepares you for the Level 2 practical investigation.</span></p>
+    </li>
+  </ol>
+
+  <footer>Self-paced practice. There is no marking on these pages: bring your working to your sessions.</footer>
+</main>
+</body>
+</html>
